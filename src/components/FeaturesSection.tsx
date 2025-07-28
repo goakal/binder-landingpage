@@ -23,6 +23,12 @@ const FeaturesSection = () => {
       title: "AI-Powered Spaces",
       description: "Every group chat has its own Binder AI with memory and assistant.",
       comingSoon: true
+    },
+    {
+      icon: threadIcon,
+      title: "Chat with Thread view",
+      description: "Organize conversations with threaded replies. Keep discussions focused and easy to follow.",
+      comingSoon: false
     }
   ];
 
@@ -38,7 +44,7 @@ const FeaturesSection = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <div 
               key={feature.title}
