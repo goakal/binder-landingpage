@@ -44,11 +44,11 @@ const HeroSection = () => {
                 className="w-80 h-auto animate-float drop-shadow-2xl"
               />
               {/* Placeholder for app screenshot - you can replace this with actual screenshot */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-gradient-to-b from-primary/20 to-primary-glow/30 rounded-[2.5rem] w-72 h-[600px] flex items-center justify-center text-white/80 text-sm border border-white/20 backdrop-blur-sm">
                   Your app screenshot goes here
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -56,7 +56,6 @@ const HeroSection = () => {
         {/* Animated scroll cue */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="flex flex-col items-center text-white/80">
-            <span className="text-sm mb-2">Scroll to explore</span>
             <ChevronDown className="w-6 h-6 animate-bounce-arrow" />
           </div>
         </div>

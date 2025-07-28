@@ -1,25 +1,27 @@
 import aiRoomsIcon from "@/assets/ai-rooms-icon.png";
 import libraryIcon from "@/assets/library-icon.png";
 import canvasIcon from "@/assets/canvas-icon.png";
+import threadIcon from "@/assets/thread-icon.png";
 
 const FeaturesSection = () => {
   const features = [
     {
-      icon: aiRoomsIcon,
-      title: "AI-Powered Rooms",
-      description: "Every group chat has its own memory, assistant, and workspace. Ask Binder anything.",
+      icon: threadIcon,
+      title: "Chat with Thread View",
+      description: "Organize conversations with threaded replies. Keep discussions focused and easy to follow.",
       comingSoon: false
     },
     {
       icon: libraryIcon,
-      title: "Personal + Group Library",
-      description: "Bookmark messages, files, and notes — organize them like Notion, inside your chat.",
+      title: "Notes + Course Library",
+      description: "Not just chat. Add Notion like pages or courses, and turn any group space into a shared knowledge base.",
       comingSoon: false
     },
+    
     {
-      icon: canvasIcon,
-      title: "Flexible Canvas",
-      description: "Not just chat. Add blank pages, embed tools, and turn any room into a shared knowledge base.",
+      icon: aiRoomsIcon,
+      title: "AI-Powered Spaces",
+      description: "Every group chat has its own Binder AI with memory and assistant.",
       comingSoon: true
     }
   ];
