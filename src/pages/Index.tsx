@@ -15,14 +15,14 @@ const Index = () => {
           <div className="flex flex-col items-center justify-center space-y-4">
             <div className="flex space-x-6">
               <Link 
-                to="/terms" 
+                to="https://heybinder.com/terms" 
                 className="text-sm text-slate-600 hover:text-slate-900 transition-colors"
               >
                 Terms & Conditions
               </Link>
               <span className="text-slate-400">•</span>
               <Link 
-                to="/privacy" 
+                to="https://heybinder.com/privacy" 
                 className="text-sm text-slate-600 hover:text-slate-900 transition-colors"
               >
                 Privacy Policy
