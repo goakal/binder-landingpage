@@ -27,6 +27,13 @@ const Index = () => {
               >
                 Privacy Policy
               </Link>
+              <span className="text-slate-400">•</span>
+              <Link 
+                to="https://heybinder.com/data-deletion" 
+                className="text-sm text-slate-600 hover:text-slate-900 transition-colors"
+              >
+                Data Deletion 
+              </Link>
             </div>
             <p className="text-sm text-slate-500">
               © 2025 Binder App. All rights reserved.

@@ -16,7 +16,7 @@ const DataDeletionIOS: FC = () => {
               How to Request Account Deletion
             </h2>
             <p className="mb-4">
-             You have the right to request the deletion of your account and associated data. To initiate this process, please click the 'Request Account Deletion' button below, and confirm it.
+             You have the right to request the deletion of your account and associated data. To initiate this process, please click the 'Request to delete account' button below, and confirm it.
             </p>
             
           </section>

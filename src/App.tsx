@@ -9,6 +9,7 @@ import Terms from "./pages/Terms";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import DataDeletion from "./pages/DataDeletion";
 import DataDeletionIOS from "./pages/DataDeletionIOS";
+import Story from "./pages/Story";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
           <Route path="/data-deletion-ios" element={<DataDeletionIOS  />} />
+          <Route path="/story" element={<Story />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

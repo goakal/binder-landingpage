@@ -26,10 +26,20 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-              <Button variant="hero" size="lg" className="text-lg px-8 py-6">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.akal.binder', '_blank')}
+              >
                 Download on Android
               </Button>
-              <Button variant="app-store" size="lg" className="text-lg px-8 py-6">
+              <Button 
+                variant="app-store" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.open('https://apps.apple.com/us/app/binder-chat/id6749217579', '_blank')}
+              >
                 Download on App Store
               </Button>
             </div>
