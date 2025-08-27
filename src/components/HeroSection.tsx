@@ -21,7 +21,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 lg:mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              Binder is a new kind of chat app — built for education communities. 
+              Binder is a new kind of chat app — built for families and communities. 
               Organize conversations, notes, courses, and AI in one place.
             </p>
             
