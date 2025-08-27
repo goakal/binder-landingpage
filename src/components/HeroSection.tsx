@@ -15,9 +15,9 @@ const HeroSection = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left mt-12" >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 animate-fade-in-up leading-tight">
-              AI Powered Community Chat Platform for Learning
+              AI Powered Community Messaging App for Learning
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 lg:mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
