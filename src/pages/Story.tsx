@@ -1,161 +1,194 @@
 export default function Story() {
+  const scrollToCTA = () => {
+    const ctaSection = document.getElementById('cta-section');
+    if (ctaSection) {
+      ctaSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      {/* <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
         <div className="flex items-center">
-          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">B</span>
-          </div>
+          <img
+            src="/android-chrome-512x512.png"
+            alt="Binder"
+            className="w-12 h-12 rounded-full"
+          />
           <span className="ml-2 text-xl font-semibold text-gray-900">Binder</span>
         </div>
-        <a 
-          href="https://heybinder.com" 
+        <button
+          onClick={scrollToCTA}
           className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
         >
           Try Binder
-        </a>
-      </nav>
+        </button>
+      </nav> */}
 
-      <div className="max-w-2xl mx-auto px-6 py-16">
+      <div className="max-w-2xl mx-auto px-6 pt-16">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
-            </div>
+          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <img
+              src="/android-chrome-512x512.png"
+              alt="Binder"
+              className="w-16 h-16 rounded-full"
+            />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Hey, let's talk about learning communities.
+            WhatsApp Wasn’t Built for Creators / Communities
           </h1>
         </div>
 
         {/* Story Content */}
         <div className="prose prose-lg max-w-none">
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            WhatsApp gets a bad rap, but it shouldn't. It's amazing for bringing people together — families sharing daily moments, friends staying connected, communities forming bonds.
+          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+            In Indonesia, most creators & communities still rely on WhatsApp.
+
+            But deep down, we all know, it’s painful to use.
           </p>
 
           <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            It feels great to get an answer from someone you care about. 
-            Or a newsletter you enjoy. Or an update from a service you 
-            love. That's how community chat used to feel all the time.
+            ❌ <b>New members miss context</b> - new members have no access to old chats or announcements
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            ❌ <b>Important links & resources get buried</b> - no structured place to save them
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            ❌ <b>Conversations are messy</b> - no thread view, everyone talks at once
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            ❌ <b>Privacy issues</b> - join a group, and strangers can get your phone number
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            ❌ <b>Heavy app</b> - check your phone storage, WhatsApp is among the top 3 biggest apps on your phone
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            ❌ <b>Spam overload</b> - businesses (and strangers) can spam you endlessly
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+            ❌ <b>Dumb AI</b> - Meta AI feels… useless
           </p>
 
           <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            But things changed when we tried to learn together.
+            WhatsApp works for family and friends.
+
+            But if you want to build a meaningful community, it is not the place.
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+
+            That's why we're building Binder ✨
+          </p>
+
+        </div>
+      </div>
+
+      {/* Image Section */}
+      <div className="my-12 px-6">
+        <img
+          src="/sidebar expanded - admin view@2x.png"
+          alt="Binder Web Version"
+          className="w-full max-w-6xl mx-auto rounded-lg shadow-lg"
+        />
+      </div>
+
+      <div className="max-w-2xl mx-auto px-6">
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg leading-relaxed text-gray-700 mb-8  ">
+            Binder is a new home for creators & communities.
+
+          </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+
+            With Binder, you can:
+          </p>
+
+
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">
+            📚 Create groups with a built-in knowledge space (notes & courses)
+
           </p>
 
           <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            You started getting stuff you didn't want from people you 
-            barely know. Your study groups became cluttered. Your 
-            learning communities were forced to adopt other people's bad communication 
-            habits. An avalanche of repeated questions amplified the 
-            clutter.
+
+            🧵 Keep discussions organized with threaded conversations
+
+          </p>
+
+          <p className="text-lg leading-relaxed text-gray-700 mb-8">
+
+            🤖 Bring in AI agents to answer questions and collaborate (coming soon)
           </p>
 
           <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            And WhatsApp, Telegram, Discord, and all the others just let 
-            it happen.
+            Binder is still early, we’re building this together with you.
+Your feedback is greatly appreciated, and it will help shape our future.
+ </p>
+          <p className="text-lg leading-relaxed text-gray-700 mb-6">Download and try it out now!
           </p>
 
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            Learning felt like a chore, rather than a joy. Something 
-            you fall behind on. Something you scroll through, not cherish. 
-            Rather than delight in knowledge sharing, you dealt with chaos. Your relationship 
-            with community learning changed, and you didn't have a say.
-          </p>
 
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            New members keep asking the same questions because they can't read previous chats. 
-            Admins keep resharing the same links because there's no organized directory. 
-            Even when you use proper learning platforms, members still ask about materials in the chat group.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            And yet, learning communities remain a wonder. Thanks to technology, people 
-            across cultures, continents, countries, cities, and 
-            time zones can learn together every day. It's 
-            simple. It makes it easy for humans to share knowledge, 
-            help millions of people grow and learn.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            There are no gatekeepers when it comes to learning together. If you have knowledge to share, and 
-            they have curiosity to learn, community should just work, every time.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            So good news, the magic's still there. It's just obscured — 
-            buried under a mess of modern day bad habits and neglect. 
-            Rather than give up on community learning, we thought it 
-            deserves better than that.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            It deserves a thoughtful renovation. Modernized for the way 
-            learning communities work today.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            With Binder, we've done just that. It's a rethink, a 
-            simplistic, potent reconstruction of community learning. It feels organized, the 
-            way it should be.
-          </p>
-
-          <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            Binder's our love letter to learning communities, and we're sending it to you. 
-            Available now on the web and mobile.
-          </p>
 
           <p className="text-lg leading-relaxed text-gray-700 mb-6 italic">
             — The Binder Team
           </p>
 
-          <p className="text-sm leading-relaxed text-gray-500 mb-8">
-            P.S. Here are the fundamental issues we have with chat-based learning as we 
-            know it.
-          </p>
+        </div>
+      </div>
 
-          {/* Divider */}
-          <div className="border-t border-gray-200 my-12"></div>
-
-          {/* Binder Logo and CTA */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <span className="text-white font-bold text-2xl">B</span>
-            </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Try it.</h2>
-            <p className="text-lg text-gray-600 mb-6">
-              To get on the list, email <strong>heybinder.com</strong> with how 
-              you feel about communities. Could be a love story, or a hate story. 
-              Could be long, could be short. It's your story, so it's up to you. 
-              Invites will begin going out June 15th, 2024.
-            </p>
-            <p className="text-sm text-gray-500 mb-6">
-              We'll only use your email address to alert you if you hit the first round lottery (we 
-              expect heavy demand), and if you end up getting an invitation. We'll also 
-              alert you once we open it up to the public (we're not sure when that will be), 
-              and maybe once more somewhere down the line to tell you about a new 
-              service that we're especially excited about.
-            </p>
-            <p className="text-sm text-gray-500 mb-8">
-              If you don't signal, we won't send; we won't bug you constantly, and you'll know exactly 
-              why we're contacting you. Promise.
-            </p>
+      {/* CTA Section */}
+      <section id="cta-section" className="py-10">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-blue-600 rounded-2xl p-8 sm:p-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8">
+              Ready to transform your community?
+            </h2>
             
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-              <p className="text-sm text-gray-600 text-center">
-                Policy:<br />
-                Legal and privacy questions<br />
-                <a href="mailto:legal@binder.com" className="text-blue-600 hover:underline">
-                  legal@binder.com
-                </a>
-              </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => window.open('https://play.google.com/store/apps/details?id=com.akal.binder', '_blank')}
+                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+              >
+                Download on Android
+              </button>
+              <button
+                onClick={() => window.open('https://apps.apple.com/us/app/binder-chat/id6749217579', '_blank')}
+                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors inline-block"
+              >
+                Download on App Store
+              </button>
+            </div>
+            <p className="text-xl text-blue-100 mt-4 mb-4">
+              (The web version is still on progress)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="flex items-center">
+              <img
+                src="/android-chrome-512x512.png"
+                alt="Binder"
+                className="w-8 h-8 rounded-full"
+              />
+              <span className="ml-2 text-lg font-semibold text-gray-900">Binder</span>
+            </div>
+            <div className="flex flex-wrap justify-center space-x-6 text-sm text-gray-600">
+              <a href="/terms" className="hover:text-gray-900">Terms & Conditions</a>
+              <a href="/privacy" className="hover:text-gray-900">Privacy Policy</a>
+              <a href="/data-deletion" className="hover:text-gray-900">Data Deletion</a>
+            </div>
+            <div className="text-sm text-gray-500">
+              © 2025 Binder. All rights reserved.
             </div>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
