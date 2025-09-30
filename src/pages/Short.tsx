@@ -30,7 +30,7 @@ const ShortPage = () => {
           </h1>
 
           {/* Screenshot */}
-          <div className="mt-12 px-12">
+          <div className="mt-12 px-48">
             <img
               src={isMobile ? "/mobilemockup.png" : "/sidebar expanded - admin view@2x.png"}
               alt="Binder Screenshot"
