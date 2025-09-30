@@ -95,7 +95,7 @@ const ShortPage = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="https://binder.works"
+            href="https://web.heybinder.com"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-indigo-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-transform transform hover:scale-105 shadow-md"
