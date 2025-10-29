@@ -51,7 +51,7 @@ export const FeaturesSection = () => {
                   <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                 </div>
 
-                <div className="w-full max-w-[300px] mx-auto overflow-hidden rounded-2xl">
+                <div className="w-full max-w-[250px] mx-auto overflow-hidden rounded-2xl">
                   <img src={feature.image} alt={feature.title} className="w-full h-auto object-contain" />
                 </div>
               </div>
