@@ -12,6 +12,7 @@ import DataDeletionIOS from "./pages/DataDeletionIOS";
 import Story from "./pages/Story";
 import Clean from "./pages/Clean";
 import Short from "./pages/Short";
+import Heybinder from "./pages/Heybinder";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Clean />} />
+          <Route path="/" element={<Heybinder />} />
+          <Route path="/clean" element={<Clean />} />
           <Route path="/short" element={<Short />} />
           <Route path="/story" element={<Story />} />
           <Route path="/terms" element={<Terms />} />
