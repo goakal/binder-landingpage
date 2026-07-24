@@ -4,7 +4,8 @@ import heroCabin from '@/assets/heybinder-hero-cabin.jpg';
 import logoMark from '@/assets/heybinder-logo-mark.png';
 import productPeek from '@/assets/heybinder-product-peek.jpg';
 import ctaSky from '@/assets/heybinder-cta-sky.jpg';
-import mobileMockup from '@/assets/heybinder-mobile-mockup.webp';
+import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
+import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
 import logoWordmark from '@/assets/heybinder-logo-wordmark.png';
 
 const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so my groups can talk to you by @mentioning your bot.
@@ -149,7 +150,16 @@ const HeybinderPage = () => {
             <div style={{ position: 'relative', width: 'min(300px,80%)', aspectRatio: '9/19.5', background: '#1C1B1A', borderRadius: 44, padding: 11, boxShadow: '0 30px 70px rgba(28,27,26,0.22)' }}>
               <div style={{ width: '100%', height: '100%', borderRadius: 34, overflow: 'hidden', background: '#F7F6FD' }}>
                 <div style={{ position: 'absolute', top: 10, left: 163, transform: 'translateX(-50%)', width: 83, height: 19, background: '#1C1B1A', borderRadius: '0 0 16px 16px', zIndex: 2 }} />
-                <img src={mobileMockup} alt="Binder mobile app" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                >
+                  <source src={mobileDemoWebm} type="video/webm" />
+                  <source src={mobileDemoMp4} type="video/mp4" />
+                </video>
               </div>
             </div>
           </div>
