@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // GitHub Pages SPA fallback: stash the intended path in sessionStorage
+      // and redirect to the app root, where main.tsx restores it before render.
+      sessionStorage.setItem('spa-redirect', location.pathname + location.search + location.hash);
+      location.replace('/binder-landingpage/');
+    </script>
+  </head>
+  <body></body>
+</html>
