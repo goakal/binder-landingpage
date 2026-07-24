@@ -78,13 +78,14 @@ const HeybinderPage = () => {
 
   return (
     <div className="hb-page">
-      {/* ============ HERO (pixel-art background, full-bleed) ============ */}
-      <div style={{ padding: 0, margin: '0 0 90px' }}>
+      {/* ============ HERO (pixel-art background, card-style) ============ */}
+      <div className="hb-hero-wrap" style={{ padding: '20px 20px 0', margin: '0 0 90px' }}>
         <div
           className="hb-hero-full"
-          style={{ position: 'relative', width: '100%', maxWidth: 'none', margin: 0, borderRadius: 0, overflow: 'hidden', boxShadow: 'none', height: 1080, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '150px 24px 130px', boxSizing: 'border-box' }}
+          style={{ position: 'relative', width: '100%', maxWidth: 1560, margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 30px 80px rgba(28,27,26,0.22)', height: 'min(1040px, calc(100svh - 40px))', minHeight: 680, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '150px 24px 130px', boxSizing: 'border-box' }}
         >
-          <img src={heroCabin} alt="Cabin in a mountain valley at dusk" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
+          <img src={heroCabin} alt="Cabin in a mountain valley at dusk" className="hb-hero-bg" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
+          <div className="hb-hero-glow" aria-hidden="true" />
 
           {/* STATE A: top-center (initial) */}
           <div className="hb-hero-top" data-hero-top="" style={{ position: 'absolute', zIndex: 2, top: 180, left: '50%', transform: 'translate(-50%,0)', maxWidth: 1200, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 30, transition: 'opacity 0.55s ease, transform 0.55s ease', width: '100%' }}>

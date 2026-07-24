@@ -32,13 +32,44 @@
 @keyframes hb-rev { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 .hb-rv { animation: hb-rev linear both; animation-timeline: view(); animation-range: entry 0% cover 24%; }
 
+/* Keeps the rounded-corner clip intact while children animate transforms (Safari) */
+.hb-hero-full { isolation: isolate; transform: translateZ(0); }
+
+/* Hero background: slow Ken Burns drift (always scaled >1 so edges never show) */
+@keyframes hb-hero-drift {
+  0%   { transform: scale(1.06) translate(0.7%, 0.5%); }
+  100% { transform: scale(1.14) translate(-0.7%, -0.6%); }
+}
+.hb-hero-bg {
+  animation: hb-hero-drift 32s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Soft light that slowly sweeps across the hero */
+@keyframes hb-hero-glow-move {
+  0%   { transform: translate(-12%, -6%) scale(1); opacity: 0.5; }
+  50%  { transform: translate(10%, 6%) scale(1.15); opacity: 0.85; }
+  100% { transform: translate(-12%, -6%) scale(1); opacity: 0.5; }
+}
+.hb-hero-glow {
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background: radial-gradient(42% 34% at 38% 30%, rgba(255, 214, 170, 0.28), transparent 70%),
+              radial-gradient(36% 30% at 68% 62%, rgba(122, 108, 255, 0.22), transparent 70%);
+  mix-blend-mode: soft-light;
+  animation: hb-hero-glow-move 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hb-page * { animation: none !important; scroll-behavior: auto !important; }
 }
 
 @media (max-width: 900px) {
   .hb-two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
-  .hb-hero-full { height: auto !important; min-height: 620px !important; padding: 120px 20px 90px !important; }
+  .hb-hero-wrap { padding: 12px 12px 0 !important; }
+  .hb-hero-full { height: auto !important; min-height: 620px !important; padding: 120px 20px 90px !important; border-radius: 24px !important; }
   .hb-hero-full img { position: absolute !important; }
   .hb-hero-top { position: static !important; transform: none !important; top: auto !important; left: auto !important; padding: 0 !important; gap: 22px !important; }
   .hb-hero-top img { position: static !important; width: 80px !important; height: 80px !important; }
@@ -49,6 +80,7 @@
 }
 
 @media (max-width: 560px) {
-  .hb-hero-full { min-height: 560px !important; padding: 96px 16px 64px !important; }
+  .hb-hero-wrap { padding: 10px 10px 0 !important; }
+  .hb-hero-full { min-height: 560px !important; padding: 96px 16px 64px !important; border-radius: 20px !important; }
   .hb-hero-top img { width: 64px !important; height: 64px !important; }
 }
