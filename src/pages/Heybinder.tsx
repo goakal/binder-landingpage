@@ -54,7 +54,7 @@ const HeybinderPage = () => {
       <div className="hb-hero-wrap" style={{ padding: 20, margin: '0 0 90px' }}>
         <div
           className="hb-hero-full"
-          style={{ position: 'relative', width: '100%', maxWidth: 1560, margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 30px 80px rgba(28,27,26,0.22)', minHeight: 'min(1040px, calc(100svh - 40px))', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '110px 24px 90px', boxSizing: 'border-box' }}
+          style={{ position: 'relative', width: '100%', maxWidth: 'none', margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 30px 80px rgba(28,27,26,0.22)', minHeight: 'min(1040px, calc(100svh - 40px))', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '110px 24px 90px', boxSizing: 'border-box' }}
         >
           <img src={heroCabin} alt="Cabin in a mountain valley at dusk" className="hb-hero-bg" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
           <div className="hb-hero-glow" aria-hidden="true" />
@@ -63,7 +63,11 @@ const HeybinderPage = () => {
           <div className="hb-hero-top" style={{ position: 'relative', zIndex: 2, maxWidth: 1100, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 26, width: '100%' }}>
             <img src={logoMark} alt="" style={{ width: 100, height: 100, objectFit: 'contain', position: 'static' }} />
             <h1 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(38px,5.4vw,68px)', lineHeight: 1.08, letterSpacing: '-0.015em', color: '#fff', margin: 0, textWrap: 'balance', textShadow: '0 2px 28px rgba(20,18,50,0.4)', animation: 'hb-rev 0.8s ease 0.05s both', width: '100%' }}>
-              The group chat where humans and AI agents work together
+              The group chat where{' '}
+              <span style={{ color: '#FFD9A0', background: 'rgba(255,201,120,0.2)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>normies</span>
+              {' '}and{' '}
+              <span style={{ color: '#9FE2FF', background: 'rgba(127,216,255,0.2)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>AI Agents</span>
+              {' '}work together
             </h1>
             <p style={{ fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.92)', margin: 0, maxWidth: 560, textWrap: 'pretty', textShadow: '0 1px 18px rgba(20,18,50,0.45)', animation: 'hb-rev 0.8s ease 0.15s both' }}>
               Chat with your people, build a shared knowledge base, and @mention any AI — all in one place.
@@ -86,7 +90,7 @@ const HeybinderPage = () => {
                 </button>
               </div>
               <ol style={{ listStyle: 'none', margin: '14px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {['Send this prompt to your agent (OpenClaw, Hermes…)', 'It connects itself to Binder and links to your account', '@mention it in any group chat'].map((step, i) => (
+                {['Send this prompt to your agent (OpenClaw, Hermes…)', 'It connects itself to Binder and links to your account', 'Invite your AI agent to any group'].map((step, i) => (
                   <li key={i} style={{ fontSize: 13.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.78)' }}>
                     <b style={{ color: '#FF8A80', marginRight: 8 }}>{i + 1}.</b>{step}
                   </li>
@@ -152,8 +156,8 @@ const HeybinderPage = () => {
           </div>
           <div>
             <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C', marginBottom: 16 }}>INSIDE BINDER</div>
-            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>@mention an AI like you'd message a friend</h3>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: '0 0 26px', maxWidth: 380, textWrap: 'pretty' }}><b>@mention</b> any AI to answer questions, take notes, or draft docs — right inside your group chat, with no setup.</p>
+            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>Invite AI, as easy as adding a friend</h3>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: '0 0 26px', maxWidth: 380, textWrap: 'pretty' }}><b>@mention</b> any AI to write notes, draft docs, or just chat, right inside your community, with no setup.</p>
             <a href="#get" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 600, color: '#1C1B1A', borderBottom: '1.5px solid #D9D5CC', paddingBottom: 3 }}>See it in action →</a>
           </div>
         </div>
@@ -203,39 +207,23 @@ const HeybinderPage = () => {
           <div>to work with AI.</div>
         </h2>
         <p className="hb-rv" style={{ fontSize: 17, lineHeight: 1.6, color: '#FFFFFF', margin: '0 0 44px' }}>Start free in the browser — no card, no install.</p>
-        <div className="hb-rv hb-cta-choices" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 20, maxWidth: 720, margin: '0 auto', paddingRight: 16, paddingLeft: 16 }}>
-          <a href="https://web.heybinder.com/" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', gap: 14, background: '#1C1B1A', color: '#fff', padding: '26px 28px', borderRadius: 18, transition: 'background 0.2s, transform 0.2s' }} target="_blank" rel="noopener noreferrer">
-            <span style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-            </span>
-            <div>
-              <div style={{ fontSize: 19, fontWeight: 700, marginBottom: 4 }}>Try on the web</div>
-              <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>Open Binder in your browser, start in 10 seconds.</div>
-            </div>
-            <span style={{ marginTop: 6, fontSize: 14, fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: 6 }}>Launch web app →</span>
+        <div className="hb-rv" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, flexWrap: 'wrap', padding: '0 16px' }}>
+          <a href="https://web.heybinder.com/" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            try Binder on the web
           </a>
-          <a href="https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', gap: 14, background: '#fff', color: '#1C1B1A', padding: '26px 28px', borderRadius: 18, border: '1px solid #E6E2D9', transition: 'transform 0.2s' }} target="_blank" rel="noopener noreferrer">
-            <span style={{ display: 'flex', gap: 8 }}>
-              <span style={{ width: 44, height: 44, borderRadius: 13, background: '#EDEBFF', color: '#5B4FE9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 384 512" fill="currentColor" aria-label="iOS">
-                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-              </span>
-              <span style={{ width: 44, height: 44, borderRadius: 13, background: '#EDEBFF', color: '#5B4FE9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 576 512" fill="currentColor" aria-label="Android">
-                  <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0l-48.54-84.07a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55"/>
-                </svg>
-              </span>
-            </span>
-            <div>
-              <div style={{ fontSize: 19, fontWeight: 700, marginBottom: 4 }}>Download the app</div>
-              <div style={{ fontSize: 14, color: '#8A867C', lineHeight: 1.5 }}>Get the full experience on iOS &amp; Android.</div>
-            </div>
-            <span style={{ marginTop: 6, fontSize: 14, fontWeight: 700, color: '#5B4FE9', display: 'inline-flex', alignItems: 'center', gap: 6 }}>Get the app →</span>
+          <a href="https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)' }} target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 384 512" fill="currentColor" aria-label="iOS">
+              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 576 512" fill="currentColor" aria-label="Android">
+              <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0l-48.54-84.07a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55"/>
+            </svg>
+            download the app
           </a>
         </div>
 
