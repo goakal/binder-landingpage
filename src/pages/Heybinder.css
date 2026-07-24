@@ -16,6 +16,9 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Anchor links (e.g. "Try Binder" → #get) scroll smoothly; must live on <html> to affect window scrolling */
+html:has(.hb-page) { scroll-behavior: smooth; }
+
 .hb-page {
   scroll-behavior: smooth;
   margin: 0;
@@ -32,55 +35,64 @@
 @keyframes hb-rev { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 .hb-rv { animation: hb-rev linear both; animation-timeline: view(); animation-range: entry 0% cover 24%; }
 
+/* Light-purple textured band around the hero card */
+.hb-hero-wrap {
+  background:
+    radial-gradient(rgba(91, 79, 233, 0.11) 1px, transparent 1.5px),
+    linear-gradient(180deg, #F2EFFC 0%, #E7E2F8 100%);
+  background-size: 20px 20px, 100% 100%;
+}
+
 /* Keeps the rounded-corner clip intact while children animate transforms (Safari) */
 .hb-hero-full { isolation: isolate; transform: translateZ(0); }
 
-/* Hero background: slow Ken Burns drift (always scaled >1 so edges never show) */
+/* Hero background: Ken Burns drift (always scaled >1 so edges never show) */
 @keyframes hb-hero-drift {
-  0%   { transform: scale(1.06) translate(0.7%, 0.5%); }
-  100% { transform: scale(1.14) translate(-0.7%, -0.6%); }
+  0%   { transform: scale(1.09) translate(1.4%, 1%); }
+  100% { transform: scale(1.24) translate(-1.6%, -1.2%); }
 }
 .hb-hero-bg {
-  animation: hb-hero-drift 32s ease-in-out infinite alternate;
+  animation: hb-hero-drift 20s ease-in-out infinite alternate;
   will-change: transform;
 }
 
-/* Soft light that slowly sweeps across the hero */
+/* Soft light that sweeps across the hero */
 @keyframes hb-hero-glow-move {
-  0%   { transform: translate(-12%, -6%) scale(1); opacity: 0.5; }
-  50%  { transform: translate(10%, 6%) scale(1.15); opacity: 0.85; }
-  100% { transform: translate(-12%, -6%) scale(1); opacity: 0.5; }
+  0%   { transform: translate(-16%, -8%) scale(1); opacity: 0.45; }
+  50%  { transform: translate(14%, 8%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-16%, -8%) scale(1); opacity: 0.45; }
 }
 .hb-hero-glow {
   position: absolute;
   inset: -25%;
   pointer-events: none;
-  background: radial-gradient(42% 34% at 38% 30%, rgba(255, 214, 170, 0.28), transparent 70%),
-              radial-gradient(36% 30% at 68% 62%, rgba(122, 108, 255, 0.22), transparent 70%);
+  background: radial-gradient(42% 34% at 38% 30%, rgba(255, 214, 170, 0.38), transparent 70%),
+              radial-gradient(36% 30% at 68% 62%, rgba(122, 108, 255, 0.3), transparent 70%);
   mix-blend-mode: soft-light;
-  animation: hb-hero-glow-move 18s ease-in-out infinite;
+  animation: hb-hero-glow-move 13s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html:has(.hb-page) { scroll-behavior: auto; }
   .hb-page * { animation: none !important; scroll-behavior: auto !important; }
 }
 
 @media (max-width: 900px) {
   .hb-two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
-  .hb-hero-wrap { padding: 12px 12px 0 !important; }
-  .hb-hero-full { height: auto !important; min-height: 620px !important; padding: 120px 20px 90px !important; border-radius: 24px !important; }
+  .hb-hero-wrap { padding: 12px !important; }
+  .hb-hero-full { height: auto !important; min-height: 620px !important; padding: 90px 20px 70px !important; border-radius: 24px !important; }
   .hb-hero-full img { position: absolute !important; }
-  .hb-hero-top { position: static !important; transform: none !important; top: auto !important; left: auto !important; padding: 0 !important; gap: 22px !important; }
+  .hb-hero-top { gap: 22px !important; }
   .hb-hero-top img { position: static !important; width: 80px !important; height: 80px !important; }
-  .hb-hero-bottom { left: 20px !important; right: 20px !important; bottom: 28px !important; max-width: none !important; }
+  .hb-hero-agent { padding: 16px 16px !important; }
   .hb-sec { padding-left: 20px !important; padding-right: 20px !important; }
   .hb-fig1 { width: 100% !important; height: auto !important; }
   .hb-cta-choices { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 560px) {
-  .hb-hero-wrap { padding: 10px 10px 0 !important; }
-  .hb-hero-full { min-height: 560px !important; padding: 96px 16px 64px !important; border-radius: 20px !important; }
+  .hb-hero-wrap { padding: 10px !important; }
+  .hb-hero-full { min-height: 560px !important; padding: 72px 16px 56px !important; border-radius: 20px !important; }
   .hb-hero-top img { width: 64px !important; height: 64px !important; }
 }
