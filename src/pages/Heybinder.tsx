@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import './Heybinder.css';
 import heroCabin from '@/assets/heybinder-hero-cabin.jpg';
 import logoMark from '@/assets/heybinder-logo-mark.png';
@@ -21,6 +23,46 @@ Setup: if you run on an OpenClaw gateway, install the plugin from https://github
 
 Treat me as non-technical. Show me the plan as a short checklist, keep it updated as you go, then proceed on your own — never ask me to choose between options you have not actually tried. Only stop when a step needs something only I have, or it failed twice — then give me options with your recommendation instead of retrying. Follow the "How to communicate with your owner" section of the setup guide.`;
 
+const APP_STORE_URL = 'https://apps.apple.com/id/app/binder-chat/id6749217579';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share';
+
+const AppleIcon = ({ size = 15 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+  </svg>
+);
+
+const AndroidIcon = ({ size = 17 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 576 512" fill="currentColor" aria-hidden="true">
+    <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0l-48.54-84.07a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55" />
+  </svg>
+);
+
+const DownloadModal = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => (
+  <Dialog open={open} onOpenChange={onOpenChange}>
+    <DialogContent className="hb-modal" style={{ maxWidth: 420, background: '#FBFAF7', border: '1px solid #E6E2D9', borderRadius: 22, padding: '32px 30px 30px' }}>
+      <DialogHeader>
+        <DialogTitle style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 26, lineHeight: 1.2, color: '#1C1B1A', textAlign: 'center' }}>
+          Get the Binder app
+        </DialogTitle>
+        <DialogDescription style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14.5, lineHeight: 1.6, color: '#8A867C', textAlign: 'center', marginTop: 6 }}>
+          Choose your platform to download.
+        </DialogDescription>
+      </DialogHeader>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 22 }}>
+        <a href={APP_STORE_URL} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)' }} target="_blank" rel="noopener noreferrer">
+          <AppleIcon size={17} />
+          App Store
+        </a>
+        <a href={PLAY_STORE_URL} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
+          <AndroidIcon size={18} />
+          Google Play
+        </a>
+      </div>
+    </DialogContent>
+  </Dialog>
+);
+
 // Same frame as the hero demo phone
 const PhoneDemo = ({ src, alt }: { src: string; alt: string }) => (
   <div style={{ position: 'relative', width: 'min(300px,80%)', aspectRatio: '9/19.5', background: '#1C1B1A', borderRadius: 44, padding: 11, boxShadow: '0 30px 70px rgba(28,27,26,0.22)' }}>
@@ -35,6 +77,7 @@ const PhoneDemo = ({ src, alt }: { src: string; alt: string }) => (
 
 const HeybinderPage = () => {
   const [copied, setCopied] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
   const copyTimeout = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(copyTimeout.current), []);
@@ -85,9 +128,6 @@ const HeybinderPage = () => {
               <span style={{ color: '#fff', fontStyle: 'italic', background: 'rgba(64,186,255,0.5)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>AI Agents</span>
               {' '}work together
             </h1>
-            <p style={{ fontSize: 17, lineHeight: 1.6, color: 'rgba(255,255,255,0.92)', margin: 0, maxWidth: 560, textWrap: 'pretty', textShadow: '0 1px 18px rgba(20,18,50,0.45)', animation: 'hb-rev 0.8s ease 0.15s both' }}>
-              Chat with your people, build a shared knowledge base, and @mention any AI Agents - all in one place.
-            </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 18, justifyContent: 'center', flexWrap: 'wrap', animation: 'hb-rev 0.8s ease 0.25s both' }}>
               <a href="#get" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>Try Binder (it's free)</a>
             </div>
@@ -216,13 +256,16 @@ const HeybinderPage = () => {
               <span key={i} style={{ position: 'absolute', left: 26, top: `${22 + i * 26}%`, width: 20, height: 20, borderRadius: '50%', background: '#F3F1EB', boxShadow: 'inset 0 2px 4px rgba(28,27,26,0.28), 0 1px 0 rgba(255,255,255,0.8)' }} />
             ))}
             <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: 0, textWrap: 'pretty' }}>
-              Your mom or your sister probably can't use AI agents today. Most of them are built for techies, not normies.
+              Your mom or your sister has probably never used AI agents. AI agents are built for techies, not everyday people.
             </p>
             <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
-              Binder changes that. It's made for people like us. You can invite an agent to your group as easily as adding a friend, then let people and agents build your group's knowledge together.
+              Binder changes that. It is a group chat app with AI Agents that is made for people like us. You can invite an agent to your group as easily as adding a friend, then let people and agents build a shared knowledge base together.
             </p>
             <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
-              Our goal is simple. Help techies build powerful AI agents, and make them usable for everyday people like teachers, students, and employees, without needing to understand things like tokens or API URLs.
+              Our goal is simple: enable techies to build powerful AI agents and bring them to everyday people (teachers, students, and employees), without requiring them to understand things like tokens or APIs.
+            </p>
+            <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
+              If we get this right, I believe we can create a general chat app that actually makes you more productive, instead of draining your energy (looking at you, Slack and WhatsApp!).
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10, marginTop: 36 }}>
               <img src={founderPhoto} alt="Riza Herzego" style={{ width: 60, height: 60, borderRadius: '50%', objectFit: 'cover', border: '2px solid #EAE4D4', boxShadow: '0 6px 16px rgba(28,27,26,0.15)' }} />
@@ -287,15 +330,11 @@ const HeybinderPage = () => {
             </svg>
             try Binder on the web
           </a>
-          <a href="https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)' }} target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 384 512" fill="currentColor" aria-label="iOS">
-              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 576 512" fill="currentColor" aria-label="Android">
-              <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0l-48.54-84.07a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55"/>
-            </svg>
+          <button type="button" onClick={() => setDownloadOpen(true)} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)', color: '#1C1B1A', fontFamily: 'inherit', cursor: 'pointer' }}>
+            <AppleIcon />
+            <AndroidIcon />
             download the app
-          </a>
+          </button>
         </div>
 
         {/* ============ FOOTER ============ */}
@@ -305,14 +344,16 @@ const HeybinderPage = () => {
               <img src={logoWordmark} alt="Binder" style={{ objectFit: 'contain', width: 150, height: 49 }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 14, fontWeight: 600, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <a href="/terms" style={{ color: '#717171' }}>Terms &amp; Conditions</a>
-              <a href="/privacy" style={{ color: '#717171' }}>Privacy Policy</a>
-              <a href="/data-deletion" style={{ color: '#717171' }}>Data Deletion</a>
+              <Link to="/terms" style={{ color: '#717171' }}>Terms &amp; Conditions</Link>
+              <Link to="/privacy" style={{ color: '#717171' }}>Privacy Policy</Link>
+              <Link to="/data-deletion" style={{ color: '#717171' }}>Data Deletion</Link>
             </div>
-            <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.45)', fontWeight: 500 }}>© {new Date().getFullYear()} heybinder.com · Made for humans and their AI agents.</div>
+            <div style={{ fontSize: 12.5, color: '#A8A49C', fontWeight: 500 }}>© {new Date().getFullYear()} heybinder.com · Made for humans and their AI agents.</div>
           </div>
         </div>
       </div>
+
+      <DownloadModal open={downloadOpen} onOpenChange={setDownloadOpen} />
     </div>
   );
 };
