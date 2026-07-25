@@ -118,6 +118,11 @@ html:has(.hb-page) { scroll-behavior: smooth; }
   .hb-hero-agent { padding: 16px 16px !important; }
   .hb-sec { padding-left: 20px !important; padding-right: 20px !important; }
   .hb-fig1 { width: 100% !important; height: auto !important; }
+  .hb-note {
+    padding: 34px 24px 30px 60px !important;
+    background-image: repeating-linear-gradient(180deg, transparent, transparent 35px, #EFE8DA 35px, #EFE8DA 36px) !important;
+  }
+  .hb-note > span { left: 16px !important; width: 16px !important; height: 16px !important; }
 }
 
 @media (max-width: 560px) {
