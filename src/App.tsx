@@ -12,6 +12,7 @@ import DataDeletionIOS from "./pages/DataDeletionIOS";
 import Story from "./pages/Story";
 import Clean from "./pages/Clean";
 import Short from "./pages/Short";
+import Heybinder from "./pages/Heybinder";
 
 const queryClient = new QueryClient();
 
@@ -20,9 +21,10 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
-          <Route path="/" element={<Clean />} />
+          <Route path="/" element={<Heybinder />} />
+          <Route path="/clean" element={<Clean />} />
           <Route path="/short" element={<Short />} />
           <Route path="/story" element={<Story />} />
           <Route path="/terms" element={<Terms />} />
