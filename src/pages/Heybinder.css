@@ -110,6 +110,8 @@ html:has(.hb-page) { scroll-behavior: smooth; }
 
 @media (max-width: 900px) {
   .hb-two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
+  /* Feature sections: title + description above the demo phone on mobile */
+  .hb-two-col .hb-col-media { order: 2; }
   .hb-hero-wrap { padding: 12px !important; }
   .hb-hero-full { height: auto !important; min-height: 620px !important; padding: 90px 20px 70px !important; border-radius: 24px !important; }
   .hb-hero-full img { position: absolute !important; }

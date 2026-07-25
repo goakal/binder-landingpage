@@ -8,6 +8,8 @@ import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
 import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
 import logoWordmark from '@/assets/heybinder-logo-wordmark.png';
 import founderPhoto from '@/assets/founder-riza.png';
+import libraryDemo from '@/assets/heybinder-library-demo.webp';
+import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webp';
 
 const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so I can talk to you by @mentioning your bot.
 
@@ -19,12 +21,12 @@ Setup: if you run on an OpenClaw gateway, install the plugin from https://github
 
 Treat me as non-technical. Show me the plan as a short checklist, keep it updated as you go, then proceed on your own — never ask me to choose between options you have not actually tried. Only stop when a step needs something only I have, or it failed twice — then give me options with your recommendation instead of retrying. Follow the "How to communicate with your owner" section of the setup guide.`;
 
-// Same frame as the hero demo phone — swap the inner placeholder for a <video>/<img> when the gif is ready
-const PhonePlaceholder = () => (
+// Same frame as the hero demo phone — swap the img for the animated gif when it's ready
+const PhoneDemo = ({ src, alt }: { src: string; alt: string }) => (
   <div style={{ position: 'relative', width: 'min(300px,80%)', aspectRatio: '9/19.5', background: '#1C1B1A', borderRadius: 44, padding: 11, boxShadow: '0 30px 70px rgba(28,27,26,0.22)' }}>
-    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 34, overflow: 'hidden', background: 'linear-gradient(180deg, #F7F6FD 0%, #ECE8FB 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 34, overflow: 'hidden', background: '#F7F6FD' }}>
       <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: 83, height: 19, background: '#1C1B1A', borderRadius: '0 0 16px 16px', zIndex: 2 }} />
-      <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: '#B4AFC4' }}>DEMO COMING SOON</span>
+      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
     </div>
   </div>
 );
@@ -86,7 +88,6 @@ const HeybinderPage = () => {
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: 18, justifyContent: 'center', flexWrap: 'wrap', animation: 'hb-rev 0.8s ease 0.25s both' }}>
               <a href="#get" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>Try Binder (it's free)</a>
-              <a href="#how" className="hb-link-underline" style={{ fontSize: 15, fontWeight: 600, color: '#fff', borderBottom: '1.5px solid rgba(255,255,255,0.5)', paddingBottom: 3 }}>See how it works →</a>
             </div>
 
             {/* Agent prompt box */}
@@ -117,7 +118,7 @@ const HeybinderPage = () => {
       {/* ============ PRODUCT PEEK ============ */}
       <div id="how" className="hb-sec" style={{ maxWidth: 1120, margin: '0 auto', padding: '100px 24px' }}>
         <div className="hb-rv hb-two-col" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 56, alignItems: 'center' }}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="hb-col-media" style={{ display: 'flex', justifyContent: 'center' }}>
             <div style={{ position: 'relative', width: 'min(300px,80%)', aspectRatio: '9/19.5', background: '#1C1B1A', borderRadius: 44, padding: 11, boxShadow: '0 30px 70px rgba(28,27,26,0.22)' }}>
               <div style={{ width: '100%', height: '100%', borderRadius: 34, overflow: 'hidden', background: '#F7F6FD' }}>
                 <div style={{ position: 'absolute', top: 10, left: 163, transform: 'translateX(-50%)', width: 83, height: 19, background: '#1C1B1A', borderRadius: '0 0 16px 16px', zIndex: 2 }} />
@@ -151,8 +152,8 @@ const HeybinderPage = () => {
             <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>A shared library for your group</h3>
             <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: 0, maxWidth: 400, textWrap: 'pretty' }}>Build <b>Notes</b>, <b>Courses</b>, <b>Folders</b>, and <b>To-dos</b> inside your group, and let AI agents help organizer them. Everything you build becomes context for smarter AI agents.</p>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <PhonePlaceholder />
+          <div className="hb-col-media" style={{ display: 'flex', justifyContent: 'center' }}>
+            <PhoneDemo src={libraryDemo} alt="A Binder group chat with Library tabs where an AI agent drafts content" />
           </div>
         </div>
       </div>
@@ -160,8 +161,8 @@ const HeybinderPage = () => {
       {/* ============ MARKETPLACE (coming soon) ============ */}
       <div className="hb-sec" style={{ padding: '100px 24px' }}>
         <div className="hb-rv hb-two-col" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 56, alignItems: 'center', maxWidth: 1120, margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <PhonePlaceholder />
+          <div className="hb-col-media" style={{ display: 'flex', justifyContent: 'center' }}>
+            <PhoneDemo src={marketplaceDemo} alt="The AI Agents screen in Binder with the agent marketplace" />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
