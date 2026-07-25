@@ -8,8 +8,8 @@ import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
 import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
 import logoWordmark from '@/assets/heybinder-logo-wordmark.png';
 import founderPhoto from '@/assets/founder-riza.png';
-import libraryDemo from '@/assets/heybinder-library-demo.webp';
-import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webp';
+import libraryDemo from '@/assets/heybinder-library-demo.webm';
+import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webm';
 
 const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so I can talk to you by @mentioning your bot.
 
@@ -21,12 +21,14 @@ Setup: if you run on an OpenClaw gateway, install the plugin from https://github
 
 Treat me as non-technical. Show me the plan as a short checklist, keep it updated as you go, then proceed on your own — never ask me to choose between options you have not actually tried. Only stop when a step needs something only I have, or it failed twice — then give me options with your recommendation instead of retrying. Follow the "How to communicate with your owner" section of the setup guide.`;
 
-// Same frame as the hero demo phone — swap the img for the animated gif when it's ready
+// Same frame as the hero demo phone
 const PhoneDemo = ({ src, alt }: { src: string; alt: string }) => (
   <div style={{ position: 'relative', width: 'min(300px,80%)', aspectRatio: '9/19.5', background: '#1C1B1A', borderRadius: 44, padding: 11, boxShadow: '0 30px 70px rgba(28,27,26,0.22)' }}>
     <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 34, overflow: 'hidden', background: '#F7F6FD' }}>
       <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width: 83, height: 19, background: '#1C1B1A', borderRadius: '0 0 16px 16px', zIndex: 2 }} />
-      <img src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <video autoPlay loop muted playsInline aria-label={alt} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}>
+        <source src={src} type="video/webm" />
+      </video>
     </div>
   </div>
 );
