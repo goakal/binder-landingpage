@@ -1,17 +1,8 @@
+import LegalPage from "@/components/LegalPage";
+
 export default function PrivacyPolicy() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      <div className="relative mx-auto max-w-[37.5rem] pb-24 pt-20 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-          Privacy Policy
-        </h1>
-        <p className="mt-4 text-base leading-7 text-slate-600">
-          Effective Date: July 28, 2025
-        </p>
-      </div>
-
-      <div className="relative px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-prose text-lg">
+    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE JULY 28, 2025">
           <p className="text-base leading-7 text-slate-600 mb-6">
             Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use our mobile application ("Binder" or the "App").
           </p>
@@ -115,8 +106,6 @@ export default function PrivacyPolicy() {
             <strong>Binder App Team</strong><br />
             goku@goakal.com
           </p>
-        </div>
-      </div>
-    </div>
+    </LegalPage>
   );
 }
