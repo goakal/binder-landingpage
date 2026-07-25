@@ -5,7 +5,12 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === "production" ? "/binder-landingpage/" : "/",
+  // "/binder-landingpage/" only for the GitHub Pages project-path deploy;
+  // Netlify (heybinder.com) and local serve from the domain root.
+  base:
+    mode === "production" && process.env.GITHUB_ACTIONS
+      ? "/binder-landingpage/"
+      : "/",
   server: {
     host: "::",
     port: 8080,
