@@ -1,17 +1,8 @@
+import LegalPage from "@/components/LegalPage";
+
 export default function Terms() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      <div className="relative mx-auto max-w-[37.5rem] pb-24 pt-20 text-center">
-        <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-          Terms and Conditions for Binder App
-        </h1>
-        <p className="mt-4 text-base leading-7 text-slate-600">
-          Effective Date: 28 July 2025
-        </p>
-      </div>
-
-      <div className="relative px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-prose text-lg">
+    <LegalPage title="Terms and Conditions" effectiveDate="EFFECTIVE 28 JULY 2025">
           <p className="text-base leading-7 text-slate-600 mb-6">
             Welcome to Binder, a chat-based community app ("Binder," "we," "us," or "our"). By downloading, installing, or using our mobile application ("App"), you agree to comply with and be bound by these Terms and Conditions ("Terms") and our Privacy Policy. Please read them carefully before using our services.
           </p>
@@ -102,8 +93,6 @@ export default function Terms() {
           <p className="text-base leading-7 text-slate-600 mt-10 font-semibold text-center">
             Thank you for using Binder!
           </p>
-        </div>
-      </div>
-    </div>
+    </LegalPage>
   );
 }

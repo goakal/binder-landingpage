@@ -22,6 +22,11 @@
     U+2215, U+FEFF, U+FFFD;
 }
 
+/* Anchor links (e.g. "Try Binder" → #get) scroll smoothly; must live on <html> to affect window scrolling */
+html:has(.hb-page) {
+  scroll-behavior: smooth;
+}
+
 .hb-page {
   scroll-behavior: smooth;
   margin: 0;
@@ -57,6 +62,136 @@
   animation: hb-rev linear both;
   animation-timeline: view();
   animation-range: entry 0% cover 24%;
+}
+
+/* Light-purple band around the hero card: abstract cloud blobs + film grain */
+.hb-hero-wrap {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E"),
+    radial-gradient(
+      42% 34% at 22% 28%,
+      rgba(255, 255, 255, 0.85),
+      transparent 70%
+    ),
+    radial-gradient(
+      34% 28% at 74% 18%,
+      rgba(255, 255, 255, 0.65),
+      transparent 70%
+    ),
+    radial-gradient(
+      48% 38% at 58% 78%,
+      rgba(255, 255, 255, 0.5),
+      transparent 72%
+    ),
+    radial-gradient(
+      36% 30% at 90% 62%,
+      rgba(151, 131, 240, 0.38),
+      transparent 70%
+    ),
+    radial-gradient(
+      30% 26% at 6% 74%,
+      rgba(136, 115, 235, 0.32),
+      transparent 70%
+    ),
+    linear-gradient(180deg, #ede7fa 0%, #dbd0f4 100%);
+  background-blend-mode:
+    soft-light, normal, normal, normal, normal, normal, normal;
+}
+
+/* Keeps the rounded-corner clip intact while children animate transforms (Safari) */
+.hb-hero-full {
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* Hero background: Ken Burns drift (always scaled >1 so edges never show) */
+@keyframes hb-hero-drift {
+  0% {
+    transform: scale(1.09) translate(1.4%, 1%);
+  }
+  100% {
+    transform: scale(1.24) translate(-1.6%, -1.2%);
+  }
+}
+.hb-hero-bg {
+  animation: hb-hero-drift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Soft light that sweeps across the hero */
+@keyframes hb-hero-glow-move {
+  0% {
+    transform: translate(-16%, -8%) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate(14%, 8%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-16%, -8%) scale(1);
+    opacity: 0.45;
+  }
+}
+.hb-hero-glow {
+  position: absolute;
+  inset: -25%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      42% 34% at 38% 30%,
+      rgba(255, 214, 170, 0.38),
+      transparent 70%
+    ),
+    radial-gradient(
+      36% 30% at 68% 62%,
+      rgba(122, 108, 255, 0.3),
+      transparent 70%
+    );
+  mix-blend-mode: soft-light;
+  animation: hb-hero-glow-move 13s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Mac-style pill CTA buttons: bordered, gradient fill, press feedback.
+   Unscoped so they also work in the download dialog, which renders in a portal. */
+.hb-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1.5px solid #1c1b1a;
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1b1a;
+  cursor: pointer;
+  box-shadow:
+    0 2px 0 rgba(28, 27, 26, 0.35),
+    0 10px 24px rgba(28, 27, 26, 0.18);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+.hb-pill-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow:
+    0 4px 0 rgba(28, 27, 26, 0.35),
+    0 14px 30px rgba(28, 27, 26, 0.22);
+}
+.hb-pill-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgba(28, 27, 26, 0.35),
+    0 6px 16px rgba(28, 27, 26, 0.18);
+}
+/* Keep pill links dark — .hb-page a:hover would otherwise turn them purple */
+.hb-page a.hb-pill-btn,
+.hb-page a.hb-pill-btn:hover {
+  color: #1c1b1a;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,6 +259,85 @@
   .hb-hero-full {
     min-height: 560px !important;
     padding: 96px 16px 64px !important;
+  }
+  .hb-hero-top img {
+    width: 64px !important;
+    height: 64px !important;
+  }
+  html:has(.hb-page) {
+    scroll-behavior: auto;
+  }
+  .hb-page * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .hb-two-col {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  /* Feature sections: title + description above the demo phone on mobile */
+  .hb-two-col .hb-col-media {
+    order: 2;
+  }
+  .hb-hero-wrap {
+    padding: 12px !important;
+  }
+  .hb-hero-full {
+    height: auto !important;
+    min-height: 620px !important;
+    padding: 90px 20px 70px !important;
+    border-radius: 24px !important;
+  }
+  .hb-hero-full img {
+    position: absolute !important;
+  }
+  .hb-hero-top {
+    gap: 22px !important;
+  }
+  .hb-hero-top img {
+    position: static !important;
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .hb-hero-agent {
+    padding: 16px 16px !important;
+  }
+  .hb-sec {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .hb-fig1 {
+    width: 100% !important;
+    height: auto !important;
+  }
+  .hb-note {
+    padding: 34px 24px 30px 60px !important;
+    background-image: repeating-linear-gradient(
+      180deg,
+      transparent,
+      transparent 35px,
+      #efe8da 35px,
+      #efe8da 36px
+    ) !important;
+  }
+  .hb-note > span {
+    left: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .hb-hero-wrap {
+    padding: 10px !important;
+  }
+  .hb-hero-full {
+    min-height: 560px !important;
+    padding: 72px 16px 56px !important;
+    border-radius: 20px !important;
   }
   .hb-hero-top img {
     width: 64px !important;

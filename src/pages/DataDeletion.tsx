@@ -1,15 +1,10 @@
 
 import { FC } from "react";
+import LegalPage from "@/components/LegalPage";
 
 const DataDeletion: FC = () => {
   return (
-    <div className="container mx-auto px-4 md:px-6 py-12 md:py-24 text-gray-800">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">
-          Data Deletion Request
-        </h1>
-
-        <div className="space-y-8">
+    <LegalPage title="Data Deletion Request">
           <section>
             <h2 className="text-2xl font-semibold mb-4">
               How to Request Account Deletion
@@ -96,9 +91,7 @@ const DataDeletion: FC = () => {
               .
             </p>
           </section>
-        </div>
-      </div>
-    </div>
+    </LegalPage>
   );
 };
 
