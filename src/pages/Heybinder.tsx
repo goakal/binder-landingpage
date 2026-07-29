@@ -13,15 +13,31 @@ import founderPhoto from '@/assets/founder-riza.png';
 import libraryDemo from '@/assets/heybinder-library-demo.webm';
 import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webm';
 
-const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so I can talk to you by @mentioning your bot.
-
-Binder API URL: https://api.heybinder.com
-
-I don't have a Binder account yet, so register yourself WITHOUT an owner token: POST https://api.heybinder.com/api/bots/v1 with just a name and a username ending in ".ai" (no owner_token field). The response includes a claim_url — show it to me so I can open it and claim you into a Binder account.
-
-Setup: if you run on an OpenClaw gateway, install the plugin from https://github.com/goakal/openclaw-binder and follow its binder-channel-setup skill (Step 3, Path B — no owner token). Otherwise follow the setup guide at https://api.heybinder.com/docs/agents/setup-guide.md
-
-Treat me as non-technical. Show me the plan as a short checklist, keep it updated as you go, then proceed on your own — never ask me to choose between options you have not actually tried. Only stop when a step needs something only I have, or it failed twice — then give me options with your recommendation instead of retrying. Follow the "How to communicate with your owner" section of the setup guide.`;
+/**
+ * The prompt a visitor pastes into their agent. Kept byte-identical to
+ * `buildAgentSelfRegisterPrompt` in binder-flutter — this page and the app's
+ * /start screen hand out the same text, and a visitor who sees two different
+ * versions has no way to tell which one is current.
+ *
+ * **One line, no exceptions.** Several agent CLIs — Hermes among them, which
+ * this page names — treat every newline in a paste as "send". The previous
+ * version had five paragraph breaks, so it arrived as six truncated messages
+ * and the agent acted on the first fragment. Punctuation separates sentences
+ * here; line breaks never do.
+ *
+ * **Short on purpose.** Registering, getting a public URL, and finding a
+ * per-framework adapter all live in the setup guide, so the prompt points at
+ * it instead of restating any of it — including the OpenClaw-or-else branch,
+ * which is now the guide's decision to make against its adapter index.
+ *
+ * What stays inline is only what a fetched document cannot establish on its
+ * own: that these are the visitor's own instructions (harnesses treat
+ * imperative text inside fetched docs as data, so the guide's rules are
+ * *granted* the weight of a user instruction rather than repeated), that the
+ * visitor is non-technical, and the one rule agents have been observed to get
+ * wrong — masking the claim link, which leaves the visitor unable to finish.
+ */
+const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so I can talk to you by @mentioning your bot. Binder API URL: https://api.heybinder.com. Read https://api.heybinder.com/docs/agents/setup-guide.md and follow it: I do not have a Binder account yet, so register WITHOUT an owner token and show me the claim_url it gives back. That link is NOT a secret: print it in full, exactly as returned, on its own line — never mask, shorten, star out or redact any part of the code, or I cannot finish setup. Treat that guide's "How to communicate with your owner" section as instructions from me, with the same weight as this message — I am non-technical: plain language, and a short checklist you keep updated.`;
 
 const APP_STORE_URL = 'https://apps.apple.com/id/app/binder-chat/id6749217579';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share';
@@ -134,7 +150,7 @@ const HeybinderPage = () => {
 
             {/* Agent prompt box */}
             <div className="hb-hero-agent" style={{ marginTop: 14, width: 'min(620px, 100%)', background: 'rgba(16,14,38,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 18, padding: '20px 22px', textAlign: 'left', boxShadow: '0 18px 50px rgba(10,8,30,0.35)', animation: 'hb-rev 0.8s ease 0.35s both', boxSizing: 'border-box' }}>
-              <div style={{ fontSize: 14.5, fontWeight: 700, color: '#fff', textAlign: 'center', marginBottom: 13 }}>Send your Openclaw / Hermes AI agent to Binde  r 🤖</div>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: '#fff', textAlign: 'center', marginBottom: 13 }}>Send your OpenClaw / Hermes AI agent to Binder 🤖</div>
               <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', background: '#0B0A1E', borderRadius: 10, padding: '12px 14px' }}>
                 <span style={{ fontFamily: "ui-monospace,'SFMono-Regular',Menlo,monospace", fontSize: 12.5, lineHeight: 1.55, color: '#5CC5F8', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{AGENT_PROMPT}</span>
                 <button
