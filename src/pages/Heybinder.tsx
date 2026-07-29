@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import './Heybinder.css';
-import heroCabin from '@/assets/heybinder-hero-cabin.jpg';
+import heroCabinDay from '@/assets/heybinder-hero-cabin-illustrated.jpg';
+import heroCabinNight from '@/assets/heybinder-hero-cabin.jpg';
 import logoMark from '@/assets/heybinder-logo-mark.png';
 import productPeek from '@/assets/heybinder-product-peek.jpg';
 import ctaSky from '@/assets/heybinder-cta-sky.jpg';
@@ -115,7 +116,8 @@ const HeybinderPage = () => {
           className="hb-hero-full"
           style={{ position: 'relative', width: '100%', maxWidth: 'none', margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 30px 80px rgba(28,27,26,0.22)', minHeight: 'min(1040px, calc(100svh - 40px))', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '110px 24px 90px', boxSizing: 'border-box' }}
         >
-          <img src={heroCabin} alt="Cabin in a mountain valley at dusk" className="hb-hero-bg" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
+          <img src={heroCabinNight} alt="Cabin in a mountain valley at dusk" className="hb-hero-bg hb-hero-bg-night" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
+          <img src={heroCabinDay} alt="Illustrated cabin in a green mountain valley by day" className="hb-hero-bg hb-hero-bg-day" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%', filter: 'brightness(0.72)' }} />
           <div className="hb-hero-glow" aria-hidden="true" />
 
           {/* Hero content */}

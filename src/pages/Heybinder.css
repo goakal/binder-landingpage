@@ -61,6 +61,26 @@ html:has(.hb-page) { scroll-behavior: smooth; }
   will-change: transform;
 }
 
+/* Day/night crossfade: two stacked hero images swap slowly, like a day-cycle */
+@keyframes hb-hero-fade-day {
+  0%, 40%   { opacity: 1; }
+  55%, 90%  { opacity: 0; }
+  100%      { opacity: 1; }
+}
+@keyframes hb-hero-fade-night {
+  0%, 40%   { opacity: 0; }
+  55%, 90%  { opacity: 1; }
+  100%      { opacity: 0; }
+}
+.hb-hero-bg-day {
+  animation: hb-hero-drift 20s ease-in-out infinite alternate, hb-hero-fade-day 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.hb-hero-bg-night {
+  animation: hb-hero-drift 20s ease-in-out infinite alternate, hb-hero-fade-night 22s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 /* Soft light that sweeps across the hero */
 @keyframes hb-hero-glow-move {
   0%   { transform: translate(-16%, -8%) scale(1); opacity: 0.45; }
