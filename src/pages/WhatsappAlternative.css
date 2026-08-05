@@ -1,0 +1,115 @@
+/* Styles specific to /whatsapp-alternative.
+   Fonts, hero treatment, reveal animation and .hb-pill-btn come from Heybinder.css,
+   which this page imports first so the two landing pages stay visually identical. */
+
+/* ---- WhatsApp vs Binder comparison ---- */
+.wa-cmp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.wa-cmp-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.wa-cmp-head--wa {
+  background: #F1EFE8;
+  border: 1px solid #E6E2D9;
+  color: #8A867C;
+}
+.wa-cmp-head--bd {
+  background: #EDEBFF;
+  border: 1px solid #DCD7FF;
+  color: #5B4FE9;
+}
+
+.wa-cmp-cell {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 22px 24px;
+  border-radius: 18px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.wa-cmp-cell--wa {
+  background: #F7F5F0;
+  border: 1px solid #E6E2D9;
+  color: #6F6A61;
+}
+.wa-cmp-cell--bd {
+  background: #FEFDFB;
+  border: 1px solid #DCD7FF;
+  color: #3B372E;
+  box-shadow: 0 10px 30px rgba(91, 79, 233, 0.06);
+}
+.wa-cmp-cell b { color: #1C1B1A; }
+
+.wa-cmp-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+}
+.wa-cmp-icon--wa { background: #EFDDD8; color: #A9563D; }
+.wa-cmp-icon--bd { background: #E4E0FF; color: #5B4FE9; }
+
+/* Only shown once the columns stack and the header pills disappear */
+.wa-cmp-label {
+  display: none;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.wa-cmp-label--wa { color: #A8A49C; }
+.wa-cmp-label--bd { color: #5B4FE9; }
+
+@media (max-width: 760px) {
+  .wa-cmp-grid { grid-template-columns: 1fr; gap: 10px; }
+  .wa-cmp-head { display: none; }
+  .wa-cmp-label { display: block; }
+  /* Air between each WhatsApp/Binder pair, but not above the very first one */
+  .wa-cmp-cell--wa { margin-top: 18px; }
+  .wa-cmp-grid > *:nth-child(3) { margin-top: 0; }
+  .wa-cmp-cell { padding: 18px 20px; font-size: 15px; }
+}
+
+/* ---- Hero pain-point chips ---- */
+.wa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.wa-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 14, 38, 0.42);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 9px 17px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+@media (max-width: 560px) {
+  .wa-chip { font-size: 12.5px; padding: 8px 14px; }
+}

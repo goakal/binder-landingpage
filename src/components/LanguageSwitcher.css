@@ -1,0 +1,59 @@
+/* Floating EN/ID toggle. Fixed, so it has to stay legible over both the dark
+   hero photo and the light sections below it — hence the frosted light pill. */
+.lang-switch {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(28, 27, 26, 0.14);
+  box-shadow: 0 6px 20px rgba(28, 27, 26, 0.16);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.lang-switch__btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #6F6A61;
+  padding: 7px 14px;
+  border-radius: 999px;
+  line-height: 1;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.lang-switch__btn:hover {
+  color: #1C1B1A;
+  background: rgba(28, 27, 26, 0.06);
+}
+
+.lang-switch__btn[aria-pressed='true'] {
+  background: #1C1B1A;
+  color: #FFFFFF;
+}
+
+.lang-switch__btn:focus-visible {
+  outline: 2px solid #5B4FE9;
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .lang-switch { top: 20px; right: 20px; }
+  .lang-switch__btn { font-size: 12px; padding: 6px 11px; }
+}
+
+@media (max-width: 560px) {
+  .lang-switch { top: 16px; right: 16px; }
+}

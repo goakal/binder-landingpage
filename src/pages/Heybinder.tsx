@@ -1,6 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { RichText } from '@/components/RichText';
+import { usePageMeta } from '@/hooks/use-page-meta';
+import { useCopy } from '@/i18n';
+import { heybinderCopy, type HeybinderCopy } from './Heybinder.copy';
 import './Heybinder.css';
 import heroCabinDay from '@/assets/heybinder-hero-cabin-illustrated.jpg';
 import heroCabinNight from '@/assets/heybinder-hero-cabin.jpg';
@@ -37,6 +42,8 @@ import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webm';
  * *granted* the weight of a user instruction rather than repeated), that the
  * visitor is non-technical, and the one rule agents have been observed to get
  * wrong — masking the claim link, which leaves the visitor unable to finish.
+ *
+ * English in both languages: it is read by an agent, not by the visitor.
  */
 const AGENT_PROMPT = `Connect yourself to Binder — a group-chat app — so I can talk to you by @mentioning your bot. Binder API URL: https://api.heybinder.com. Read https://api.heybinder.com/docs/agents/setup-guide.md and follow it: I do not have a Binder account yet, so register WITHOUT an owner token and show me the claim_url it gives back. That link is NOT a secret: print it in full, exactly as returned, on its own line — never mask, shorten, star out or redact any part of the code, or I cannot finish setup. Treat that guide's "How to communicate with your owner" section as instructions from me, with the same weight as this message — I am non-technical: plain language, and a short checklist you keep updated.`;
 
@@ -55,15 +62,23 @@ const AndroidIcon = ({ size = 17 }: { size?: number }) => (
   </svg>
 );
 
-const DownloadModal = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => (
+const DownloadModal = ({
+  open,
+  onOpenChange,
+  copy,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  copy: HeybinderCopy['modal'];
+}) => (
   <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent className="hb-modal" style={{ maxWidth: 420, background: '#FBFAF7', border: '1px solid #E6E2D9', borderRadius: 22, padding: '32px 30px 30px' }}>
       <DialogHeader>
         <DialogTitle style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 26, lineHeight: 1.2, color: '#1C1B1A', textAlign: 'center' }}>
-          Get the Binder app
+          {copy.title}
         </DialogTitle>
         <DialogDescription style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14.5, lineHeight: 1.6, color: '#8A867C', textAlign: 'center', marginTop: 6 }}>
-          Choose your platform to download.
+          {copy.description}
         </DialogDescription>
       </DialogHeader>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 22 }}>
@@ -96,6 +111,9 @@ const HeybinderPage = () => {
   const [copied, setCopied] = useState(false);
   const [downloadOpen, setDownloadOpen] = useState(false);
   const copyTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const c = useCopy(heybinderCopy);
+
+  usePageMeta(c.meta.title, c.meta.description);
 
   useEffect(() => () => clearTimeout(copyTimeout.current), []);
 
@@ -126,45 +144,47 @@ const HeybinderPage = () => {
 
   return (
     <div className="hb-page">
+      <LanguageSwitcher />
+
       {/* ============ HERO (pixel-art background, card-style) ============ */}
       <div className="hb-hero-wrap" style={{ padding: 20, margin: '0 0 90px' }}>
         <div
           className="hb-hero-full"
           style={{ position: 'relative', width: '100%', maxWidth: 'none', margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 30px 80px rgba(28,27,26,0.22)', minHeight: 'min(1040px, calc(100svh - 40px))', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '110px 24px 90px', boxSizing: 'border-box' }}
         >
-          <img src={heroCabinNight} alt="Cabin in a mountain valley at dusk" className="hb-hero-bg hb-hero-bg-night" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
-          <img src={heroCabinDay} alt="Illustrated cabin in a green mountain valley by day" className="hb-hero-bg hb-hero-bg-day" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%', filter: 'brightness(0.72)' }} />
+          <img src={heroCabinNight} alt={c.hero.imageAltNight} className="hb-hero-bg hb-hero-bg-night" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%' }} />
+          <img src={heroCabinDay} alt={c.hero.imageAltDay} className="hb-hero-bg hb-hero-bg-day" style={{ position: 'absolute', inset: 0, width: '100%', objectFit: 'cover', objectPosition: 'center 42%', height: '100%', filter: 'brightness(0.72)' }} />
           <div className="hb-hero-glow" aria-hidden="true" />
 
           {/* Hero content */}
           <div className="hb-hero-top" style={{ position: 'relative', zIndex: 2, maxWidth: 1100, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 26, width: '100%' }}>
             <img src={logoMark} alt="" style={{ width: 100, height: 100, objectFit: 'contain', position: 'static' }} />
             <h1 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(38px,5.4vw,68px)', lineHeight: 1.08, letterSpacing: '-0.015em', color: '#fff', margin: 0, textWrap: 'balance', textShadow: '0 2px 28px rgba(20,18,50,0.4)', animation: 'hb-rev 0.8s ease 0.05s both', width: '100%' }}>
-              The group chat where{' '}
-              <span style={{ color: '#fff', fontStyle: 'italic', background: 'rgba(255,178,64,0.5)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>normies</span>
-              {' '}and{' '}
-              <span style={{ color: '#fff', fontStyle: 'italic', background: 'rgba(64,186,255,0.5)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>AI Agents</span>
-              {' '}work together
+              {c.hero.headline.before}
+              <span style={{ color: '#fff', fontStyle: 'italic', background: 'rgba(255,178,64,0.5)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>{c.hero.headline.normies}</span>
+              {c.hero.headline.between}
+              <span style={{ color: '#fff', fontStyle: 'italic', background: 'rgba(64,186,255,0.5)', padding: '0.02em 0.18em', borderRadius: '0.22em', boxDecorationBreak: 'clone', WebkitBoxDecorationBreak: 'clone' }}>{c.hero.headline.agents}</span>
+              {c.hero.headline.after}
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: 18, justifyContent: 'center', flexWrap: 'wrap', animation: 'hb-rev 0.8s ease 0.25s both' }}>
-              <a href="#get" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>Try Binder (it's free)</a>
+              <a href="#get" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>{c.hero.cta}</a>
             </div>
 
             {/* Agent prompt box */}
             <div className="hb-hero-agent" style={{ marginTop: 14, width: 'min(620px, 100%)', background: 'rgba(16,14,38,0.6)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.16)', borderRadius: 18, padding: '20px 22px', textAlign: 'left', boxShadow: '0 18px 50px rgba(10,8,30,0.35)', animation: 'hb-rev 0.8s ease 0.35s both', boxSizing: 'border-box' }}>
-              <div style={{ fontSize: 14.5, fontWeight: 700, color: '#fff', textAlign: 'center', marginBottom: 13 }}>Send your OpenClaw / Hermes AI agent to Binder 🤖</div>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: '#fff', textAlign: 'center', marginBottom: 13 }}>{c.hero.agentBox.title}</div>
               <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start', background: '#0B0A1E', borderRadius: 10, padding: '12px 14px' }}>
                 <span style={{ fontFamily: "ui-monospace,'SFMono-Regular',Menlo,monospace", fontSize: 12.5, lineHeight: 1.55, color: '#5CC5F8', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{AGENT_PROMPT}</span>
                 <button
                   onClick={copyPrompt}
                   style={{ flexShrink: 0, cursor: 'pointer', fontFamily: 'inherit', background: 'rgba(255,255,255,0.14)', border: 'none', color: '#fff', fontSize: 12.5, fontWeight: 700, padding: '8px 14px', borderRadius: 999, transition: 'background 0.2s' }}
                 >
-                  {copied ? 'Copied ✓' : 'Copy'}
+                  {copied ? c.copyButton.done : c.copyButton.idle}
                 </button>
               </div>
               <ol style={{ listStyle: 'none', margin: '14px 0 0', padding: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {['Send this prompt to your agent (OpenClaw or Hermes)', 'It signs up and sends you a claim link', 'Invite your AI agent to any group'].map((step, i) => (
-                  <li key={i} style={{ fontSize: 13.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.78)' }}>
+                {c.hero.agentBox.steps.map((step, i) => (
+                  <li key={step} style={{ fontSize: 13.5, lineHeight: 1.55, color: 'rgba(255,255,255,0.78)' }}>
                     <b style={{ color: '#FF8A80', marginRight: 8 }}>{i + 1}.</b>{step}
                   </li>
                 ))}
@@ -173,6 +193,18 @@ const HeybinderPage = () => {
           </div>
           <div style={{ position: 'absolute', inset: 0, opacity: 0.5, overflow: 'visible', width: '100%', height: '100%', backgroundColor: '#00000044' }} />
         </div>
+      </div>
+
+      {/* ============ COMING FROM WHATSAPP? → /whatsapp-alternative ============ */}
+      <div className="hb-sec" style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px' }}>
+        <Link to="/whatsapp-alternative" className="hb-rv hb-wa-band">
+          <div>
+            <div style={{ fontSize: 11.5, fontWeight: 700, letterSpacing: '0.12em', color: '#5B4FE9', marginBottom: 12 }}>{c.waBand.eyebrow}</div>
+            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(22px,2.4vw,30px)', lineHeight: 1.2, color: '#1C1B1A', margin: '0 0 10px', textWrap: 'balance' }}>{c.waBand.heading}</h3>
+            <p style={{ fontSize: 15.5, lineHeight: 1.6, color: '#5F5B53', margin: 0, maxWidth: 560, textWrap: 'pretty' }}>{c.waBand.body}</p>
+          </div>
+          <span className="hb-wa-band__arrow">{c.waBand.cta} →</span>
+        </Link>
       </div>
 
       {/* ============ PRODUCT PEEK ============ */}
@@ -196,10 +228,10 @@ const HeybinderPage = () => {
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C', marginBottom: 16 }}>INSIDE BINDER</div>
-            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>Invite AI, as easy as adding a friend</h3>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: '0 0 26px', maxWidth: 380, textWrap: 'pretty' }}><b>@mention</b> any AI to write notes, draft docs, or just chat, right inside your community, with no setup.</p>
-            <a href="#get" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 600, color: '#1C1B1A', borderBottom: '1.5px solid #D9D5CC', paddingBottom: 3 }}>Try Binder →</a>
+            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C', marginBottom: 16 }}>{c.peek.eyebrow}</div>
+            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>{c.peek.heading}</h3>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: '0 0 26px', maxWidth: 380, textWrap: 'pretty' }}><RichText text={c.peek.body} /></p>
+            <a href="#get" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 15, fontWeight: 600, color: '#1C1B1A', borderBottom: '1.5px solid #D9D5CC', paddingBottom: 3 }}>{c.peek.link}</a>
           </div>
         </div>
       </div>
@@ -208,12 +240,12 @@ const HeybinderPage = () => {
       <div className="hb-sec" style={{ background: '#F3F1EB', padding: '100px 24px' }}>
         <div className="hb-rv hb-two-col" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 56, alignItems: 'center', maxWidth: 1120, margin: '0 auto' }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C', marginBottom: 16 }}>GROUP LIBRARY</div>
-            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>A shared library for your group</h3>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: 0, maxWidth: 400, textWrap: 'pretty' }}>Build <b>Notes</b>, <b>Courses</b>, <b>Folders</b>, and <b>To-dos</b> inside your group, and let AI agents help organizer them. Everything you build becomes context for smarter AI agents.</p>
+            <div style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C', marginBottom: 16 }}>{c.library.eyebrow}</div>
+            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>{c.library.heading}</h3>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: 0, maxWidth: 400, textWrap: 'pretty' }}><RichText text={c.library.body} /></p>
           </div>
           <div className="hb-col-media" style={{ display: 'flex', justifyContent: 'center' }}>
-            <PhoneDemo src={libraryDemo} alt="A Binder group chat with Library tabs where an AI agent drafts content" />
+            <PhoneDemo src={libraryDemo} alt={c.library.videoAlt} />
           </div>
         </div>
       </div>
@@ -222,15 +254,15 @@ const HeybinderPage = () => {
       <div className="hb-sec" style={{ padding: '100px 24px' }}>
         <div className="hb-rv hb-two-col" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 56, alignItems: 'center', maxWidth: 1120, margin: '0 auto' }}>
           <div className="hb-col-media" style={{ display: 'flex', justifyContent: 'center' }}>
-            <PhoneDemo src={marketplaceDemo} alt="The AI Agents screen in Binder with the agent marketplace" />
+            <PhoneDemo src={marketplaceDemo} alt={c.marketplace.videoAlt} />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C' }}>MARKETPLACE</span>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: '#5B4FE9', background: '#EDEBFF', border: '1px solid #DCD7FF', borderRadius: 999, padding: '4px 10px' }}>COMING SOON</span>
+              <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.12em', color: '#8A867C' }}>{c.marketplace.eyebrow}</span>
+              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.08em', color: '#5B4FE9', background: '#EDEBFF', border: '1px solid #DCD7FF', borderRadius: 999, padding: '4px 10px' }}>{c.marketplace.badge}</span>
             </div>
-            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>Sell your AI agents on the marketplace</h3>
-            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: 0, maxWidth: 400, textWrap: 'pretty' }}>Build an agent people love, list it on the Binder marketplace, and earn when groups invite it.</p>
+            <h3 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(26px,2.8vw,38px)', lineHeight: 1.18, color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance', maxWidth: 420 }}>{c.marketplace.heading}</h3>
+            <p style={{ fontSize: 16, lineHeight: 1.7, color: '#5F5B53', margin: 0, maxWidth: 400, textWrap: 'pretty' }}>{c.marketplace.body}</p>
           </div>
         </div>
       </div>
@@ -257,7 +289,7 @@ const HeybinderPage = () => {
       {/* ============ FOUNDER NOTE ============ */}
       <div id="vision" className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
         <div style={{ maxWidth: 860, margin: '0 auto' }}>
-          <div className="hb-rv" style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.14em', color: '#8A867C', marginBottom: 34 }}>A NOTE FROM OUR FOUNDER</div>
+          <div className="hb-rv" style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.14em', color: '#8A867C', marginBottom: 34 }}>{c.founder.eyebrow}</div>
           <div
             className="hb-rv hb-note"
             style={{
@@ -273,22 +305,15 @@ const HeybinderPage = () => {
             {[0, 1, 2].map((i) => (
               <span key={i} style={{ position: 'absolute', left: 26, top: `${22 + i * 26}%`, width: 20, height: 20, borderRadius: '50%', background: '#F3F1EB', boxShadow: 'inset 0 2px 4px rgba(28,27,26,0.28), 0 1px 0 rgba(255,255,255,0.8)' }} />
             ))}
-            <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: 0, textWrap: 'pretty' }}>
-              Your mom or your sister has probably never used AI agents. AI agents are built for techies, not everyday people.
-            </p>
-            <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
-              Binder changes that. It is a group chat app with AI Agents that is made for people like us. You can invite an agent to your group as easily as adding a friend, then let people and agents build a shared knowledge base together.
-            </p>
-            <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
-              Our goal is simple: enable techies to build powerful AI agents and bring them to everyday people (teachers, students, and employees), without requiring them to understand things like tokens or APIs.
-            </p>
-            <p style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: '36px 0 0', textWrap: 'pretty' }}>
-              If we get this right, I believe we can create a general chat app that actually makes you more productive, instead of draining your energy (looking at you, Slack and WhatsApp!).
-            </p>
+            {c.founder.paragraphs.map((paragraph, i) => (
+              <p key={paragraph} style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: i === 0 ? 0 : '36px 0 0', textWrap: 'pretty' }}>
+                {paragraph}
+              </p>
+            ))}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10, marginTop: 36 }}>
               <img src={founderPhoto} alt="Riza Herzego" style={{ width: 60, height: 60, borderRadius: '50%', objectFit: 'cover', border: '2px solid #EAE4D4', boxShadow: '0 6px 16px rgba(28,27,26,0.15)' }} />
               <p style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: 'clamp(16px,1.9vw,19px)', lineHeight: 1.4, color: '#8A867C', margin: 0 }}>
-                — Riza Herzego, CEO
+                {c.founder.signature}
               </p>
             </div>
           </div>
@@ -299,26 +324,18 @@ const HeybinderPage = () => {
       <div className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
           <div className="hb-rv" style={{ textAlign: 'center', maxWidth: 660, margin: '0 auto 60px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 11.5, fontWeight: 700, letterSpacing: '0.12em', color: '#8A867C', background: '#FBFAF7', border: '1px solid #E6E2D9', borderRadius: 999, padding: '6px 13px', marginBottom: 22 }}>BRING YOUR OWN AI</div>
-            <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(28px,3.6vw,46px)', lineHeight: 1.16, letterSpacing: '-0.01em', color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance' }}>Already have your own AI? Add it to Binder.</h2>
-            <p style={{ fontSize: 16.5, lineHeight: 1.65, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}>Works with agents running on <b style={{ color: '#1C1B1A' }}>OpenClaw</b> or <b style={{ color: '#1C1B1A' }}>Hermes</b>.<br />Bring yours into your group in three steps.</p>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 11.5, fontWeight: 700, letterSpacing: '0.12em', color: '#8A867C', background: '#FBFAF7', border: '1px solid #E6E2D9', borderRadius: 999, padding: '6px 13px', marginBottom: 22 }}>{c.byo.eyebrow}</div>
+            <h2 style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(28px,3.6vw,46px)', lineHeight: 1.16, letterSpacing: '-0.01em', color: '#1C1B1A', margin: '0 0 16px', textWrap: 'balance' }}>{c.byo.heading}</h2>
+            <p style={{ fontSize: 16.5, lineHeight: 1.65, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}><RichText text={c.byo.sub} /></p>
           </div>
           <div className="hb-rv" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))', gap: 20, marginBottom: 40 }}>
-            <div style={{ background: '#FEFDFB', border: '1px solid #E6E2D9', borderRadius: 18, padding: '30px 26px' }}>
-              <div style={{ fontFamily: "'Fraunces', serif", fontSize: 34, fontWeight: 400, color: '#5B4FE9', lineHeight: 1, marginBottom: 16 }}>1</div>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1C1B1A', margin: '0 0 8px' }}>Copy this prompt</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.6, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}>Copy the prompt below — it tells your agent exactly what to do.</p>
-            </div>
-            <div style={{ background: '#FEFDFB', border: '1px solid #E6E2D9', borderRadius: 18, padding: '30px 26px' }}>
-              <div style={{ fontFamily: "'Fraunces', serif", fontSize: 34, fontWeight: 400, color: '#5B4FE9', lineHeight: 1, marginBottom: 16 }}>2</div>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1C1B1A', margin: '0 0 8px' }}>Paste it into your agent</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.6, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}>Paste it into your OpenClaw or Hermes agent and let it run.</p>
-            </div>
-            <div style={{ background: '#FEFDFB', border: '1px solid #E6E2D9', borderRadius: 18, padding: '30px 26px' }}>
-              <div style={{ fontFamily: "'Fraunces', serif", fontSize: 34, fontWeight: 400, color: '#5B4FE9', lineHeight: 1, marginBottom: 16 }}>3</div>
-              <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1C1B1A', margin: '0 0 8px' }}>Open the claim link</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.6, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}>Your agent signs up and sends you a claim link — open it to add the agent to your Binder.</p>
-            </div>
+            {c.byo.steps.map((step, i) => (
+              <div key={step.title} style={{ background: '#FEFDFB', border: '1px solid #E6E2D9', borderRadius: 18, padding: '30px 26px' }}>
+                <div style={{ fontFamily: "'Fraunces', serif", fontSize: 34, fontWeight: 400, color: '#5B4FE9', lineHeight: 1, marginBottom: 16 }}>{i + 1}</div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: '#1C1B1A', margin: '0 0 8px' }}>{step.title}</h3>
+                <p style={{ fontSize: 14.5, lineHeight: 1.6, color: '#5F5B53', margin: 0, textWrap: 'pretty' }}>{step.body}</p>
+              </div>
+            ))}
           </div>
           <div className="hb-rv" style={{ maxWidth: 600, margin: '0 auto', background: '#14122E', borderRadius: 14, padding: '16px 20px', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
             <span style={{ fontFamily: "ui-monospace,'SFMono-Regular',Menlo,monospace", fontSize: 13, lineHeight: 1.55, color: '#5CC5F8', flex: 1, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{AGENT_PROMPT}</span>
@@ -326,7 +343,7 @@ const HeybinderPage = () => {
               onClick={copyPrompt}
               style={{ flexShrink: 0, cursor: 'pointer', fontFamily: 'inherit', background: 'rgba(255,255,255,0.12)', border: 'none', color: '#fff', fontSize: 13, fontWeight: 700, padding: '9px 16px', borderRadius: 999, transition: 'background 0.2s' }}
             >
-              {copied ? 'Copied ✓' : 'Copy prompt'}
+              {copied ? c.copyButton.done : c.copyButton.withLabel}
             </button>
           </div>
         </div>
@@ -335,10 +352,10 @@ const HeybinderPage = () => {
       {/* ============ CTA (dual-choice: web vs app) ============ */}
       <div id="get" style={{ margin: '0 auto', padding: '100px 24px 120px', textAlign: 'center', background: `url(${ctaSky}) center / cover no-repeat`, width: '100%', paddingBottom: 0, paddingRight: 0, paddingLeft: 0 }}>
         <h2 className="hb-rv" style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(34px,5vw,68px)', lineHeight: 1.08, letterSpacing: '-0.02em', color: '#FFFFFF', margin: '0 0 14px', textWrap: 'balance' }}>
-          <div>Give your group one place</div>
-          <div>to work with AI.</div>
+          <div>{c.cta.line1}</div>
+          <div>{c.cta.line2}</div>
         </h2>
-        <p className="hb-rv" style={{ fontSize: 17, lineHeight: 1.6, color: '#FFFFFF', margin: '0 0 44px' }}>Start free in the browser — no card, no install.</p>
+        <p className="hb-rv" style={{ fontSize: 17, lineHeight: 1.6, color: '#FFFFFF', margin: '0 0 44px' }}>{c.cta.sub}</p>
         <div className="hb-rv" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, flexWrap: 'wrap', padding: '0 16px' }}>
           <a href="https://web.heybinder.com/" className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -346,12 +363,12 @@ const HeybinderPage = () => {
               <line x1="2" y1="12" x2="22" y2="12"></line>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            Try Binder on the web
+            {c.cta.web}
           </a>
           <button type="button" onClick={() => setDownloadOpen(true)} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)', color: '#1C1B1A', fontFamily: 'inherit', cursor: 'pointer' }}>
             <AppleIcon />
             <AndroidIcon />
-            Download the app
+            {c.cta.download}
           </button>
         </div>
 
@@ -362,16 +379,16 @@ const HeybinderPage = () => {
               <img src={logoWordmark} alt="Binder" style={{ objectFit: 'contain', width: 150, height: 49 }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 14, fontWeight: 600, flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Link to="/terms" style={{ color: '#717171' }}>Terms &amp; Conditions</Link>
-              <Link to="/privacy" style={{ color: '#717171' }}>Privacy Policy</Link>
-              <Link to="/data-deletion" style={{ color: '#717171' }}>Data Deletion</Link>
+              <Link to="/terms" style={{ color: '#717171' }}>{c.footer.terms}</Link>
+              <Link to="/privacy" style={{ color: '#717171' }}>{c.footer.privacy}</Link>
+              <Link to="/data-deletion" style={{ color: '#717171' }}>{c.footer.dataDeletion}</Link>
             </div>
-            <div style={{ fontSize: 12.5, color: '#A8A49C', fontWeight: 500 }}>© {new Date().getFullYear()} heybinder.com · Made for humans and their AI agents.</div>
+            <div style={{ fontSize: 12.5, color: '#A8A49C', fontWeight: 500 }}>{c.footer.tagline.replace('{year}', String(new Date().getFullYear()))}</div>
           </div>
         </div>
       </div>
 
-      <DownloadModal open={downloadOpen} onOpenChange={setDownloadOpen} />
+      <DownloadModal open={downloadOpen} onOpenChange={setDownloadOpen} copy={c.modal} />
     </div>
   );
 };
