@@ -173,6 +173,104 @@ html:has(.hb-page) { scroll-behavior: smooth; }
   }
 }
 
+/* Use-case cards on the home page. Like .hb-wa-band, the whole card is a
+   <Link>, so it has to opt out of `.hb-page a:hover` turning it purple. */
+.hb-uc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.hb-uc-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  height: 100%;
+  padding: 32px 34px 28px;
+  border-radius: 22px;
+  background: linear-gradient(115deg, var(--uc-tint, #F1EEFF) 0%, #FBFAF7 62%);
+  border: 1px solid var(--uc-line, #DCD7FF);
+  box-shadow: 0 14px 40px rgba(28, 27, 26, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hb-page a.hb-uc-card,
+.hb-page a.hb-uc-card:hover { color: #1C1B1A; }
+.hb-uc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 52px rgba(28, 27, 26, 0.13);
+}
+
+.hb-uc-card__eyebrow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--uc-accent, #5B4FE9);
+}
+.hb-uc-card__title {
+  margin: 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(21px, 2.2vw, 27px);
+  line-height: 1.2;
+  color: #1C1B1A;
+  text-wrap: balance;
+}
+.hb-uc-card__body {
+  flex: 1;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #5F5B53;
+  text-wrap: pretty;
+}
+.hb-uc-card__cta {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--uc-accent, #5B4FE9);
+  transition: transform 0.2s ease;
+}
+.hb-uc-card:hover .hb-uc-card__cta { transform: translateX(4px); }
+
+@media (max-width: 860px) {
+  .hb-uc-grid { grid-template-columns: 1fr; gap: 14px; }
+  .hb-uc-card { padding: 26px 24px 24px; }
+}
+
+/* Hero credibility chips — used by the home and communities heroes */
+.hb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.hb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 14, 38, 0.42);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 9px 17px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Dark-on-light chips, for the photoless hero on /for-work */
+.hb-chips--ink .hb-chip {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: #DCD7FF;
+  color: #3B372E;
+}
+
+@media (max-width: 560px) {
+  .hb-chip { font-size: 12.5px; padding: 8px 14px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:has(.hb-page) { scroll-behavior: auto; }
   .hb-page * { animation: none !important; scroll-behavior: auto !important; }

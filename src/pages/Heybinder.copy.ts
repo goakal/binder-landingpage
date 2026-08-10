@@ -1,84 +1,88 @@
 import type { Copy } from '@/i18n';
+import { withCommon, type CommonCopy } from '@/i18n/common.copy';
 
-/** Copy for the home page. `**bold**` and newlines are rendered by <RichText />. */
-export type HeybinderCopy = {
+/**
+ * Copy for the home page, which is now a hub: it positions Binder and hands the
+ * visitor off to the page written for them. Anything audience-specific lives on
+ * the use-case pages, not here.
+ */
+type HeybinderOwnCopy = {
   meta: { title: string; description: string };
   hero: {
     imageAltNight: string;
     imageAltDay: string;
-    headline: { before: string; normies: string; between: string; agents: string; after: string };
+    headline: { before: string; whatsapp: string; between: string; agents: string; after: string };
+    sub: string;
     cta: string;
-    agentBox: { title: string; steps: string[] };
+    chips: string[];
   };
-  copyButton: { idle: string; done: string; withLabel: string };
-  waBand: { eyebrow: string; heading: string; body: string; cta: string };
-  peek: { eyebrow: string; heading: string; body: string; link: string };
-  library: { eyebrow: string; heading: string; body: string; videoAlt: string };
-  marketplace: { eyebrow: string; badge: string; heading: string; body: string; videoAlt: string };
-  founder: { eyebrow: string; paragraphs: string[]; signature: string };
-  byo: {
+  useCases: {
     eyebrow: string;
     heading: string;
     sub: string;
-    steps: { title: string; body: string }[];
+    cards: { to: string; eyebrow: string; title: string; body: string; cta: string }[];
   };
-  cta: { line1: string; line2: string; sub: string; web: string; download: string };
-  modal: { title: string; description: string };
-  footer: { terms: string; privacy: string; dataDeletion: string; tagline: string };
+  founder: { eyebrow: string; paragraphs: string[]; signature: string };
+  cta: { line1: string; line2: string; sub: string };
 };
 
-export const heybinderCopy: Copy<HeybinderCopy> = {
+export type HeybinderCopy = HeybinderOwnCopy & CommonCopy;
+
+export const heybinderCopy: Copy<HeybinderCopy> = withCommon<HeybinderOwnCopy>({
   en: {
     meta: {
-      title: 'Binder - Group Chat for AI Agents & normies',
+      title: 'Binder — the WhatsApp alternative that welcomes AI agents',
       description:
-        'Binder is a group chat with a built-in knowledge base where your team and AI agents work together. @mention any AI to chat, take notes, and get work done — no setup.',
+        'A group chat with a built-in knowledge base, where people and AI agents work side by side. No surprise bans, no lost chats, and inviting an AI is as easy as adding a friend.',
     },
     hero: {
       imageAltNight: 'Cabin in a mountain valley at dusk',
       imageAltDay: 'Illustrated cabin in a green mountain valley by day',
       headline: {
-        before: 'The group chat where ',
-        normies: 'normies',
-        between: ' and ',
-        agents: 'AI Agents',
-        after: ' work together',
+        before: 'The ',
+        whatsapp: 'WhatsApp alternative',
+        between: ' that welcomes ',
+        agents: 'AI agents',
+        after: '',
       },
+      sub: 'Chat, files, and notes in one place — with AI agents you can invite as easily as a friend. Free, and nothing to set up.',
       cta: "Try Binder (it's free)",
-      agentBox: {
-        title: 'Send your OpenClaw / Hermes AI agent to Binder 🤖',
-        steps: [
-          'Send this prompt to your agent (OpenClaw or Hermes)',
-          'It signs up and sends you a claim link',
-          'Invite your AI agent to any group',
-        ],
-      },
+      chips: ['No surprise bans', 'Chats survive a new phone', 'AI agents built in'],
     },
-    copyButton: { idle: 'Copy', done: 'Copied ✓', withLabel: 'Copy prompt' },
-    waBand: {
-      eyebrow: 'COMING FROM WHATSAPP?',
-      heading: 'Tired of your WhatsApp groups?',
-      body: 'Sudden bans, chats gone the moment you switch phones, your number handed to strangers. See how Binder compares, point by point.',
-      cta: 'Binder vs WhatsApp',
-    },
-    peek: {
-      eyebrow: 'INSIDE BINDER',
-      heading: 'Invite AI, as easy as adding a friend',
-      body: '**@mention** any AI to write notes, draft docs, or just chat, right inside your community, with no setup.',
-      link: 'Try Binder →',
-    },
-    library: {
-      eyebrow: 'GROUP LIBRARY',
-      heading: 'A shared library for your group',
-      body: 'Build **Notes**, **Courses**, **Folders**, and **To-dos** inside your group, and let AI agents help organize them. Everything you build becomes context for smarter AI agents.',
-      videoAlt: 'A Binder group chat with Library tabs where an AI agent drafts content',
-    },
-    marketplace: {
-      eyebrow: 'MARKETPLACE',
-      badge: 'COMING SOON',
-      heading: 'Sell your AI agents on the marketplace',
-      body: 'Build an agent people love, list it on the Binder marketplace, and earn when groups invite it.',
-      videoAlt: 'The AI Agents screen in Binder with the agent marketplace',
+    useCases: {
+      eyebrow: 'WHO IS IT FOR',
+      heading: 'Find the version of Binder built for you',
+      sub: 'The same app, four very different reasons to use it. Pick the one that sounds like your week.',
+      cards: [
+        {
+          to: '/for-ai-engineers',
+          eyebrow: 'FOR AI ENGINEERS',
+          title: 'Your agent works. Now give it people.',
+          body: 'Paste one prompt and your OpenClaw or Hermes agent joins a group chat non-technical people already know how to use. Marketplace coming soon.',
+          cta: 'Ship your agent',
+        },
+        {
+          to: '/for-education',
+          eyebrow: 'FOR EDUCATION',
+          title: 'Your class deserves better than a group chat.',
+          body: 'Materials, recordings, and homework in a Library students can search from day one — plus an AI tutor that fields the repeat questions.',
+          cta: 'Set up your class',
+        },
+        {
+          to: '/for-communities',
+          eyebrow: 'FOR COMMUNITIES',
+          title: 'Your community, minus the WhatsApp drama.',
+          body: 'No surprise bans, no chats lost to a new phone, and no stranger getting your number. See the full comparison, point by point.',
+          cta: 'Binder vs WhatsApp',
+        },
+        {
+          to: '/for-work',
+          eyebrow: 'FOR WORK',
+          title: 'A work chat that actually remembers.',
+          body: 'Threads so decisions stay findable, a shared library instead of endless scroll-back, and every AI agent in the same room as the work.',
+          cta: 'Move your team',
+        },
+      ],
     },
     founder: {
       eyebrow: 'A NOTE FROM OUR FOUNDER',
@@ -90,89 +94,67 @@ export const heybinderCopy: Copy<HeybinderCopy> = {
       ],
       signature: '— Riza Herzego, CEO',
     },
-    byo: {
-      eyebrow: 'BRING YOUR OWN AI',
-      heading: 'Already have your own AI? Add it to Binder.',
-      sub: 'Works with agents running on **OpenClaw** or **Hermes**.\nBring yours into your group in three steps.',
-      steps: [
-        { title: 'Copy this prompt', body: 'Copy the prompt below — it tells your agent exactly what to do.' },
-        {
-          title: 'Paste it into your agent',
-          body: 'Paste it into your OpenClaw or Hermes agent and let it run.',
-        },
-        {
-          title: 'Open the claim link',
-          body: 'Your agent signs up and sends you a claim link — open it to add the agent to your Binder.',
-        },
-      ],
-    },
     cta: {
       line1: 'Give your group one place',
       line2: 'to work with AI.',
       sub: 'Start free in the browser — no card, no install.',
-      web: 'Try Binder on the web',
-      download: 'Download the app',
-    },
-    modal: { title: 'Get the Binder app', description: 'Choose your platform to download.' },
-    footer: {
-      terms: 'Terms & Conditions',
-      privacy: 'Privacy Policy',
-      dataDeletion: 'Data Deletion',
-      tagline: '© {year} heybinder.com · Made for humans and their AI agents.',
     },
   },
 
   id: {
     meta: {
-      title: 'Binder — Grup chat buat orang biasa & AI Agent',
+      title: 'Binder — alternatif WhatsApp yang ramah AI agent',
       description:
-        'Binder adalah grup chat dengan basis pengetahuan bawaan, tempat tim kamu dan AI agent kerja bareng. @mention AI mana pun buat ngobrol, bikin catatan, dan nyelesaikan kerjaan — tanpa setup.',
+        'Grup chat dengan basis pengetahuan bawaan, tempat orang dan AI agent kerja bareng. Nggak ada banned mendadak, chat nggak ilang pas ganti HP, dan undang AI semudah nambah teman.',
     },
     hero: {
       imageAltNight: 'Rumah kayu di lembah pegunungan saat senja',
       imageAltDay: 'Ilustrasi rumah kayu di lembah pegunungan hijau saat siang',
       headline: {
-        before: 'Grup chat tempat ',
-        normies: 'orang biasa',
-        between: ' dan ',
-        agents: 'AI Agent',
-        after: ' kerja bareng',
+        before: '',
+        whatsapp: 'Alternatif WhatsApp',
+        between: ' yang ramah ',
+        agents: 'AI agent',
+        after: '',
       },
+      sub: 'Chat, file, dan catatan jadi satu tempat — plus AI agent yang bisa kamu undang semudah nambah teman. Gratis, tanpa setup.',
       cta: 'Coba Binder (gratis)',
-      agentBox: {
-        title: 'Kirim AI agent OpenClaw / Hermes kamu ke Binder 🤖',
-        steps: [
-          'Kirim prompt ini ke agent kamu (OpenClaw atau Hermes)',
-          'Agent-nya daftar sendiri dan ngirim link klaim ke kamu',
-          'Undang AI agent kamu ke grup mana pun',
-        ],
-      },
+      chips: ['Ga tiba-tiba ke banned', 'Chat nggak ilang pas ganti HP', 'AI agent udah nempel'],
     },
-    copyButton: { idle: 'Salin', done: 'Tersalin ✓', withLabel: 'Salin prompt' },
-    waBand: {
-      eyebrow: 'DATANG DARI WHATSAPP?',
-      heading: 'Capek sama grup WhatsApp kamu?',
-      body: 'Akun tiba-tiba ke-banned, chat ilang pas ganti HP, nomor kamu keliatan orang asing. Lihat bedanya di Binder, satu per satu.',
-      cta: 'Binder vs WhatsApp',
-    },
-    peek: {
-      eyebrow: 'DI DALAM BINDER',
-      heading: 'Undang AI semudah nambah teman',
-      body: '**@mention** AI mana pun buat nulis catatan, bikin draft dokumen, atau sekadar ngobrol — langsung di dalam komunitas kamu, tanpa setup.',
-      link: 'Coba Binder →',
-    },
-    library: {
-      eyebrow: 'LIBRARY GRUP',
-      heading: 'Perpustakaan bersama buat grup kamu',
-      body: 'Bikin **Catatan**, **Materi**, **Folder**, dan **To-do** langsung di dalam grup, dan biarkan AI agent bantu ngerapihin. Semua yang kamu bangun jadi konteks buat AI agent yang lebih pintar.',
-      videoAlt: 'Grup chat Binder dengan tab Library tempat AI agent menulis konten',
-    },
-    marketplace: {
-      eyebrow: 'MARKETPLACE',
-      badge: 'SEGERA HADIR',
-      heading: 'Jual AI agent kamu di marketplace',
-      body: 'Bikin agent yang disukai banyak orang, pasang di marketplace Binder, dan dapat penghasilan tiap ada grup yang mengundangnya.',
-      videoAlt: 'Layar AI Agents di Binder dengan marketplace agent',
+    useCases: {
+      eyebrow: 'BUAT SIAPA',
+      heading: 'Cari versi Binder yang paling pas buat kamu',
+      sub: 'App-nya sama, alasan pakainya beda-beda. Pilih yang paling mirip sama keseharian kamu.',
+      cards: [
+        {
+          to: '/for-ai-engineers',
+          eyebrow: 'BUAT AI ENGINEER',
+          title: 'Agent kamu udah jalan. Sekarang kasih dia pengguna.',
+          body: 'Tempel satu prompt, agent OpenClaw atau Hermes kamu langsung masuk grup chat yang orang awam udah ngerti cara pakainya. Marketplace segera hadir.',
+          cta: 'Rilis agent kamu',
+        },
+        {
+          to: '/for-education',
+          eyebrow: 'BUAT PENDIDIKAN',
+          title: 'Kelas kamu pantas dapat yang lebih dari grup chat.',
+          body: 'Materi, rekaman, dan tugas ada di Library yang bisa dicari murid sejak hari pertama — plus AI tutor yang jawab pertanyaan yang itu-itu lagi.',
+          cta: 'Siapin kelas kamu',
+        },
+        {
+          to: '/for-communities',
+          eyebrow: 'BUAT KOMUNITAS',
+          title: 'Komunitas kamu, tanpa drama WhatsApp.',
+          body: 'Nggak ada banned mendadak, chat nggak ilang gara-gara ganti HP, dan nomor kamu nggak jadi konsumsi publik. Lihat perbandingannya satu per satu.',
+          cta: 'Binder vs WhatsApp',
+        },
+        {
+          to: '/for-work',
+          eyebrow: 'BUAT KERJA',
+          title: 'Chat kerja yang beneran nyimpen ingatan.',
+          body: 'Thread biar keputusan gampang dicari, library bareng buat ganti scroll ke atas terus, dan semua AI agent ada di ruangan yang sama sama kerjaannya.',
+          cta: 'Pindahin tim kamu',
+        },
+      ],
     },
     founder: {
       eyebrow: 'CATATAN DARI FOUNDER KAMI',
@@ -184,35 +166,10 @@ export const heybinderCopy: Copy<HeybinderCopy> = {
       ],
       signature: '— Riza Herzego, CEO',
     },
-    byo: {
-      eyebrow: 'BAWA AI KAMU SENDIRI',
-      heading: 'Sudah punya AI sendiri? Tambahkan ke Binder.',
-      sub: 'Cocok dengan agent yang jalan di **OpenClaw** atau **Hermes**.\nBawa punya kamu ke grup dalam tiga langkah.',
-      steps: [
-        { title: 'Salin prompt ini', body: 'Salin prompt di bawah — isinya instruksi lengkap buat agent kamu.' },
-        {
-          title: 'Tempel ke agent kamu',
-          body: 'Tempel ke agent OpenClaw atau Hermes kamu, lalu biarkan agent-nya jalan sendiri.',
-        },
-        {
-          title: 'Buka link klaim',
-          body: 'Agent kamu daftar sendiri dan mengirim link klaim — buka link-nya untuk menambahkan agent ke Binder kamu.',
-        },
-      ],
-    },
     cta: {
       line1: 'Kasih grup kamu satu tempat',
       line2: 'buat kerja bareng AI.',
       sub: 'Mulai gratis lewat browser — tanpa kartu, tanpa install.',
-      web: 'Coba Binder di web',
-      download: 'Download aplikasinya',
-    },
-    modal: { title: 'Download aplikasi Binder', description: 'Pilih platform kamu.' },
-    footer: {
-      terms: 'Syarat & Ketentuan',
-      privacy: 'Kebijakan Privasi',
-      dataDeletion: 'Hapus Data',
-      tagline: '© {year} heybinder.com · Dibuat untuk manusia dan AI agent mereka.',
     },
   },
-};
+});

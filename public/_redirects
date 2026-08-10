@@ -1,1 +1,8 @@
-/* /index.html 200
+# Folded into /for-communities. A real 301 (rather than letting the SPA
+# catch-all serve it and redirect client-side) is what tells crawlers the page
+# moved, so the retired URL stops competing with the new one.
+# Netlify matches top-down — these must stay above the /* rule to be reached.
+/whatsapp-alternative      /for-communities   301!
+/whatsapp-alternative/*    /for-communities   301!
+
+/*                         /index.html        200
