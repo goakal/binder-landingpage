@@ -1,44 +1,32 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+import { RichText } from '@/components/RichText';
 import logoMark from '@/assets/heybinder-logo-mark.png';
 
 /**
  * How the hero card is filled behind the copy.
  *
  * `flat` skips the photo entirely and lets the lilac `.hb-hero-wrap` band show
- * through, with dark ink instead of white. It exists so that five pages sharing
- * two cabin photographs don't all read as the same page.
+ * through, with dark ink instead of white. No page uses it today — every page
+ * has a photograph of its own — but it stays as the escape hatch for a page
+ * that ships before its artwork does. Pair it with `.hb-chips--ink`.
  */
 export type HeroBg =
   | { kind: 'photo'; src: string; alt: string; objectPosition?: string; scrim?: number }
   | { kind: 'crossfade'; day: string; dayAlt: string; night: string; nightAlt: string }
   | { kind: 'flat' };
 
-/**
- * The highlighted word inside a hero headline. The text colour is inherited
- * from the <h1> rather than pinned to white, so the mark stays legible on the
- * photoless hero, where the heading is dark ink on a pale highlight.
- */
-export const HeroMark = ({ tone, children }: { tone: 'amber' | 'blue'; children: ReactNode }) => (
-  <span
-    style={{
-      color: 'inherit',
-      fontStyle: 'italic',
-      background: tone === 'amber' ? 'rgba(255,178,64,0.5)' : 'rgba(64,186,255,0.5)',
-      padding: '0.02em 0.18em',
-      borderRadius: '0.22em',
-      boxDecorationBreak: 'clone',
-      WebkitBoxDecorationBreak: 'clone',
-    }}
-  >
-    {children}
-  </span>
+/** A headline phrase set in italic, for headlines that want a little emphasis. */
+export const HeroItalic = ({ children }: { children: ReactNode }) => (
+  <span style={{ fontStyle: 'italic' }}>{children}</span>
 );
 
 /**
- * `headline` is a ReactNode rather than a string because each page splits it
- * differently — the home page highlights two words, the communities page one —
- * and a data shape general enough to cover every arity reads worse at the call
- * site than just assembling the fragment there with <HeroMark>.
+ * `headline` is a ReactNode rather than a string because a page may want to
+ * emphasise part of it — the home page italicises two phrases — and a data
+ * shape general enough to cover every arity reads worse at the call site than
+ * assembling the fragment there with <HeroItalic>. Pages that emphasise
+ * nothing pass a plain string.
  */
 export const MarketingHero = ({
   bg,
@@ -46,6 +34,7 @@ export const MarketingHero = ({
   sub,
   ctaLabel,
   ctaHref = '#get',
+  secondaryCta,
   children,
   style,
 }: {
@@ -54,14 +43,18 @@ export const MarketingHero = ({
   sub?: string;
   ctaLabel: string;
   ctaHref?: string;
+  /** The quieter second button. Its glass fill assumes a hero photograph. */
+  secondaryCta?: { label: string; href: string };
   children?: ReactNode;
   style?: CSSProperties;
 }) => {
   const onPhoto = bg.kind !== 'flat';
   const ink = onPhoto ? '#fff' : '#1C1B1A';
 
+  // The wrap carries no bottom margin: page background showing between the
+  // lilac band and the next section read as an unintended white stripe.
   return (
-    <div className="hb-hero-wrap" style={{ padding: 20, margin: '0 0 90px' }}>
+    <div className="hb-hero-wrap" style={{ padding: 20 }}>
       <div
         className="hb-hero-full"
         style={{
@@ -103,7 +96,9 @@ export const MarketingHero = ({
         {onPhoto && <div className="hb-hero-glow" aria-hidden="true" />}
 
         <div className="hb-hero-top" style={{ position: 'relative', zIndex: 2, maxWidth: 1100, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 26, width: '100%' }}>
-          <img src={logoMark} alt="" style={{ width: 100, height: 100, objectFit: 'contain', position: 'static' }} />
+          <Link to="/" style={{ lineHeight: 0 }}>
+            <img src={logoMark} alt="Binder home" style={{ width: 100, height: 100, objectFit: 'contain', position: 'static' }} />
+          </Link>
           <h1
             style={{
               fontFamily: "'Fraunces', serif",
@@ -134,11 +129,14 @@ export const MarketingHero = ({
                 animation: 'hb-rev 0.8s ease 0.15s both',
               }}
             >
-              {sub}
+              <RichText text={sub} />
             </p>
           )}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18, justifyContent: 'center', flexWrap: 'wrap', animation: 'hb-rev 0.8s ease 0.25s both' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, justifyContent: 'center', flexWrap: 'wrap', animation: 'hb-rev 0.8s ease 0.25s both' }}>
             <a href={ctaHref} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>{ctaLabel}</a>
+            {secondaryCta && (
+              <a href={secondaryCta.href} className="hb-pill-btn hb-pill-btn--ghost">{secondaryCta.label}</a>
+            )}
           </div>
           {children}
         </div>

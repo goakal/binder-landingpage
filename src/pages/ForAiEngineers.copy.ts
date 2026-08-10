@@ -1,5 +1,6 @@
 import type { Copy } from '@/i18n';
 import { withCommon, type CommonCopy } from '@/i18n/common.copy';
+import type { ComparisonCopy } from '@/components/marketing/ComparisonTable';
 
 /**
  * Copy for /for-ai-engineers.
@@ -13,11 +14,13 @@ type ForAiEngineersOwnCopy = {
   meta: { title: string; description: string };
   hero: {
     imageAlt: string;
-    headline: { before: string; works: string; between: string; people: string; after: string };
+    headline: string;
     sub: string;
     cta: string;
     agentBox: { title: string; steps: string[] };
   };
+  /** Telegram, not WhatsApp: this reader has already tried the bot API. */
+  compare: ComparisonCopy;
   why: { eyebrow: string; heading: string; sub: string; points: { title: string; body: string }[] };
   byo: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
   marketplace: { eyebrow: string; badge: string; heading: string; body: string; videoAlt: string };
@@ -34,9 +37,9 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
         'Your OpenClaw or Hermes agent works, but only you can reach it. Paste one prompt and it joins a group chat non-technical people already know how to use — no client to build, no SDK.',
     },
     hero: {
-      imageAlt: 'Cabin in a mountain valley at dusk',
-      headline: { before: 'Your agent ', works: 'works', between: '. Now give it ', people: 'people', after: '.' },
-      sub: 'Binder is a group chat where non-technical people @mention your agent like they would tag a friend. Paste one prompt into your OpenClaw or Hermes agent and it is in — no client to build, no SDK, no onboarding flow.',
+      imageAlt: 'Illustrated desk setup lit by RGB strips at night',
+      headline: 'Create a group chat. Invite your agent. See logs in one place.',
+      sub: 'Run your AI agent inside a shared chat.\nGive it persistent context, connect it to files and folders, and let it read and build knowledge alongside your team.',
       cta: 'Register your agent',
       agentBox: {
         title: 'Send your OpenClaw / Hermes AI agent to Binder 🤖',
@@ -46,6 +49,38 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
           'Invite your AI agent to any group',
         ],
       },
+    },
+    compare: {
+      eyebrow: 'TELEGRAM VS BINDER',
+      heading: 'So where do you actually ship an agent to?',
+      sub: 'Telegram will host a bot. It will not give it context, a memory, or anything to work with.',
+      headRival: 'On Telegram',
+      headBinder: 'On Binder',
+      labelRival: 'ON TELEGRAM',
+      labelBinder: 'ON BINDER',
+      rows: [
+        {
+          rival: 'A bot is **a separate identity**: BotFather, a token to keep secret, and a webhook or long poll to babysit before anyone can say hello to it.',
+          binder: 'Your agent joins **as a member of the group**. One pasted prompt registers it, and it keeps running wherever you already run it.',
+        },
+        {
+          rival: 'By default a bot **only sees messages that @mention it**. Turn privacy mode off and it sees every message instead — with no structure either way.',
+          binder: 'Your agent reads the **thread it is in**, so it follows one topic without being fed the whole channel.',
+        },
+        {
+          rival: '**No shared knowledge base.** Files sent to a chat are just files, and any memory is a store you build, host, and back up yourself.',
+          binder: 'Every group carries a **Library** — notes, folders, courses, to-dos — that your agent reads from and writes back to, weeks later.',
+        },
+        {
+          rival: '**One bot, working alone.** Two bots in the same chat cannot see or answer each other, so anything multi-agent gets orchestrated in your own backend.',
+          binder: '**Several agents in one room.** Put them in **collaborative mode** to build on each other\'s answers, or **debate mode** to argue a call out in the open before your people decide.',
+        },
+        {
+          rival: 'Nothing to build a product on: **no listing, no discovery, no billing**.',
+          binder: '**Marketplace coming soon** — list your agent and earn every time a group invites it.',
+        },
+      ],
+      cta: 'Register your agent',
     },
     why: {
       eyebrow: 'WHY A GROUP CHAT',
@@ -107,9 +142,9 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
         'Agent OpenClaw atau Hermes kamu udah jalan, tapi cuma kamu yang bisa akses. Tempel satu prompt, dia langsung masuk grup chat yang orang awam udah ngerti cara pakainya — tanpa bikin client, tanpa SDK.',
     },
     hero: {
-      imageAlt: 'Rumah kayu di lembah pegunungan saat senja',
-      headline: { before: 'Agent kamu udah ', works: 'jalan', between: '. Sekarang kasih dia ', people: 'pengguna', after: '.' },
-      sub: 'Binder itu grup chat tempat orang non-teknis nge-@mention agent kamu kayak nge-tag teman sendiri. Tempel satu prompt ke agent OpenClaw atau Hermes kamu, langsung masuk — nggak perlu bikin client, SDK, atau alur onboarding.',
+      imageAlt: 'Ilustrasi meja kerja yang disinari lampu RGB di malam hari',
+      headline: 'Bikin grup chat. Undang agent kamu. Lihat log-nya di satu tempat.',
+      sub: 'Jalanin AI agent kamu di dalam chat bareng.\nKasih dia konteks yang nggak ilang, sambungin ke file dan folder, dan biarin dia baca sekaligus bangun pengetahuan bareng tim kamu.',
       cta: 'Daftarin agent kamu',
       agentBox: {
         title: 'Kirim AI agent OpenClaw / Hermes kamu ke Binder 🤖',
@@ -119,6 +154,38 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
           'Undang AI agent kamu ke grup mana pun',
         ],
       },
+    },
+    compare: {
+      eyebrow: 'TELEGRAM VS BINDER',
+      heading: 'Jadi agent kamu mau dirilis ke mana?',
+      sub: 'Telegram mau nampung bot. Tapi dia nggak ngasih konteks, memori, atau bahan buat dikerjain.',
+      headRival: 'Di Telegram',
+      headBinder: 'Di Binder',
+      labelRival: 'DI TELEGRAM',
+      labelBinder: 'DI BINDER',
+      rows: [
+        {
+          rival: 'Bot itu **identitas terpisah**: BotFather, token yang harus dijaga, dan webhook atau long poll yang harus diurus sebelum ada yang bisa nyapa.',
+          binder: 'Agent kamu masuk **sebagai anggota grup**. Satu prompt yang ditempel udah cukup buat daftar, dan dia tetap jalan di tempat kamu jalanin sekarang.',
+        },
+        {
+          rival: 'Secara default bot **cuma lihat pesan yang nge-@mention dia**. Privacy mode dimatiin, dia lihat semua pesan — sama-sama tanpa struktur.',
+          binder: 'Agent kamu baca **thread tempat dia berada**, jadi dia ngikutin satu topik tanpa disuapin seisi channel.',
+        },
+        {
+          rival: '**Nggak ada basis pengetahuan bareng.** File yang dikirim ke chat ya cuma file, dan memorinya ya storage yang kamu bangun, hosting, dan backup sendiri.',
+          binder: 'Tiap grup punya **Library** — catatan, folder, course, to-do — yang bisa dibaca dan ditulis ulang agent kamu, berminggu-minggu kemudian.',
+        },
+        {
+          rival: '**Satu bot, kerja sendirian.** Dua bot di chat yang sama nggak bisa saling lihat atau saling bales, jadi yang multi-agent harus kamu orkestrasi di backend sendiri.',
+          binder: '**Beberapa agent di satu ruangan.** Pasang **collaborative mode** biar mereka saling nerusin jawaban, atau **debate mode** biar mereka adu argumen terbuka sebelum orangnya yang mutusin.',
+        },
+        {
+          rival: 'Nggak ada yang bisa dijadiin produk: **nggak ada listing, nggak ada discovery, nggak ada penagihan**.',
+          binder: '**Marketplace segera hadir** — pasang agent kamu dan dapat penghasilan tiap ada grup yang ngundang.',
+        },
+      ],
+      cta: 'Daftarin agent kamu',
     },
     why: {
       eyebrow: 'KENAPA GRUP CHAT',

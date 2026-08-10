@@ -1,5 +1,6 @@
 import type { Copy } from '@/i18n';
 import { withCommon, type CommonCopy } from '@/i18n/common.copy';
+import type { ComparisonCopy } from '@/components/marketing/ComparisonTable';
 
 /**
  * Copy for /for-work.
@@ -16,13 +17,15 @@ import { withCommon, type CommonCopy } from '@/i18n/common.copy';
 type ForWorkOwnCopy = {
   meta: { title: string; description: string };
   hero: {
-    headline: { before: string; work: string; between: string; remembers: string; after: string };
+    imageAlt: string;
+    headline: string;
     sub: string;
     cta: string;
     chips: string[];
   };
-  threads: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
-  agents: { eyebrow: string; heading: string; body: string; link: string; caption: string; figureAlt: string };
+  /** Slack, not WhatsApp: this reader has already been sold the upgrade once. */
+  compare: ComparisonCopy;
+  agents: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   move: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
   cta: { line1: string; line2: string; sub: string };
@@ -38,25 +41,54 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
         'Threads so decisions stay findable, a shared library instead of endless scroll-back, and AI agents working in the same chat on the same notes. Free, and nobody has to learn Slack.',
     },
     hero: {
-      headline: { before: 'A work chat that ', work: 'actually', between: ' ', remembers: 'remembers', after: '.' },
-      sub: 'Threads so decisions do not get buried, a Library so a new hire can catch up without asking, and AI agents in the same room as the work. Free — and nobody has to learn Slack.',
+      imageAlt: 'Illustrated studio office in warm afternoon light',
+      headline: 'Chat, project boards, and files in one place. Free.',
+      sub: 'Stop paying for Slack + Jira just to keep work connected.\nBinder combines chat, a task board, and shared context with AI agents built in.',
       cta: 'Move your team (free)',
-      chips: ['Decisions stay findable', 'New hires onboard themselves', 'AI agents built in'],
+      chips: [
+        '📋 Tasks and chat, side by side',
+        '🤖 AI agents that actually do work',
+        '💸 Free to use, pay only for premium AI',
+      ],
     },
-    threads: {
-      eyebrow: 'THREADS',
-      heading: 'Decisions stop drowning in the group',
-      body: 'Every topic gets its own **thread**, so the deploy discussion and the lunch plan are not the same scroll. Decisions stay where you can find them again in six weeks, and nobody has to pin twelve messages to keep them alive.',
-      link: 'See it in action →',
-      videoAlt: 'A Binder work chat with a thread per topic',
+    compare: {
+      eyebrow: 'SLACK VS BINDER',
+      heading: 'Slack was built for offices with an IT budget',
+      sub: 'Your team is smaller than that, and your own history should not be a monthly line item.',
+      headRival: 'On Slack',
+      headBinder: 'On Binder',
+      labelRival: 'ON SLACK',
+      labelBinder: 'ON BINDER',
+      rows: [
+        {
+          rival: 'On the free plan **your history disappears after 90 days**. Keeping your own conversation costs money, per person, every month.',
+          binder: '**Your history stays**, and it stays free. Nothing expires because you did not upgrade.',
+        },
+        {
+          rival: 'Everybody costs a **seat**. Adding a contractor, a client, or a part-timer means paying for them or leaving them out.',
+          binder: '**Invite anyone with a link.** No seats to provision, no admin console, no per-head cost.',
+        },
+        {
+          rival: 'Knowledge lives **somewhere else** — a Drive folder, a Notion, a pinned message — so the chat and the documents never quite line up.',
+          binder: 'Every group carries its own **Library**: specs, notes, folders, and to-dos, in the same place as the conversation.',
+        },
+        {
+          rival: '**AI is an add-on** on a higher tier, and every bot is its own app install, OAuth screen, and admin approval.',
+          binder: '**Invite an AI agent like a teammate.** It reads the group and the Library, and answers in the same thread as everyone else.',
+        },
+        {
+          rival: 'It is a **migration project**: a workspace to configure, channels to design, and people who keep replying in WhatsApp anyway.',
+          binder: 'It is **a group chat**. Anyone who has used one already knows how to use this — including the people who never adopted Slack.',
+        },
+      ],
+      cta: 'Try Binder now',
     },
     agents: {
       eyebrow: 'AI IN THE ROOM',
-      heading: 'Bring every agent into one chat',
-      body: "Each AI is good at a different job — writing, research, planning — but they run in separate apps that don't share context. So you copy-paste between tabs and stitch the results together by hand.\n\nIn Binder, your agents work in the same chat, on the same shared notes.",
-      link: 'Try it yourself →',
-      caption: 'Your team chat, knowledge base, and AI agents — together in Binder',
-      figureAlt: 'A Binder workspace showing chat, notes, and AI agents side by side',
+      heading: 'Invite an AI agent like a teammate',
+      body: 'Your agents join the group and work where the work is discussed. They read the **thread**, the specs, and the shared **Library**, so nobody has to paste context into another tab and paste the answer back.\n\nBring in more than one and let them work together in the same chat — drafting, checking each other, picking up items off the board — with the whole team reading the same replies.',
+      link: 'See it in action →',
+      videoAlt: 'A Binder work chat with an AI agent replying inside a thread',
     },
     library: {
       eyebrow: 'TEAM LIBRARY',
@@ -97,25 +129,54 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
         'Thread biar keputusan gampang dicari, library bareng buat ganti scroll ke atas terus, dan AI agent yang kerja di chat yang sama dengan catatan yang sama. Gratis, dan nggak ada yang perlu belajar Slack.',
     },
     hero: {
-      headline: { before: 'Chat kerja yang ', work: 'beneran', between: ' ', remembers: 'nyimpen ingatan', after: '.' },
-      sub: 'Thread biar keputusan nggak ketimbun, Library biar orang baru bisa nyusul tanpa nanya-nanya, dan AI agent di ruangan yang sama sama kerjaannya. Gratis — dan nggak ada yang perlu belajar Slack.',
+      imageAlt: 'Ilustrasi kantor studio di bawah cahaya sore',
+      headline: 'Chat, papan proyek, dan file di satu tempat. Gratis.',
+      sub: 'Berhenti bayar Slack + Jira cuma biar kerjaan tetap nyambung.\nBinder nyatuin chat, papan tugas, dan konteks bareng, plus AI agent yang udah nempel.',
       cta: 'Pindahin tim kamu (gratis)',
-      chips: ['Keputusan gampang dicari', 'Orang baru bisa nyusul sendiri', 'AI agent udah nempel'],
+      chips: [
+        '📋 Tugas dan chat, bersebelahan',
+        '🤖 AI agent yang beneran ngerjain',
+        '💸 Gratis dipakai, bayar cuma buat AI premium',
+      ],
     },
-    threads: {
-      eyebrow: 'THREAD',
-      heading: 'Keputusan berhenti tenggelam di grup',
-      body: 'Tiap topik punya **thread** sendiri, jadi obrolan deploy dan rencana makan siang nggak di scroll yang sama. Keputusan tetap di tempat yang bisa kamu cari lagi enam minggu kemudian, dan nggak perlu pin dua belas pesan biar nggak ilang.',
-      link: 'Lihat langsung →',
-      videoAlt: 'Chat kerja Binder dengan thread per topik',
+    compare: {
+      eyebrow: 'SLACK VS BINDER',
+      heading: 'Slack dibikin buat kantor yang punya budget IT',
+      sub: 'Tim kamu lebih kecil dari itu, dan riwayat obrolan kamu sendiri nggak seharusnya jadi tagihan bulanan.',
+      headRival: 'Di Slack',
+      headBinder: 'Di Binder',
+      labelRival: 'DI SLACK',
+      labelBinder: 'DI BINDER',
+      rows: [
+        {
+          rival: 'Di paket gratis, **riwayat chat ilang setelah 90 hari**. Buat nyimpen obrolan kamu sendiri, bayar per orang, tiap bulan.',
+          binder: '**Riwayat kamu tetap ada**, dan tetap gratis. Nggak ada yang expired cuma gara-gara kamu nggak upgrade.',
+        },
+        {
+          rival: 'Tiap orang makan satu **seat**. Ngajak freelancer, klien, atau anak part-time berarti bayar lagi atau nggak diajak sekalian.',
+          binder: '**Undang siapa pun lewat link.** Nggak ada seat yang perlu disiapin, nggak ada admin console, nggak ada biaya per kepala.',
+        },
+        {
+          rival: 'Pengetahuannya tinggal **di tempat lain** — folder Drive, Notion, pesan yang di-pin — jadi chat dan dokumennya nggak pernah nyambung.',
+          binder: 'Tiap grup punya **Library** yang nempel: spek, catatan, folder, dan to-do, satu tempat sama obrolannya.',
+        },
+        {
+          rival: '**AI itu add-on** di paket yang lebih mahal, dan tiap bot punya install app, layar OAuth, dan approval admin sendiri.',
+          binder: '**Undang AI agent kayak anggota tim.** Dia baca grup dan Library-nya, dan bales di thread yang sama dengan semua orang.',
+        },
+        {
+          rival: 'Ini **proyek migrasi**: workspace yang harus disetel, channel yang harus dirancang, dan orang-orang yang tetap bales di WhatsApp.',
+          binder: 'Ini **grup chat**. Siapa pun yang pernah pakai grup chat udah ngerti — termasuk orang yang dulu nggak pernah kepakai Slack-nya.',
+        },
+      ],
+      cta: 'Coba Binder sekarang',
     },
     agents: {
       eyebrow: 'AI DI RUANGAN YANG SAMA',
-      heading: 'Bawa semua agent ke satu chat',
-      body: 'Tiap AI jago di kerjaan yang beda — nulis, riset, bikin rencana — tapi jalannya di app yang beda-beda dan nggak saling tahu konteks. Ujung-ujungnya kamu copy-paste antar tab dan nyatuin hasilnya manual.\n\nDi Binder, agent kamu kerja di chat yang sama, di atas catatan yang sama.',
-      link: 'Coba sendiri →',
-      caption: 'Chat tim, basis pengetahuan, dan AI agent kamu — jadi satu di Binder',
-      figureAlt: 'Workspace Binder yang nampilin chat, catatan, dan AI agent bareng-bareng',
+      heading: 'Undang AI agent kayak anggota tim',
+      body: 'Agent kamu masuk ke grup dan kerja di tempat kerjaannya dibahas. Dia baca **thread**, spek, dan **Library** bareng, jadi nggak ada yang perlu nempel konteks ke tab lain terus nempel jawabannya balik.\n\nBawa lebih dari satu, dan biarin mereka kerja bareng di chat yang sama — nyusun draf, saling ngecek, ngambil item dari papan tugas — sementara satu tim baca balasan yang sama.',
+      link: 'Lihat langsung →',
+      videoAlt: 'Chat kerja Binder dengan AI agent yang bales di dalam thread',
     },
     library: {
       eyebrow: 'LIBRARY TIM',

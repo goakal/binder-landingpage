@@ -4,25 +4,27 @@ import { withCommon, type CommonCopy } from '@/i18n/common.copy';
 /**
  * Copy for the home page, which is now a hub: it positions Binder and hands the
  * visitor off to the page written for them. Anything audience-specific lives on
- * the use-case pages, not here.
+ * the use-case pages, not here — including the four card descriptions, which
+ * are shared from `@/i18n/use-cases.copy` because five pages render them.
  */
 type HeybinderOwnCopy = {
   meta: { title: string; description: string };
   hero: {
     imageAltNight: string;
     imageAltDay: string;
+    /** Split so `whatsapp` and `agents` can be set in italic. */
     headline: { before: string; whatsapp: string; between: string; agents: string; after: string };
-    sub: string;
     cta: string;
-    chips: string[];
+    ctaAgent: string;
   };
-  useCases: {
+  agent: {
     eyebrow: string;
     heading: string;
     sub: string;
-    cards: { to: string; eyebrow: string; title: string; body: string; cta: string }[];
+    steps: { title: string; body: string }[];
+    link: string;
   };
-  founder: { eyebrow: string; paragraphs: string[]; signature: string };
+  useCases: { eyebrow: string; heading: string; sub: string };
   cta: { line1: string; line2: string; sub: string };
 };
 
@@ -40,59 +42,35 @@ export const heybinderCopy: Copy<HeybinderCopy> = withCommon<HeybinderOwnCopy>({
       imageAltDay: 'Illustrated cabin in a green mountain valley by day',
       headline: {
         before: 'The ',
-        whatsapp: 'WhatsApp alternative',
-        between: ' that welcomes ',
-        agents: 'AI agents',
-        after: '',
+        whatsapp: 'WhatsApp',
+        between: ' alternative that ',
+        agents: 'AI Agents',
+        after: ' friendly',
       },
-      sub: 'Chat, files, and notes in one place — with AI agents you can invite as easily as a friend. Free, and nothing to set up.',
       cta: "Try Binder (it's free)",
-      chips: ['No surprise bans', 'Chats survive a new phone', 'AI agents built in'],
+      ctaAgent: 'Invite your OpenClaw / Hermes agent',
+    },
+    agent: {
+      eyebrow: 'BRING YOUR OWN AI',
+      heading: 'Already running an agent? Bring it in.',
+      sub: 'If you have an agent on **OpenClaw** or **Hermes**, it can be in a Binder group in about two minutes. You never leave your terminal.',
+      steps: [
+        { title: 'Copy this prompt', body: 'The prompt below tells your agent exactly what to do — you do not have to read any docs.' },
+        {
+          title: 'Paste it into your agent',
+          body: 'Paste it into your OpenClaw or Hermes agent and let it run. It registers itself against the Binder API.',
+        },
+        {
+          title: 'Open the claim link',
+          body: 'Your agent sends back a claim link. Open it to attach the agent to your account, then invite it to any group.',
+        },
+      ],
+      link: 'More for AI engineers →',
     },
     useCases: {
       eyebrow: 'WHO IS IT FOR',
-      heading: 'Find the version of Binder built for you',
-      sub: 'The same app, four very different reasons to use it. Pick the one that sounds like your week.',
-      cards: [
-        {
-          to: '/for-ai-engineers',
-          eyebrow: 'FOR AI ENGINEERS',
-          title: 'Your agent works. Now give it people.',
-          body: 'Paste one prompt and your OpenClaw or Hermes agent joins a group chat non-technical people already know how to use. Marketplace coming soon.',
-          cta: 'Ship your agent',
-        },
-        {
-          to: '/for-education',
-          eyebrow: 'FOR EDUCATION',
-          title: 'Your class deserves better than a group chat.',
-          body: 'Materials, recordings, and homework in a Library students can search from day one — plus an AI tutor that fields the repeat questions.',
-          cta: 'Set up your class',
-        },
-        {
-          to: '/for-communities',
-          eyebrow: 'FOR COMMUNITIES',
-          title: 'Your community, minus the WhatsApp drama.',
-          body: 'No surprise bans, no chats lost to a new phone, and no stranger getting your number. See the full comparison, point by point.',
-          cta: 'Binder vs WhatsApp',
-        },
-        {
-          to: '/for-work',
-          eyebrow: 'FOR WORK',
-          title: 'A work chat that actually remembers.',
-          body: 'Threads so decisions stay findable, a shared library instead of endless scroll-back, and every AI agent in the same room as the work.',
-          cta: 'Move your team',
-        },
-      ],
-    },
-    founder: {
-      eyebrow: 'A NOTE FROM OUR FOUNDER',
-      paragraphs: [
-        'Your mom or your sister has probably never used AI agents. AI agents are built for techies, not everyday people.',
-        'Binder changes that. It is a group chat app with AI Agents that is made for people like us. You can invite an agent to your group as easily as adding a friend, then let people and agents build a shared knowledge base together.',
-        'Our goal is simple: enable techies to build powerful AI agents and bring them to everyday people (teachers, students, and employees), without requiring them to understand things like tokens or APIs.',
-        'If we get this right, I believe we can create a general chat app that actually makes you more productive, instead of draining your energy (looking at you, Slack and WhatsApp!).',
-      ],
-      signature: '— Riza Herzego, CEO',
+      heading: 'How people use Binder',
+      sub: 'One group chat, four very different weeks. Pick the one that sounds like yours.',
     },
     cta: {
       line1: 'Give your group one place',
@@ -111,60 +89,36 @@ export const heybinderCopy: Copy<HeybinderCopy> = withCommon<HeybinderOwnCopy>({
       imageAltNight: 'Rumah kayu di lembah pegunungan saat senja',
       imageAltDay: 'Ilustrasi rumah kayu di lembah pegunungan hijau saat siang',
       headline: {
-        before: '',
-        whatsapp: 'Alternatif WhatsApp',
+        before: 'Alternatif ',
+        whatsapp: 'WhatsApp',
         between: ' yang ramah ',
-        agents: 'AI agent',
+        agents: 'AI Agent',
         after: '',
       },
-      sub: 'Chat, file, dan catatan jadi satu tempat — plus AI agent yang bisa kamu undang semudah nambah teman. Gratis, tanpa setup.',
       cta: 'Coba Binder (gratis)',
-      chips: ['Ga tiba-tiba ke banned', 'Chat nggak ilang pas ganti HP', 'AI agent udah nempel'],
+      ctaAgent: 'Undang agent OpenClaw / Hermes kamu',
+    },
+    agent: {
+      eyebrow: 'BAWA AI KAMU SENDIRI',
+      heading: 'Udah punya agent? Bawa aja ke sini.',
+      sub: 'Kalau kamu punya agent di **OpenClaw** atau **Hermes**, dia bisa masuk grup Binder sekitar dua menit. Kamu nggak perlu keluar dari terminal.',
+      steps: [
+        { title: 'Salin prompt ini', body: 'Prompt di bawah isinya instruksi lengkap buat agent kamu — kamu nggak perlu baca dokumentasi apa pun.' },
+        {
+          title: 'Tempel ke agent kamu',
+          body: 'Tempel ke agent OpenClaw atau Hermes kamu, lalu biarkan jalan. Dia daftar sendiri ke Binder API.',
+        },
+        {
+          title: 'Buka link klaim',
+          body: 'Agent kamu balikin link klaim. Buka link-nya buat nyantolin agent ke akun kamu, terus undang ke grup mana pun.',
+        },
+      ],
+      link: 'Selengkapnya buat AI engineer →',
     },
     useCases: {
       eyebrow: 'BUAT SIAPA',
-      heading: 'Cari versi Binder yang paling pas buat kamu',
-      sub: 'App-nya sama, alasan pakainya beda-beda. Pilih yang paling mirip sama keseharian kamu.',
-      cards: [
-        {
-          to: '/for-ai-engineers',
-          eyebrow: 'BUAT AI ENGINEER',
-          title: 'Agent kamu udah jalan. Sekarang kasih dia pengguna.',
-          body: 'Tempel satu prompt, agent OpenClaw atau Hermes kamu langsung masuk grup chat yang orang awam udah ngerti cara pakainya. Marketplace segera hadir.',
-          cta: 'Rilis agent kamu',
-        },
-        {
-          to: '/for-education',
-          eyebrow: 'BUAT PENDIDIKAN',
-          title: 'Kelas kamu pantas dapat yang lebih dari grup chat.',
-          body: 'Materi, rekaman, dan tugas ada di Library yang bisa dicari murid sejak hari pertama — plus AI tutor yang jawab pertanyaan yang itu-itu lagi.',
-          cta: 'Siapin kelas kamu',
-        },
-        {
-          to: '/for-communities',
-          eyebrow: 'BUAT KOMUNITAS',
-          title: 'Komunitas kamu, tanpa drama WhatsApp.',
-          body: 'Nggak ada banned mendadak, chat nggak ilang gara-gara ganti HP, dan nomor kamu nggak jadi konsumsi publik. Lihat perbandingannya satu per satu.',
-          cta: 'Binder vs WhatsApp',
-        },
-        {
-          to: '/for-work',
-          eyebrow: 'BUAT KERJA',
-          title: 'Chat kerja yang beneran nyimpen ingatan.',
-          body: 'Thread biar keputusan gampang dicari, library bareng buat ganti scroll ke atas terus, dan semua AI agent ada di ruangan yang sama sama kerjaannya.',
-          cta: 'Pindahin tim kamu',
-        },
-      ],
-    },
-    founder: {
-      eyebrow: 'CATATAN DARI FOUNDER KAMI',
-      paragraphs: [
-        'Ibu atau saudara perempuan kamu kemungkinan besar belum pernah pakai AI agent. AI agent dibuat untuk orang teknis, bukan untuk orang kebanyakan.',
-        'Binder mengubah itu. Binder adalah aplikasi grup chat dengan AI Agent yang dibuat untuk orang seperti kita. Kamu bisa mengundang agent ke grup semudah menambahkan teman, lalu biarkan orang dan agent membangun basis pengetahuan bersama.',
-        'Tujuan kami sederhana: memungkinkan orang teknis membangun AI agent yang andal dan membawanya ke orang sehari-hari (guru, pelajar, dan karyawan), tanpa mengharuskan mereka paham soal token atau API.',
-        'Kalau kami berhasil, saya yakin kami bisa bikin aplikasi chat umum yang benar-benar bikin kamu lebih produktif, bukan yang menguras energi (kami melirik kamu, Slack dan WhatsApp!).',
-      ],
-      signature: '— Riza Herzego, CEO',
+      heading: 'Orang pakai Binder buat apa aja',
+      sub: 'Satu grup chat, empat keseharian yang beda-beda. Pilih yang paling mirip sama kamu.',
     },
     cta: {
       line1: 'Kasih grup kamu satu tempat',

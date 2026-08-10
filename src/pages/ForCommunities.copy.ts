@@ -1,5 +1,6 @@
 import type { Copy } from '@/i18n';
 import { commonCopy, withCommon, type CommonCopy } from '@/i18n/common.copy';
+import type { ComparisonCopy } from '@/components/marketing/ComparisonTable';
 
 /**
  * Copy for /for-communities — the page that absorbed /whatsapp-alternative.
@@ -12,22 +13,12 @@ type ForCommunitiesOwnCopy = {
   meta: { title: string; description: string };
   hero: {
     imageAlt: string;
-    headline: { before: string; community: string; between: string; drama: string; after: string };
+    headline: string;
     sub: string;
     cta: string;
     chips: string[];
   };
-  compare: {
-    eyebrow: string;
-    heading: string;
-    sub: string;
-    headWhatsapp: string;
-    headBinder: string;
-    labelWhatsapp: string;
-    labelBinder: string;
-    rows: { whatsapp: string; binder: string }[];
-    cta: string;
-  };
+  compare: ComparisonCopy;
   chat: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   move: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
@@ -47,53 +38,59 @@ export const forCommunitiesCopy: Copy<ForCommunitiesCopy> = withCommon<ForCommun
         'Sudden bans, chats lost to a new phone, your number handed to two hundred strangers. Move your community to Binder: chat, files, and notes in one place, and you stay a username.',
     },
     hero: {
-      imageAlt: 'Cabin in a mountain valley at dusk',
-      headline: { before: 'Your community, ', community: 'minus', between: ' the WhatsApp ', drama: 'drama', after: '' },
-      sub: 'No surprise bans, no chats lost when you change phones, and no stranger getting your number. Move one group over and see how it feels.',
+      imageAlt: 'Illustrated living room full of plants and bookshelves',
+      headline: '7,000 members in one group. Not 1,024.',
+      sub: 'Run your community in a single space, no splitting into multiple groups.\nCreate courses, invite AI agents, keep phone numbers private, and keep everything organized in one place.',
       cta: 'Move your group (free)',
-      chips: ['No surprise bans', 'Chats survive a new phone', 'A real home for files & notes'],
+      chips: [
+        '🔒 No phone number exposure',
+        '💬 7000 members in one group, not 1,024',
+        '📚 Courses and files inside the same group',
+      ],
     },
     compare: {
       eyebrow: 'WHATSAPP VS BINDER',
       heading: "What wears you down on WhatsApp isn't here",
       sub: "This isn't about swapping chat apps. It's about your group finally having a place that works.",
-      headWhatsapp: 'On WhatsApp',
+      headRival: 'On WhatsApp',
       headBinder: 'On Binder',
-      labelWhatsapp: 'ON WHATSAPP',
+      labelRival: 'ON WHATSAPP',
       labelBinder: 'ON BINDER',
       rows: [
         {
-          whatsapp: 'Your account can be **banned out of nowhere**. One strike and every group and chat goes with it.',
+          rival:
+            'A group stops at **1,024 members**. Past that you are running "Community 2" and "Community 3", and posting everything three times.',
           binder:
-            "Your account **won't get swept up in a mass ban**. Sign in with your own number or email, and your groups stay put.",
+            'One group holds up to **7,000 members**. The community stays a single room, and you announce things once.',
         },
         {
-          whatsapp: 'Switch phones and **old chats vanish**. Forget to back up and they are gone for good.',
+          rival:
+            'New members **cannot read a single message** from before they joined, so the rules and the introduction get pasted again for every arrival.',
           binder:
-            'Every chat and file is **stored in the cloud**. Sign in on a new phone and it is all still there — no manual backup.',
+            'New members **read everything that came before**. The rules, the pinned explainer, and last month\'s thread are already there when they walk in.',
         },
         {
-          whatsapp:
+          rival:
             'Join a group and **everyone sees your phone number**. Soon come the unknown calls, the loan spam, and the scam attempts.',
           binder:
             'In a group, people know you by your **username**, not your phone number. Your number stays yours.',
         },
         {
-          whatsapp: '**Nowhere to keep notes or files.** Everything piles up in the same chat column.',
+          rival: '**Nowhere to keep notes or files.** Everything piles up in the same chat column.',
           binder:
-            'Every group gets its own **Library**: notes, materials, folders, and to-dos, kept separate from the chat.',
+            'Every group gets its own **Library**: notes, files, folders, to-dos — and full **courses**, so what you teach lives in the group instead of behind a Drive link.',
         },
         {
-          whatsapp:
+          rival:
             'In a busy group, **important info sinks** within minutes, buried under stickers and "morning everyone".',
           binder:
             'Discussions split into **threads per topic**. What matters stays visible, and small talk never buries it.',
         },
         {
-          whatsapp:
+          rival:
             'Want an **AI agent** in your group? That breaks WhatsApp\'s rules, and your number can get **banned** for it.',
           binder:
-            'Invite an **AI agent** to your group **as easily as inviting a friend**. Binder was built for it — no workarounds.',
+            'Invite an **AI agent as easily as a friend** — and decide who gets to call it. Set it to **admins only** so it answers the people running the group, not all 7,000.',
         },
       ],
       cta: 'Try Binder now',
@@ -162,53 +159,59 @@ export const forCommunitiesCopy: Copy<ForCommunitiesCopy> = withCommon<ForCommun
         'Akun tiba-tiba ke-banned, chat ilang pas ganti HP, nomor kamu keliatan ratusan orang asing. Pindahin komunitas kamu ke Binder: chat, file, dan catatan jadi satu, dan kamu tetap dikenal lewat username.',
     },
     hero: {
-      imageAlt: 'Rumah kayu di lembah pegunungan saat senja',
-      headline: { before: 'Komunitas kamu, ', community: 'tanpa', between: ' drama ', drama: 'WhatsApp', after: '' },
-      sub: 'Nggak ada banned mendadak, chat nggak ilang pas ganti HP, dan nomor kamu nggak jatuh ke orang asing. Pindahin satu grup dulu, rasain bedanya.',
+      imageAlt: 'Ilustrasi ruang tamu penuh tanaman dan rak buku',
+      headline: '7.000 anggota dalam satu grup. Bukan 1.024.',
+      sub: 'Jalanin komunitas kamu di satu ruang, nggak perlu dipecah jadi banyak grup.\nBikin course, undang AI agent, nomor HP tetap privat, dan semuanya rapi di satu tempat.',
       cta: 'Pindahin grup kamu (gratis)',
-      chips: ['Ga tiba-tiba ke banned', 'Chat nggak ilang pas ganti HP', 'Ada tempat khusus buat catatan & file'],
+      chips: [
+        '🔒 Nomor HP nggak kesebar',
+        '💬 7000 anggota satu grup, bukan 1.024',
+        '📚 Course dan file di dalam grup yang sama',
+      ],
     },
     compare: {
       eyebrow: 'WHATSAPP VS BINDER',
       heading: 'Yang bikin capek di WhatsApp, nggak ada di Binder',
       sub: 'Kapan terakhir kali mau ngerasa excited buka Whatsapp? Cobain Binder!',
-      headWhatsapp: 'Di WhatsApp',
+      headRival: 'Di WhatsApp',
       headBinder: 'Di Binder',
-      labelWhatsapp: 'DI WHATSAPP',
+      labelRival: 'DI WHATSAPP',
       labelBinder: 'DI BINDER',
       rows: [
         {
-          whatsapp: 'Akun bisa **ke-banned tiba-tiba**. Sekali kena, semua grup dan chat kamu ikut hilang.',
+          rival:
+            'Satu grup mentok di **1.024 anggota**. Lewat dari itu, kamu jadi ngurus "Komunitas 2" dan "Komunitas 3", dan tiap pengumuman diposting tiga kali.',
           binder:
-            'Akun kamu **nggak kena banned massal**. Login pakai nomor atau email kamu sendiri, dan grup kamu tetap aman.',
+            'Satu grup muat sampai **7.000 anggota**. Komunitasnya tetap satu ruangan, dan kamu cukup ngumumin sekali.',
         },
         {
-          whatsapp: 'Ganti HP, **chat lama ilang**. Kalau lupa backup, ya sudah, hilang selamanya.',
+          rival:
+            'Member baru **nggak bisa baca satu pun chat** sebelum dia gabung, jadi peraturan dan perkenalan di-copas lagi tiap ada yang masuk.',
           binder:
-            'Semua chat dan file **tersimpan di cloud**. Login di HP baru, semuanya langsung ada — tanpa backup manual.',
+            'Member baru bisa **baca semua yang udah lewat**. Peraturannya, penjelasan yang di-pin, dan thread bulan lalu udah ada pas dia masuk.',
         },
         {
-          whatsapp:
+          rival:
             'Masuk grup, **nomor kamu keliatan semua orang**. Nggak lama, mulai masuk telepon asing, tawaran pinjol, sampai percobaan scam.',
           binder:
             'Di grup, orang kenal kamu lewat **username**, bukan nomor HP. Nomor kamu nggak jadi konsumsi publik.',
         },
         {
-          whatsapp: '**Nggak ada tempat naruh catatan atau file.** Semua numpuk jadi satu di kolom chat.',
+          rival: '**Nggak ada tempat naruh catatan atau file.** Semua numpuk jadi satu di kolom chat.',
           binder:
-            'Tiap grup punya **Library** sendiri: catatan, materi, folder, dan to-do, terpisah rapi dari obrolan.',
+            'Tiap grup punya **Library** sendiri: catatan, file, folder, to-do — plus **course** utuh, jadi yang kamu ajarin tinggal di grup, bukan di balik link Drive.',
         },
         {
-          whatsapp:
+          rival:
             'Grup rame, **info penting tenggelam** dalam hitungan menit di antara stiker dan "pagi semua".',
           binder:
             'Diskusi dipecah jadi **thread per topik**. Yang penting tetap kelihatan, obrolan santai nggak numpuk di atasnya.',
         },
         {
-          whatsapp:
+          rival:
             'Mau pakai **AI agent** di grup? Itu langgar aturan WhatsApp, dan nomor kamu bisa **kena banned** gara-gara itu.',
           binder:
-            'Undang **AI agent** ke grup **semudah undang teman sendiri**. Binder emang dibangun buat itu, bukan akal-akalan.',
+            'Undang **AI agent semudah ngundang teman** — dan kamu yang nentuin siapa yang boleh manggil. Set **khusus admin**, biar dia ngelayanin yang ngurus grup, bukan 7.000 orang sekaligus.',
         },
       ],
       cta: 'Coba Binder sekarang',

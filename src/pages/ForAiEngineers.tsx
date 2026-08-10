@@ -1,16 +1,18 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { usePageMeta } from '@/hooks/use-page-meta';
 import { useCopy } from '@/i18n';
-import { MarketingHero, HeroMark } from '@/components/marketing/MarketingHero';
+import { MarketingHero } from '@/components/marketing/MarketingHero';
 import { SectionHeading } from '@/components/marketing/SectionHeading';
 import { FeatureRow } from '@/components/marketing/FeatureRow';
 import { NumberedSteps } from '@/components/marketing/NumberedSteps';
 import { AgentPromptBox } from '@/components/marketing/AgentPromptBox';
+import { ComparisonTable } from '@/components/marketing/ComparisonTable';
+import { OtherUseCases } from '@/components/marketing/UseCaseCards';
 import { PhoneDemo } from '@/components/marketing/PhoneDemo';
 import { CtaSection } from '@/components/marketing/CtaSection';
 import { forAiEngineersCopy } from './ForAiEngineers.copy';
 import './Heybinder.css';
-import heroCabin from '@/assets/heybinder-hero-cabin.jpg';
+import heroAiEngineers from '@/assets/hero-ai-engineers.jpg';
 import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webm';
 
 /**
@@ -28,18 +30,10 @@ const ForAiEngineersPage = () => {
       <LanguageSwitcher />
 
       <MarketingHero
-        // A tighter crop and a heavier scrim than /for-communities, so the two
-        // pages sharing this photograph don't read as the same hero.
-        bg={{ kind: 'photo', src: heroCabin, alt: c.hero.imageAlt, objectPosition: 'center 62%', scrim: 0.42 }}
-        headline={
-          <>
-            {c.hero.headline.before}
-            <HeroMark tone="blue">{c.hero.headline.works}</HeroMark>
-            {c.hero.headline.between}
-            <HeroMark tone="amber">{c.hero.headline.people}</HeroMark>
-            {c.hero.headline.after}
-          </>
-        }
+        // The RGB desk is the busiest artwork on the site, so it carries the
+        // heaviest scrim: the headline runs three sentences across it.
+        bg={{ kind: 'photo', src: heroAiEngineers, alt: c.hero.imageAlt, objectPosition: 'center 45%', scrim: 0.78 }}
+        headline={c.hero.headline}
         sub={c.hero.sub}
         ctaLabel={c.hero.cta}
         ctaHref="#register"
@@ -52,8 +46,10 @@ const ForAiEngineersPage = () => {
         />
       </MarketingHero>
 
+      <ComparisonTable copy={c.compare} rivalIcon="✈️" background="alt" ctaHref="#register" />
+
       {/* ============ WHY A GROUP CHAT ============ */}
-      <div className="hb-sec" style={{ maxWidth: 1120, margin: '0 auto', padding: '0 24px 110px' }}>
+      <div className="hb-sec" style={{ maxWidth: 1120, margin: '0 auto', padding: '110px 24px' }}>
         <SectionHeading eyebrow={c.why.eyebrow} heading={c.why.heading} sub={c.why.sub} />
         <NumberedSteps steps={c.why.points} numbered={false} />
       </div>
@@ -77,6 +73,8 @@ const ForAiEngineersPage = () => {
         heading={c.marketplace.heading}
         body={c.marketplace.body}
       />
+
+      <OtherUseCases exclude="/for-ai-engineers" background="alt" />
 
       <CtaSection copy={c.cta} buttons={c.ctaButtons} footer={c.footer} modal={c.modal} />
     </div>

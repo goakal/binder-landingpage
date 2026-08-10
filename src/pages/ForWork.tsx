@@ -1,18 +1,20 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { usePageMeta } from '@/hooks/use-page-meta';
 import { useCopy } from '@/i18n';
-import { MarketingHero, HeroMark } from '@/components/marketing/MarketingHero';
+import { MarketingHero } from '@/components/marketing/MarketingHero';
 import { SectionHeading } from '@/components/marketing/SectionHeading';
 import { FeatureRow } from '@/components/marketing/FeatureRow';
 import { NumberedSteps } from '@/components/marketing/NumberedSteps';
+import { ComparisonTable } from '@/components/marketing/ComparisonTable';
+import { OtherUseCases } from '@/components/marketing/UseCaseCards';
 import { PhoneDemo } from '@/components/marketing/PhoneDemo';
 import { CtaSection } from '@/components/marketing/CtaSection';
 import { forWorkCopy } from './ForWork.copy';
 import './Heybinder.css';
+import heroWork from '@/assets/hero-work.jpg';
 import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
 import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
 import libraryDemo from '@/assets/heybinder-library-demo.webm';
-import productPeek from '@/assets/heybinder-product-peek.jpg';
 
 const ForWorkPage = () => {
   const c = useCopy(forWorkCopy);
@@ -24,56 +26,26 @@ const ForWorkPage = () => {
       <LanguageSwitcher />
 
       <MarketingHero
-        // No photograph here on purpose: with five pages drawing on two cabin
-        // images, the page that should read as "product, not lifestyle" is the
-        // one that gives the photo up.
-        bg={{ kind: 'flat' }}
-        headline={
-          <>
-            {c.hero.headline.before}
-            <HeroMark tone="blue">{c.hero.headline.work}</HeroMark>
-            {c.hero.headline.between}
-            <HeroMark tone="amber">{c.hero.headline.remembers}</HeroMark>
-            {c.hero.headline.after}
-          </>
-        }
+        // Bright afternoon studio, so the scrim runs heavier than the darker
+        // heroes to keep white type legible.
+        bg={{ kind: 'photo', src: heroWork, alt: c.hero.imageAlt, objectPosition: 'center 58%', scrim: 0.68 }}
+        headline={c.hero.headline}
         sub={c.hero.sub}
         ctaLabel={c.hero.cta}
       >
-        <div className="hb-chips hb-chips--ink" style={{ animation: 'hb-rev 0.8s ease 0.35s both' }}>
+        <div className="hb-chips" style={{ animation: 'hb-rev 0.8s ease 0.35s both' }}>
           {c.hero.chips.map((chip) => (
-            <span key={chip} className="hb-chip">✓ {chip}</span>
+            <span key={chip} className="hb-chip">{chip}</span>
           ))}
         </div>
       </MarketingHero>
 
-      <FeatureRow
-        id="threads"
-        mediaSide="left"
-        media={<PhoneDemo webm={mobileDemoWebm} mp4={mobileDemoMp4} alt={c.threads.videoAlt} />}
-        eyebrow={c.threads.eyebrow}
-        heading={c.threads.heading}
-        body={c.threads.body}
-        link={{ label: c.threads.link, href: '#get' }}
-      />
+      <ComparisonTable copy={c.compare} rivalIcon="#️⃣" background="alt" />
 
-      {/* ============ EVERY AGENT IN ONE CHAT ============ */}
       <FeatureRow
-        background="alt"
-        mediaSide="right"
-        media={
-          <figure style={{ margin: 0, width: '100%' }}>
-            <div
-              className="hb-fig1"
-              role="img"
-              aria-label={c.agents.figureAlt}
-              style={{ position: 'relative', border: '1px solid #E6E2D9', borderRadius: 22, background: `url(${productPeek}) center / cover no-repeat`, overflow: 'hidden', aspectRatio: '4/3', boxShadow: '0 24px 60px rgba(28,27,26,0.1)', width: '100%' }}
-            />
-            <figcaption style={{ fontSize: 12.5, color: '#8A867C', marginTop: 14 }}>
-              <b style={{ color: '#5F5B53' }}>Fig. 1</b>&nbsp;&nbsp;{c.agents.caption}
-            </figcaption>
-          </figure>
-        }
+        id="agents"
+        mediaSide="left"
+        media={<PhoneDemo webm={mobileDemoWebm} mp4={mobileDemoMp4} alt={c.agents.videoAlt} />}
         eyebrow={c.agents.eyebrow}
         heading={c.agents.heading}
         body={c.agents.body}
@@ -81,7 +53,8 @@ const ForWorkPage = () => {
       />
 
       <FeatureRow
-        mediaSide="left"
+        background="alt"
+        mediaSide="right"
         media={<PhoneDemo webm={libraryDemo} alt={c.library.videoAlt} />}
         eyebrow={c.library.eyebrow}
         heading={c.library.heading}
@@ -89,12 +62,12 @@ const ForWorkPage = () => {
       />
 
       {/* ============ HOW TO MOVE ============ */}
-      <div className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <SectionHeading eyebrow={c.move.eyebrow} heading={c.move.heading} sub={c.move.sub} onAlt maxWidth={660} />
-          <NumberedSteps steps={c.move.steps} />
-        </div>
+      <div className="hb-sec" style={{ maxWidth: 1080, margin: '0 auto', padding: '110px 24px' }}>
+        <SectionHeading eyebrow={c.move.eyebrow} heading={c.move.heading} sub={c.move.sub} maxWidth={660} />
+        <NumberedSteps steps={c.move.steps} />
       </div>
+
+      <OtherUseCases exclude="/for-work" background="alt" />
 
       <CtaSection copy={c.cta} buttons={c.ctaButtons} footer={c.footer} modal={c.modal} />
     </div>

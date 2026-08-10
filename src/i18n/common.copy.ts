@@ -12,7 +12,7 @@ export type CommonCopy = {
   copyButton: { idle: string; done: string; withLabel: string };
   ctaButtons: { web: string; download: string };
   modal: { title: string; description: string };
-  footer: { terms: string; privacy: string; dataDeletion: string; tagline: string };
+  footer: { home: string; terms: string; privacy: string; dataDeletion: string; tagline: string };
 };
 
 export const commonCopy: Copy<CommonCopy> = {
@@ -21,6 +21,7 @@ export const commonCopy: Copy<CommonCopy> = {
     ctaButtons: { web: 'Try Binder on the web', download: 'Download the app' },
     modal: { title: 'Get the Binder app', description: 'Choose your platform to download.' },
     footer: {
+      home: 'Home',
       terms: 'Terms & Conditions',
       privacy: 'Privacy Policy',
       dataDeletion: 'Data Deletion',
@@ -32,6 +33,7 @@ export const commonCopy: Copy<CommonCopy> = {
     ctaButtons: { web: 'Coba Binder di web', download: 'Download aplikasinya' },
     modal: { title: 'Download aplikasi Binder', description: 'Pilih platform kamu.' },
     footer: {
+      home: 'Beranda',
       terms: 'Syarat & Ketentuan',
       privacy: 'Kebijakan Privasi',
       dataDeletion: 'Hapus Data',

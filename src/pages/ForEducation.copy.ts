@@ -1,5 +1,6 @@
 import type { Copy } from '@/i18n';
 import { withCommon, type CommonCopy } from '@/i18n/common.copy';
+import type { ComparisonCopy } from '@/components/marketing/ComparisonTable';
 
 /**
  * Copy for /for-education.
@@ -14,11 +15,12 @@ type ForEducationOwnCopy = {
   meta: { title: string; description: string };
   hero: {
     imageAlt: string;
-    headline: { before: string; class: string; between: string; group: string; after: string };
+    headline: string;
     sub: string;
     cta: string;
     chips: string[];
   };
+  compare: ComparisonCopy;
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   catchUp: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   tutor: { eyebrow: string; heading: string; sub: string; points: { title: string; body: string }[] };
@@ -36,11 +38,47 @@ export const forEducationCopy: Copy<ForEducationCopy> = withCommon<ForEducationO
         'Put the syllabus, recordings, and homework in a Library your students can search from day one, and let an AI tutor answer the repeat questions. Free for teachers, tutors, and course creators.',
     },
     hero: {
-      imageAlt: 'Illustrated cabin in a green mountain valley by day',
-      headline: { before: 'Your class deserves better than a ', class: 'WhatsApp', between: ' ', group: 'group', after: '.' },
-      sub: 'Materials, recordings, and homework in one Library every student can search from day one — plus an AI tutor that answers the same five questions so you do not have to answer them again next term.',
+      imageAlt: 'Illustrated empty classroom in warm morning light',
+      headline: 'Create a class group, without sharing your phone number.',
+      sub: 'Bring parents, teachers, and students into one private space with structured lessons, a searchable library, and an AI tutor that answers questions anytime.',
       cta: 'Set up your class (free)',
-      chips: ['Materials never expire', 'Latecomers can catch up', 'A built-in AI tutor'],
+      chips: ['🔒 No phone number shared', '📚 Structured lessons, not chat chaos', '🤖 Build custom AI tutor'],
+    },
+    compare: {
+      eyebrow: 'WHATSAPP VS BINDER',
+      heading: 'A class chat group that respects your privacy',
+      sub: 'WhatsApp was built so friends could talk. Nothing in it was built to hold a course.',
+      headRival: 'On WhatsApp',
+      headBinder: 'On Binder',
+      labelRival: 'ON WHATSAPP',
+      labelBinder: 'ON BINDER',
+      rows: [
+        {
+          rival: 'Students who join late **cannot read anything** from before they arrived, so you introduce the class again for every new face.',
+          binder: 'New students **read the whole history** from day one — the rules, the introductions, last month\'s recording.',
+        },
+        {
+          rival: 'Materials are **forwarded files that expire**. Every term the same PDF goes out one more time.',
+          binder: 'Upload once into the class **Library**. It stays there — searchable, organised, term after term.',
+        },
+        {
+          rival: '**No structure for a class.** Homework, announcements, and small talk are all the same scroll.',
+          binder: '**Notes, Courses, Folders, and To-dos** per class, kept separate from the chatter.',
+        },
+        {
+          rival: 'Every student in the group **gets your personal number** — and you get thirty of theirs.',
+          binder: 'You are a **username**. Students reach you in the group without ever holding your phone number.',
+        },
+        {
+          rival: 'An **AI tutor** breaks the rules, and running one can get the number holding your entire class **banned**.',
+          binder: 'Invite an **AI tutor** to the class. It reads your Library and answers from your material, not the open internet.',
+        },
+        {
+          rival: 'Change phones and **the class archive is gone**, unless somebody remembered to back it up.',
+          binder: 'Everything lives **in the cloud**. Sign in anywhere and the class is still intact.',
+        },
+      ],
+      cta: 'Try Binder now',
     },
     library: {
       eyebrow: 'CLASS LIBRARY',
@@ -107,11 +145,47 @@ export const forEducationCopy: Copy<ForEducationCopy> = withCommon<ForEducationO
         'Taruh silabus, rekaman, dan tugas di Library yang bisa dicari murid sejak hari pertama, dan biarkan AI tutor jawab pertanyaan yang itu-itu lagi. Gratis buat guru, tutor, dan pembuat kursus.',
     },
     hero: {
-      imageAlt: 'Ilustrasi rumah kayu di lembah pegunungan hijau saat siang',
-      headline: { before: 'Kelas kamu pantas dapat lebih dari ', class: 'grup', between: ' ', group: 'WhatsApp', after: '.' },
-      sub: 'Materi, rekaman, dan tugas ada di satu Library yang bisa dicari semua murid sejak hari pertama — plus AI tutor yang jawab lima pertanyaan yang itu-itu lagi, biar kamu nggak perlu jawab ulang semester depan.',
+      imageAlt: 'Ilustrasi ruang kelas kosong di bawah cahaya pagi',
+      headline: 'Bikin grup kelas, tanpa nyebar nomor HP kamu.',
+      sub: 'Bawa orang tua, guru, dan murid ke satu ruang privat dengan materi yang tertata, library yang bisa dicari, dan AI tutor yang jawab pertanyaan kapan pun.',
       cta: 'Siapin kelas kamu (gratis)',
-      chips: ['Materi nggak pernah expired', 'Yang telat gabung bisa nyusul', 'AI tutor udah nempel'],
+      chips: ['🔒 Nomor HP nggak kesebar', '📚 Materi tertata, bukan chat berantakan', '🤖 Bikin AI tutor sendiri'],
+    },
+    compare: {
+      eyebrow: 'WHATSAPP VS BINDER',
+      heading: 'Grup chat kelas yang jaga privasi kamu',
+      sub: 'WhatsApp dibikin biar orang bisa ngobrol. Nggak ada satu pun bagiannya yang dirancang buat nampung kursus.',
+      headRival: 'Di WhatsApp',
+      headBinder: 'Di Binder',
+      labelRival: 'DI WHATSAPP',
+      labelBinder: 'DI BINDER',
+      rows: [
+        {
+          rival: 'Murid yang telat gabung **nggak bisa baca apa pun** sebelum dia masuk, jadi kamu ngenalin kelasnya lagi tiap ada wajah baru.',
+          binder: 'Murid baru bisa **baca seluruh riwayatnya** sejak hari pertama — peraturannya, perkenalannya, rekaman bulan lalu.',
+        },
+        {
+          rival: 'Materinya berupa **file forward yang expired**. Tiap semester PDF yang sama dikirim sekali lagi.',
+          binder: 'Upload sekali ke **Library** kelas. Dia tetap di situ — bisa dicari, rapi, semester demi semester.',
+        },
+        {
+          rival: '**Nggak ada struktur buat kelas.** Tugas, pengumuman, dan obrolan santai numpuk di scroll yang sama.',
+          binder: '**Catatan, Course, Folder, dan To-do** per kelas, terpisah rapi dari obrolan.',
+        },
+        {
+          rival: 'Tiap murid di grup **dapat nomor pribadi kamu** — dan kamu dapat tiga puluh nomor mereka.',
+          binder: 'Kamu dikenal lewat **username**. Murid bisa nyamperin kamu di grup tanpa pernah megang nomor HP kamu.',
+        },
+        {
+          rival: '**AI tutor** itu langgar aturan, dan jalanin satu bisa bikin nomor yang nampung sekelas kamu **kena banned**.',
+          binder: 'Undang **AI tutor** ke kelas. Dia baca Library kamu dan jawab dari materi kamu, bukan dari internet sembarangan.',
+        },
+        {
+          rival: 'Ganti HP, **arsip kelasnya ilang**, kecuali ada yang inget backup duluan.',
+          binder: 'Semuanya **di cloud**. Login di mana pun, kelasnya masih utuh.',
+        },
+      ],
+      cta: 'Coba Binder sekarang',
     },
     library: {
       eyebrow: 'LIBRARY KELAS',

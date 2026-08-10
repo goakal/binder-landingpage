@@ -1,10 +1,7 @@
-/* Styles specific to /for-communities.
-   Fonts, hero treatment, reveal animation, .hb-pill-btn and the hero chips all
-   come from Heybinder.css, which this page imports first so every marketing
-   page stays visually identical. Only the comparison table lives here — it has
-   exactly one caller and nothing else needs it. */
+/* Styles for <ComparisonTable>. Class names still carry the `wa-` prefix from
+   when this lived on /whatsapp-alternative and had exactly one caller; the
+   markup is now generic over whichever app the page's reader is leaving. */
 
-/* ---- WhatsApp vs Binder comparison ---- */
 .wa-cmp-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -85,11 +82,8 @@
   .wa-cmp-grid { grid-template-columns: 1fr; gap: 10px; }
   .wa-cmp-head { display: none; }
   .wa-cmp-label { display: block; }
-  /* Air between each WhatsApp/Binder pair, but not above the very first one */
+  /* Air between each rival/Binder pair, but not above the very first one */
   .wa-cmp-cell--wa { margin-top: 18px; }
   .wa-cmp-grid > *:nth-child(3) { margin-top: 0; }
   .wa-cmp-cell { padding: 18px 20px; font-size: 15px; }
 }
-
-/* The hero pain-point chips moved to Heybinder.css as .hb-chips / .hb-chip,
-   because the home hero uses them too. */
