@@ -1,8 +1,7 @@
-/* Styles specific to /whatsapp-alternative.
-   Fonts, hero treatment, reveal animation and .hb-pill-btn come from Heybinder.css,
-   which this page imports first so the two landing pages stay visually identical. */
+/* Styles for <ComparisonTable>. Class names still carry the `wa-` prefix from
+   when this lived on /whatsapp-alternative and had exactly one caller; the
+   markup is now generic over whichever app the page's reader is leaving. */
 
-/* ---- WhatsApp vs Binder comparison ---- */
 .wa-cmp-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,33 +82,8 @@
   .wa-cmp-grid { grid-template-columns: 1fr; gap: 10px; }
   .wa-cmp-head { display: none; }
   .wa-cmp-label { display: block; }
-  /* Air between each WhatsApp/Binder pair, but not above the very first one */
+  /* Air between each rival/Binder pair, but not above the very first one */
   .wa-cmp-cell--wa { margin-top: 18px; }
   .wa-cmp-grid > *:nth-child(3) { margin-top: 0; }
   .wa-cmp-cell { padding: 18px 20px; font-size: 15px; }
-}
-
-/* ---- Hero pain-point chips ---- */
-.wa-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.wa-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(16, 14, 38, 0.42);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  padding: 9px 17px;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #fff;
-}
-
-@media (max-width: 560px) {
-  .wa-chip { font-size: 12.5px; padding: 8px 14px; }
 }
