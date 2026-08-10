@@ -6,8 +6,10 @@ import type { Copy } from '@/i18n';
  * closing CTA. One dictionary, because five pages showing five slightly
  * different descriptions of the same four pages would be a bug, not variety.
  *
- * Keep `line` to a single sentence — these render as small cards, and the hero
- * variant sits on a photograph where long copy stops being readable.
+ * `line` is that page's own hero headline, kept in sync by hand rather than
+ * imported — importing the four page copy dictionaries here would pull their
+ * whole hero/section trees into every bundle that renders these cards,
+ * including the home page, which otherwise doesn't need any of that code.
  */
 export type UseCaseCard = {
   to: string;
@@ -29,25 +31,25 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         to: '/for-ai-engineers',
         icon: '🤖',
         label: 'For AI engineers',
-        line: 'Give the agent you already built real people to talk to.',
+        line: 'Create a group chat. Invite your agent. See logs in one place.',
       },
       {
         to: '/for-education',
         icon: '🎓',
         label: 'For education institutions',
-        line: 'Materials, recordings, and an AI tutor your class can search.',
+        line: 'Create a class group, without sharing your phone number.',
       },
       {
         to: '/for-communities',
         icon: '🌏',
         label: 'For communities',
-        line: 'Run your group without the WhatsApp drama.',
+        line: '7,000 members in one group. Not 1,024.',
       },
       {
         to: '/for-work',
         icon: '💼',
         label: 'For work',
-        line: 'A team chat that remembers what everyone decided.',
+        line: 'Chat, project boards, and files in one place. Free.',
       },
     ],
     other: {
@@ -63,25 +65,25 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         to: '/for-ai-engineers',
         icon: '🤖',
         label: 'Buat AI engineer',
-        line: 'Kasih agent yang udah kamu bikin orang beneran buat diajak ngobrol.',
+        line: 'Bikin grup chat. Undang agent kamu. Lihat log-nya di satu tempat.',
       },
       {
         to: '/for-education',
         icon: '🎓',
         label: 'Buat institusi pendidikan',
-        line: 'Materi, rekaman, dan AI tutor yang bisa dicari sekelas.',
+        line: 'Bikin grup kelas, tanpa nyebar nomor HP kamu.',
       },
       {
         to: '/for-communities',
         icon: '🌏',
         label: 'Buat komunitas',
-        line: 'Jalanin grup kamu tanpa drama WhatsApp.',
+        line: '7.000 anggota dalam satu grup. Bukan 1.024.',
       },
       {
         to: '/for-work',
         icon: '💼',
         label: 'Buat kerja',
-        line: 'Chat tim yang inget apa yang udah diputusin.',
+        line: 'Chat, papan proyek, dan file di satu tempat. Gratis.',
       },
     ],
     other: {
