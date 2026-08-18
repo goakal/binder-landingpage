@@ -13,7 +13,15 @@ import { CtaSection } from '@/components/marketing/CtaSection';
 import { forAiEngineersCopy } from './ForAiEngineers.copy';
 import './Heybinder.css';
 import heroAiEngineers from '@/assets/hero-ai-engineers.jpg';
-import marketplaceDemo from '@/assets/heybinder-marketplace-demo.webm';
+import inviteWebm from '@/assets/demo-ai-invite-agent.webm';
+import inviteMp4 from '@/assets/demo-ai-invite-agent.mp4';
+import invitePoster from '@/assets/demo-ai-invite-agent-poster.jpg';
+import promptLogWebm from '@/assets/demo-ai-prompt-log.webm';
+import promptLogMp4 from '@/assets/demo-ai-prompt-log.mp4';
+import promptLogPoster from '@/assets/demo-ai-prompt-log-poster.jpg';
+import marketplaceWebm from '@/assets/heybinder-marketplace-demo.webm';
+import marketplaceMp4 from '@/assets/heybinder-marketplace-demo.mp4';
+import marketplacePoster from '@/assets/heybinder-marketplace-demo-poster.jpg';
 
 /**
  * The one page whose reader wants the agent prompt above the fold. It used to
@@ -48,16 +56,28 @@ const ForAiEngineersPage = () => {
 
       <ComparisonTable copy={c.compare} rivalIcon="✈️" background="alt" ctaHref="#register" />
 
+      <FeatureRow
+        id="invite"
+        mediaSide="left"
+        media={<PhoneDemo webm={inviteWebm} mp4={inviteMp4} poster={invitePoster} alt={c.invite.videoAlt} />}
+        eyebrow={c.invite.eyebrow}
+        heading={c.invite.heading}
+        body={c.invite.body}
+        link={{ label: c.invite.link, href: '#register' }}
+      />
+
       {/* ============ WHY A GROUP CHAT ============ */}
-      <div className="hb-sec" style={{ maxWidth: 1120, margin: '0 auto', padding: '110px 24px' }}>
-        <SectionHeading eyebrow={c.why.eyebrow} heading={c.why.heading} sub={c.why.sub} />
-        <NumberedSteps steps={c.why.points} numbered={false} />
+      <div className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+          <SectionHeading eyebrow={c.why.eyebrow} heading={c.why.heading} sub={c.why.sub} onAlt />
+          <NumberedSteps steps={c.why.points} numbered={false} />
+        </div>
       </div>
 
       {/* ============ BRING YOUR OWN AI ============ */}
-      <div id="register" className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
+      <div id="register" className="hb-sec" style={{ padding: '110px 24px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <SectionHeading eyebrow={c.byo.eyebrow} heading={c.byo.heading} sub={c.byo.sub} onAlt maxWidth={660} />
+          <SectionHeading eyebrow={c.byo.eyebrow} heading={c.byo.heading} sub={c.byo.sub} maxWidth={660} />
           <div style={{ marginBottom: 40 }}>
             <NumberedSteps steps={c.byo.steps} />
           </div>
@@ -66,8 +86,19 @@ const ForAiEngineersPage = () => {
       </div>
 
       <FeatureRow
+        background="alt"
+        mediaSide="right"
+        media={<PhoneDemo webm={promptLogWebm} mp4={promptLogMp4} poster={promptLogPoster} alt={c.promptLog.videoAlt} />}
+        eyebrow={c.promptLog.eyebrow}
+        badge={c.promptLog.badge}
+        heading={c.promptLog.heading}
+        body={c.promptLog.body}
+        link={{ label: c.promptLog.link, href: '#register' }}
+      />
+
+      <FeatureRow
         mediaSide="left"
-        media={<PhoneDemo webm={marketplaceDemo} alt={c.marketplace.videoAlt} />}
+        media={<PhoneDemo webm={marketplaceWebm} mp4={marketplaceMp4} poster={marketplacePoster} alt={c.marketplace.videoAlt} />}
         eyebrow={c.marketplace.eyebrow}
         badge={c.marketplace.badge}
         heading={c.marketplace.heading}

@@ -1,6 +1,6 @@
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { usePageMeta } from '@/hooks/use-page-meta';
-import { useCopy } from '@/i18n';
+import { useCopy, useLanguage } from '@/i18n';
 import { MarketingHero } from '@/components/marketing/MarketingHero';
 import { SectionHeading } from '@/components/marketing/SectionHeading';
 import { FeatureRow } from '@/components/marketing/FeatureRow';
@@ -13,9 +13,18 @@ import { CtaSection } from '@/components/marketing/CtaSection';
 import { forCommunitiesCopy } from './ForCommunities.copy';
 import './Heybinder.css';
 import heroCommunities from '@/assets/hero-communities.jpg';
-import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
-import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
-import libraryDemo from '@/assets/heybinder-library-demo.webm';
+import summaryWebm from '@/assets/demo-community-summary.webm';
+import summaryMp4 from '@/assets/demo-community-summary.mp4';
+import summaryPoster from '@/assets/demo-community-summary-poster.jpg';
+import rulesEnWebm from '@/assets/demo-community-rules-en.webm';
+import rulesEnMp4 from '@/assets/demo-community-rules-en.mp4';
+import rulesEnPoster from '@/assets/demo-community-rules-en-poster.jpg';
+import rulesIdWebm from '@/assets/demo-community-rules-id.webm';
+import rulesIdMp4 from '@/assets/demo-community-rules-id.mp4';
+import rulesIdPoster from '@/assets/demo-community-rules-id-poster.jpg';
+import libraryWebm from '@/assets/heybinder-library-demo.webm';
+import libraryMp4 from '@/assets/heybinder-library-demo.mp4';
+import libraryPoster from '@/assets/heybinder-library-demo-poster.jpg';
 
 /**
  * The former /whatsapp-alternative, broadened from "leave WhatsApp" to "run
@@ -25,6 +34,15 @@ import libraryDemo from '@/assets/heybinder-library-demo.webm';
  */
 const ForCommunitiesPage = () => {
   const c = useCopy(forCommunitiesCopy);
+  const { lang } = useLanguage();
+
+  // The one demo that was recorded twice, so an Indonesian reader watches an
+  // Indonesian screen. Every other clip on the site is English-only; picking
+  // here rather than inside PhoneDemo keeps that the exception it is.
+  const rules =
+    lang === 'id'
+      ? { webm: rulesIdWebm, mp4: rulesIdMp4, poster: rulesIdPoster }
+      : { webm: rulesEnWebm, mp4: rulesEnMp4, poster: rulesEnPoster };
 
   usePageMeta(c.meta.title, c.meta.description);
 
@@ -50,7 +68,7 @@ const ForCommunitiesPage = () => {
       <FeatureRow
         id="how"
         mediaSide="left"
-        media={<PhoneDemo webm={mobileDemoWebm} mp4={mobileDemoMp4} alt={c.chat.videoAlt} />}
+        media={<PhoneDemo webm={summaryWebm} mp4={summaryMp4} poster={summaryPoster} alt={c.chat.videoAlt} />}
         eyebrow={c.chat.eyebrow}
         heading={c.chat.heading}
         body={c.chat.body}
@@ -58,23 +76,35 @@ const ForCommunitiesPage = () => {
       />
 
       <FeatureRow
+        id="rules"
         background="alt"
         mediaSide="right"
-        media={<PhoneDemo webm={libraryDemo} alt={c.library.videoAlt} />}
+        media={<PhoneDemo webm={rules.webm} mp4={rules.mp4} poster={rules.poster} alt={c.rules.videoAlt} />}
+        eyebrow={c.rules.eyebrow}
+        heading={c.rules.heading}
+        body={c.rules.body}
+        link={{ label: c.rules.link, href: '#get' }}
+      />
+
+      <FeatureRow
+        mediaSide="left"
+        media={<PhoneDemo webm={libraryWebm} mp4={libraryMp4} poster={libraryPoster} alt={c.library.videoAlt} />}
         eyebrow={c.library.eyebrow}
         heading={c.library.heading}
         body={c.library.body}
       />
 
       {/* ============ HOW TO MOVE ============ */}
-      <div className="hb-sec" style={{ maxWidth: 1080, margin: '0 auto', padding: '110px 24px' }}>
-        <SectionHeading eyebrow={c.move.eyebrow} heading={c.move.heading} sub={c.move.sub} maxWidth={660} />
-        <NumberedSteps steps={c.move.steps} />
+      <div className="hb-sec" style={{ background: '#F3F1EB', padding: '110px 24px' }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+          <SectionHeading eyebrow={c.move.eyebrow} heading={c.move.heading} sub={c.move.sub} onAlt maxWidth={660} />
+          <NumberedSteps steps={c.move.steps} />
+        </div>
       </div>
 
-      <FounderNote copy={c.founder} />
+      <FounderNote copy={c.founder} background="page" />
 
-      <OtherUseCases exclude="/for-communities" />
+      <OtherUseCases exclude="/for-communities" background="alt" />
 
       <CtaSection copy={c.cta} buttons={c.ctaButtons} footer={c.footer} modal={c.modal} />
     </div>

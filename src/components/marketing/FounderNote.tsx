@@ -2,17 +2,27 @@ import founderPhoto from '@/assets/founder-riza.png';
 
 export type FounderCopy = { eyebrow: string; paragraphs: string[]; signature: string };
 
-/** The ruled-paper note, punch holes and all. */
+/** The page and alt band fills, shared with every other section. */
+const BAND = { page: '#FBFAF7', alt: '#F3F1EB' } as const;
+
+/**
+ * The ruled-paper note, punch holes and all.
+ *
+ * `background` also fills the punch holes — they read as holes because you can
+ * see the band through them, so the two can never drift apart.
+ */
 export const FounderNote = ({
   copy,
   id = 'vision',
   padding = '110px 24px',
+  background = 'alt',
 }: {
   copy: FounderCopy;
   id?: string;
   padding?: string;
+  background?: 'page' | 'alt';
 }) => (
-  <div id={id} className="hb-sec" style={{ background: '#F3F1EB', padding }}>
+  <div id={id} className="hb-sec" style={{ background: BAND[background], padding }}>
     <div style={{ maxWidth: 860, margin: '0 auto' }}>
       <div className="hb-rv" style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.14em', color: '#8A867C', marginBottom: 34 }}>{copy.eyebrow}</div>
       <div
@@ -29,7 +39,7 @@ export const FounderNote = ({
         }}
       >
         {[0, 1, 2].map((i) => (
-          <span key={i} style={{ position: 'absolute', left: 26, top: `${22 + i * 26}%`, width: 20, height: 20, borderRadius: '50%', background: '#F3F1EB', boxShadow: 'inset 0 2px 4px rgba(28,27,26,0.28), 0 1px 0 rgba(255,255,255,0.8)' }} />
+          <span key={i} style={{ position: 'absolute', left: 26, top: `${22 + i * 26}%`, width: 20, height: 20, borderRadius: '50%', background: BAND[background], boxShadow: 'inset 0 2px 4px rgba(28,27,26,0.28), 0 1px 0 rgba(255,255,255,0.8)' }} />
         ))}
         {copy.paragraphs.map((paragraph, i) => (
           <p key={paragraph} style={{ fontFamily: "'Fraunces', serif", fontWeight: 400, fontSize: 'clamp(19px,2.3vw,24px)', lineHeight: '36px', color: '#3B372E', margin: i === 0 ? 0 : '36px 0 0', textWrap: 'pretty' }}>

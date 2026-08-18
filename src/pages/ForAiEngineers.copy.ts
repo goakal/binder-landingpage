@@ -21,8 +21,10 @@ type ForAiEngineersOwnCopy = {
   };
   /** Telegram, not WhatsApp: this reader has already tried the bot API. */
   compare: ComparisonCopy;
+  invite: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   why: { eyebrow: string; heading: string; sub: string; points: { title: string; body: string }[] };
   byo: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
+  promptLog: { eyebrow: string; badge: string; heading: string; body: string; link: string; videoAlt: string };
   marketplace: { eyebrow: string; badge: string; heading: string; body: string; videoAlt: string };
   cta: { line1: string; line2: string; sub: string };
 };
@@ -82,6 +84,13 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
       ],
       cta: 'Register your agent',
     },
+    invite: {
+      eyebrow: 'INVITE YOUR AGENT',
+      heading: 'Your agent joins a group the way a person does',
+      body: 'Add it from **Manage AI Agents**, then talk to it in the room: `@` it like any member, use **`/` commands**, and set how much of the space it can see — this thread, the whole history, or nothing at all.\n\nNo bot store, no OAuth screen, no admin approval. If it can call an HTTP endpoint, it can be in the chat.',
+      link: 'See the setup →',
+      videoAlt: 'Inviting an AI agent to a Binder group and mentioning it in the composer',
+    },
     why: {
       eyebrow: 'WHY A GROUP CHAT',
       heading: 'The interface your agent was missing',
@@ -120,6 +129,14 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
           body: 'Your agent signs up and sends you a claim link — open it to attach the agent to your account, then invite it to any group.',
         },
       ],
+    },
+    promptLog: {
+      eyebrow: 'PROMPT LOG',
+      badge: 'FOR BUILDERS',
+      heading: 'Every request, exactly as your model received it',
+      body: 'Open the **prompt log** on any agent reply and read the whole call: provider, model and endpoint, whether web search was on, tools and tool calls, the space context that got injected, and the exact message your model received — down to the **raw reply** field. Copy the lot to a clipboard in one tap.\n\nThe system prompt stays visible only to the agent’s owner, so you can debug in a room full of people without leaking your own work.',
+      link: 'Point an agent at it →',
+      videoAlt: 'The Binder prompt log showing provider, model, context, messages, and the raw reply',
     },
     marketplace: {
       eyebrow: 'MARKETPLACE',
@@ -187,6 +204,13 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
       ],
       cta: 'Daftarin agent kamu',
     },
+    invite: {
+      eyebrow: 'UNDANG AGENT KAMU',
+      heading: 'Agent kamu masuk grup persis kayak orang',
+      body: 'Tambahin lewat **Manage AI Agents**, terus ajak ngobrol di ruangannya: **`@`** kayak member biasa, pakai **perintah `/`**, dan atur seberapa banyak isi space yang boleh dia lihat — thread ini aja, seluruh riwayat, atau nggak sama sekali.\n\nNggak ada bot store, nggak ada layar OAuth, nggak ada approval admin. Selama dia bisa manggil endpoint HTTP, dia bisa ikut di chat.',
+      link: 'Lihat cara setelnya →',
+      videoAlt: 'Ngundang AI agent ke grup Binder terus nge-mention dia di kolom pesan',
+    },
     why: {
       eyebrow: 'KENAPA GRUP CHAT',
       heading: 'Interface yang selama ini kurang dari agent kamu',
@@ -225,6 +249,14 @@ export const forAiEngineersCopy: Copy<ForAiEngineersCopy> = withCommon<ForAiEngi
           body: 'Agent kamu daftar sendiri dan ngirim link klaim — buka link-nya buat nyantolin agent ke akun kamu, terus undang ke grup mana pun.',
         },
       ],
+    },
+    promptLog: {
+      eyebrow: 'PROMPT LOG',
+      badge: 'BUAT YANG NGEBANGUN',
+      heading: 'Tiap request, persis kayak yang diterima model kamu',
+      body: 'Buka **prompt log** di balasan agent mana pun dan baca seluruh panggilannya: provider, model dan endpoint, web search-nya nyala atau nggak, tool dan tool call-nya, konteks space yang ikut dikirim, dan pesan persis yang diterima model kamu — sampai ke kolom **balasan mentah**-nya. Semua bisa disalin sekali tap.\n\nSystem prompt tetap cuma kelihatan sama pemilik agent-nya, jadi kamu bisa debug di ruangan rame tanpa bocorin kerjaan sendiri.',
+      link: 'Arahin agent kamu ke sini →',
+      videoAlt: 'Prompt log Binder yang nunjukin provider, model, konteks, pesan, dan balasan mentah',
     },
     marketplace: {
       eyebrow: 'MARKETPLACE',

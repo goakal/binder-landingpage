@@ -20,6 +20,7 @@ type ForCommunitiesOwnCopy = {
   };
   compare: ComparisonCopy;
   chat: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
+  rules: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   move: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
   founder: { eyebrow: string; paragraphs: string[]; signature: string };
@@ -97,10 +98,17 @@ export const forCommunitiesCopy: Copy<ForCommunitiesCopy> = withCommon<ForCommun
     },
     chat: {
       eyebrow: 'GROUP CHAT',
-      heading: 'Busy group, still readable',
-      body: "Every topic gets its own **thread**. Announcements don't get buried under stickers, and new members can catch up without scrolling back to the beginning. And if you want an **AI agent** to help, just invite it to the group — no ban to worry about.",
+      heading: 'Six hundred messages, one paragraph',
+      body: "Every topic gets its own **thread**, so announcements don't get buried under stickers. And when a member has been away a week, they don't scroll — they ask the agent in the room for a **summary of the space** and get the purpose, the decisions, and what's in the pinned notes.",
       link: 'See for yourself →',
-      videoAlt: 'A Binder group chat with threads per topic',
+      videoAlt: 'Asking a Binder AI agent to summarise a space, and reading the summary it posts',
+    },
+    rules: {
+      eyebrow: 'RUNNING THE GROUP',
+      heading: 'Write the house rules once, in the group, in a minute',
+      body: 'Ask the agent for community rules and it drafts them from what the space is actually for — respect, on-topic, no spam, no doxxing, how moderators handle it — then **saves them as a note and pins it** to the top of the space.\n\nNew members read the pin instead of asking. When the group changes, you edit the note instead of re-posting the rules for the fifth time.',
+      link: 'Set your rules →',
+      videoAlt: 'Asking a Binder AI agent to write community rules, which are saved as a pinned note',
     },
     library: {
       eyebrow: 'GROUP LIBRARY',
@@ -218,10 +226,17 @@ export const forCommunitiesCopy: Copy<ForCommunitiesCopy> = withCommon<ForCommun
     },
     chat: {
       eyebrow: 'OBROLAN GRUP',
-      heading: 'Grup rame, tapi tetap kebaca',
-      body: 'Kamu bisa bikin **thread** di dalam group. Yang baru gabung bisa langsung baca chat. Dan kalau mau dibantu **AI agent**, tinggal undang ke grup - nggak perlu takut kena banned.',
+      heading: 'Enam ratus pesan, jadi satu paragraf',
+      body: 'Tiap topik punya **thread** sendiri, jadi pengumuman nggak ketimbun stiker. Dan kalau ada member yang seminggu nggak buka, dia nggak perlu scroll — tinggal minta **ringkasan space** ke agent yang ada di ruangan, langsung dapat tujuannya, keputusannya, dan isi catatan yang di-pin.',
       link: 'Coba sendiri →',
-      videoAlt: 'Grup chat Binder dengan thread per topik',
+      videoAlt: 'Minta AI agent Binder ngerangkum space, terus baca ringkasan yang dia kirim',
+    },
+    rules: {
+      eyebrow: 'NGURUS GRUP',
+      heading: 'Bikin aturan grup sekali, di grupnya, dalam semenit',
+      body: 'Minta aturan komunitas ke agent-nya, dan dia nyusun dari tujuan space-nya — saling menghormati, sesuai topik, nggak spam, nggak doxxing, dan gimana admin nanganinnya — terus **disimpen jadi catatan dan di-pin** di atas space.\n\nMember baru tinggal baca pin-nya, nggak nanya lagi. Kalau grupnya berubah, kamu tinggal edit catatannya, bukan nulis ulang aturannya buat kelima kali.',
+      link: 'Susun aturan kamu →',
+      videoAlt: 'Minta AI agent Binder nulis aturan komunitas, yang langsung disimpen jadi catatan yang di-pin',
     },
     library: {
       eyebrow: 'LIBRARY GRUP',
