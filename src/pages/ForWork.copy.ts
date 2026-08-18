@@ -26,6 +26,7 @@ type ForWorkOwnCopy = {
   /** Slack, not WhatsApp: this reader has already been sold the upgrade once. */
   compare: ComparisonCopy;
   agents: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
+  board: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   move: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
   cta: { line1: string; line2: string; sub: string };
@@ -86,9 +87,16 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
     agents: {
       eyebrow: 'AI IN THE ROOM',
       heading: 'Invite an AI agent like a teammate',
-      body: 'Your agents join the group and work where the work is discussed. They read the **thread**, the specs, and the shared **Library**, so nobody has to paste context into another tab and paste the answer back.\n\nBring in more than one and let them work together in the same chat — drafting, checking each other, picking up items off the board — with the whole team reading the same replies.',
+      body: 'Your agents join the group and work where the work is discussed. They read the **thread**, the specs, and the shared **Library**, so nobody has to paste context into another tab and paste the answer back.\n\nBring in more than one and let them work together in the same chat — drafting, checking each other, picking up items off the board — with the whole team reading the same replies.\n\nWhen the work is done, tell the agent to file it — the notes land in the group’s Library instead of scrolling away.',
       link: 'See it in action →',
-      videoAlt: 'A Binder work chat with an AI agent replying inside a thread',
+      videoAlt: 'A Binder thread where a teammate and an AI agent draft a script together, then file the notes into the Library',
+    },
+    board: {
+      eyebrow: 'TASK BOARD',
+      heading: 'The board sits next to the conversation that created it',
+      body: 'Spin up a board in any space in about a minute: name it, write your own **statuses**, and pick who can move cards — everyone, or members view and admins edit.\n\nEvery task carries an **assignee, dates, and a priority**, and it lives one tab away from the thread it came out of. No second tool to buy, and no second login for the freelancer you added yesterday.',
+      link: 'Start a board (free) →',
+      videoAlt: 'Creating a task board in Binder, then adding a task with an assignee and dates',
     },
     library: {
       eyebrow: 'TEAM LIBRARY',
@@ -174,9 +182,16 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
     agents: {
       eyebrow: 'AI DI RUANGAN YANG SAMA',
       heading: 'Undang AI agent kayak anggota tim',
-      body: 'Agent kamu masuk ke grup dan kerja di tempat kerjaannya dibahas. Dia baca **thread**, spek, dan **Library** bareng, jadi nggak ada yang perlu nempel konteks ke tab lain terus nempel jawabannya balik.\n\nBawa lebih dari satu, dan biarin mereka kerja bareng di chat yang sama — nyusun draf, saling ngecek, ngambil item dari papan tugas — sementara satu tim baca balasan yang sama.',
+      body: 'Agent kamu masuk ke grup dan kerja di tempat kerjaannya dibahas. Dia baca **thread**, spek, dan **Library** bareng, jadi nggak ada yang perlu nempel konteks ke tab lain terus nempel jawabannya balik.\n\nBawa lebih dari satu, dan biarin mereka kerja bareng di chat yang sama — nyusun draf, saling ngecek, ngambil item dari papan tugas — sementara satu tim baca balasan yang sama.\n\nKalau kerjaannya udah kelar, tinggal suruh agent-nya nyimpen — catatannya masuk ke Library grup, bukan ilang kegulung chat.',
       link: 'Lihat langsung →',
-      videoAlt: 'Chat kerja Binder dengan AI agent yang bales di dalam thread',
+      videoAlt: 'Thread Binder waktu anggota tim dan AI agent nyusun draf bareng, terus nyimpen catatannya ke Library',
+    },
+    board: {
+      eyebrow: 'PAPAN TUGAS',
+      heading: 'Papan tugasnya nempel sama obrolan yang bikin tugas itu ada',
+      body: 'Bikin papan di space mana pun cuma butuh semenit: kasih nama, tulis **status** versi kamu sendiri, dan tentuin siapa yang boleh mindahin kartu — semua orang, atau member cuma lihat dan admin yang ngedit.\n\nTiap tugas punya **penanggung jawab, tanggal, dan prioritas**, dan letaknya cuma satu tab dari thread asalnya. Nggak perlu beli tool kedua, nggak perlu bikin login kedua buat freelancer yang baru kamu ajak kemarin.',
+      link: 'Bikin papan tugas (gratis) →',
+      videoAlt: 'Bikin papan tugas di Binder, terus nambah tugas lengkap sama penanggung jawab dan tanggal',
     },
     library: {
       eyebrow: 'LIBRARY TIM',

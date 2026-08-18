@@ -23,7 +23,20 @@ type ForEducationOwnCopy = {
   compare: ComparisonCopy;
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   catchUp: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
-  tutor: { eyebrow: string; heading: string; sub: string; points: { title: string; body: string }[] };
+  /**
+   * `body` + `videoAlt` drive the FeatureRow variant, `sub` + `points` the
+   * text-only one. Both halves exist in both languages so the page can switch
+   * to the video everywhere the day an English tutor clip is recorded — see
+   * the comment on the section in ForEducation.tsx.
+   */
+  tutor: {
+    eyebrow: string;
+    heading: string;
+    sub: string;
+    body: string;
+    videoAlt: string;
+    points: { title: string; body: string }[];
+  };
   setup: { eyebrow: string; heading: string; sub: string; steps: { title: string; body: string }[] };
   cta: { line1: string; line2: string; sub: string };
 };
@@ -97,6 +110,8 @@ export const forEducationCopy: Copy<ForEducationCopy> = withCommon<ForEducationO
       eyebrow: 'AI TEACHING ASSISTANT',
       heading: 'The questions you have answered a hundred times',
       sub: 'Invite an AI agent to the class group the same way you would add a student. It reads what is already in the Library.',
+      body: 'The agent introduces itself to the class and says what it covers — grammar, vocabulary, writing, pronunciation. A student asks about the thing they always ask about, and gets a worked answer with a table and practice questions, in the group, at 11pm.\n\nYou read the same thread they do. Correct it once and the whole class sees the correction.',
+      videoAlt: 'An AI tutor in a Binder class group answering a grammar question with a table and practice questions',
       points: [
         {
           title: 'It knows your material',
@@ -204,6 +219,8 @@ export const forEducationCopy: Copy<ForEducationCopy> = withCommon<ForEducationO
       eyebrow: 'ASISTEN AI',
       heading: 'Pertanyaan yang udah kamu jawab seratus kali',
       sub: 'Undang AI agent ke grup kelas semudah nambah murid. Dia baca apa yang udah ada di Library.',
+      body: 'Agent-nya kenalan dulu ke kelas dan nyebutin dia bisa bantu apa — grammar, kosakata, nulis, pronunciation. Terus ada murid nanya hal yang emang selalu ditanyain, dan dapet jawaban lengkap plus tabel dan latihan, di grupnya, jam 11 malam.\n\nKamu baca thread yang sama. Sekali kamu koreksi, satu kelas lihat koreksinya.',
+      videoAlt: 'AI tutor di grup kelas Binder yang jawab pertanyaan grammar pakai tabel dan soal latihan',
       points: [
         {
           title: 'Dia paham materi kamu',
