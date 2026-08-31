@@ -3,14 +3,14 @@ import { usePageMeta } from "@/hooks/use-page-meta";
 
 export default function PrivacyPolicy() {
   usePageMeta(
-    "Privacy Policy — Binder",
+    "Privacy Policy | Binder",
     "How Binder collects, uses, shares, and protects your information."
   );
 
   return (
     <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE AUGUST 31, 2026">
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App"), including messaging, groups and communities, and other features we offer from time to time.
+            Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App").
           </p>
 
           <p className="text-base leading-7 text-slate-600 mb-6">
@@ -21,17 +21,17 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Account & Profile Information</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            When you sign up, Binder asks for a name, username, and either an email address or phone number, which we verify with a one-time code — Binder doesn't use passwords. You can also add a profile photo and other optional profile details, and we may collect basic device information, such as your timezone, to support features that depend on it. If you choose to link your Binder account with another account you hold with us, some account and profile information may be shared between them.
+            When you sign up, Binder asks for a name, username, and either an email address or phone number, which we verify with a one-time code. Binder doesn't use passwords. You can also add a profile photo and other optional profile details, and we may collect basic device information, such as your timezone, to support features that depend on it. If you choose to link your Binder account with another account you hold with us, some account and profile information may be shared between them.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Content You Share</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            We store the content you create and share in the App — such as messages and other materials you send or post, including text, photos, videos, audio, and documents. This can include content shared through features that use automation or AI to help you communicate.
+            We store the content you create and share in the App, such as messages and other materials you send or post, including text, photos, videos, audio, and documents. This can include content shared through features that use automation or AI to help you communicate.
           </p>
 
-          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Groups, Communities & Friends</h3>
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Groups and Connections</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            Binder stores the groups and communities you create or join and your role in them. You add friends by searching for their username or sharing an invite link — Binder does not access, upload, or store your device's contact list.
+            Binder stores the groups you create or join and your role in them. You can connect with other people by searching for their username or by sharing an invite link. Binder does not access, upload, or store your device's contact list.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Device Permissions</h3>
@@ -39,10 +39,10 @@ export default function PrivacyPolicy() {
             Binder may request the following device permissions. Each is optional and only asked for when you use a feature that needs it:
           </p>
           <ul className="list-disc pl-6 mb-4">
-            <li className="text-base leading-7 text-slate-600">Camera and Photo Library — to let you add photos or videos within the App.</li>
-            <li className="text-base leading-7 text-slate-600">Microphone — to support audio-based features.</li>
-            <li className="text-base leading-7 text-slate-600">Notifications — to alert you about relevant activity.</li>
-            <li className="text-base leading-7 text-slate-600">Location — only if you actively choose to share it within a conversation; Binder does not track your location in the background.</li>
+            <li className="text-base leading-7 text-slate-600">Camera and Photo Library: to let you add photos or videos within the App.</li>
+            <li className="text-base leading-7 text-slate-600">Microphone: to support audio-based features.</li>
+            <li className="text-base leading-7 text-slate-600">Notifications: to alert you about relevant activity.</li>
+            <li className="text-base leading-7 text-slate-600">Location: only if you actively choose to share it within a conversation. Binder does not track your location in the background.</li>
           </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
             You can review or turn off any of these permissions at any time in your device settings.
@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul className="list-disc pl-6 mb-6">
             <li className="text-base leading-7 text-slate-600">Provide, operate, and maintain the App's features.</li>
-            <li className="text-base leading-7 text-slate-600">Support communication features, including invite links and notifications.</li>
+            <li className="text-base leading-7 text-slate-600">Support communication and notification features.</li>
             <li className="text-base leading-7 text-slate-600">Support features that use automation or AI, where you choose to use them.</li>
             <li className="text-base leading-7 text-slate-600">Personalize and improve your experience and understand how the App is used.</li>
             <li className="text-base leading-7 text-slate-600">Communicate with you, including customer support, app updates, and, where permitted, product announcements.</li>
@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul className="list-disc pl-6 mb-6">
             <li className="text-base leading-7 text-slate-600">With service providers that help us operate the App (see Third-Party Services below).</li>
-            <li className="text-base leading-7 text-slate-600">With other users, to the extent you share it with them — for example, messages you send in a group are visible to that group's members, and profile details like your name, username, and photo are visible to people you interact with.</li>
+            <li className="text-base leading-7 text-slate-600">With other users, to the extent you share it with them. For example, messages you send in a group are visible to that group's members, and profile details like your name, username, and photo are visible to people you interact with.</li>
             <li className="text-base leading-7 text-slate-600">To comply with a legal obligation, or respond to a valid legal request such as a court order or government investigation.</li>
             <li className="text-base leading-7 text-slate-600">To protect the rights, property, or safety of Binder, our users, or the public.</li>
           </ul>
@@ -81,7 +81,7 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Service Providers We Use</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            We work with third-party service providers who help us with things like hosting and infrastructure, communications and notifications, analytics, and invite or referral links. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
+            We work with third-party service providers who help us with things like hosting and infrastructure, communications, analytics, and other operational needs. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
           </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
             Some features in the App may use automation or AI, which can include third-party AI providers, to help generate content or responses. If you use those features, related content may be processed accordingly.
@@ -94,7 +94,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Security</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We use industry-standard measures to protect your information, including encryption in transit (between the App and our servers) and at rest (while stored on our servers). That said, no method of transmission or storage is 100% secure, so we can't guarantee absolute security, and we encourage you to use caution when sharing sensitive information.
+            We use industry-standard measures to protect your information. Chat messages are encrypted both in transit and at rest. That said, no method of transmission or storage is 100% secure, so we can't guarantee absolute security, and we encourage you to use caution when sharing sensitive information.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
@@ -109,7 +109,7 @@ export default function PrivacyPolicy() {
             You have the right to:
           </p>
           <ul className="list-disc pl-6 mb-6">
-            <li className="text-base leading-7 text-slate-600">Access and update your personal information — most profile fields can be edited directly in the App.</li>
+            <li className="text-base leading-7 text-slate-600">Access and update your personal information. Most profile fields can be edited directly in the App.</li>
             <li className="text-base leading-7 text-slate-600">Request deletion of your account and personal data.</li>
             <li className="text-base leading-7 text-slate-600">Withdraw your consent for processing your data where we rely on consent.</li>
             <li className="text-base leading-7 text-slate-600">Control app permissions at any time in your device settings.</li>
