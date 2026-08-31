@@ -30,7 +30,7 @@ const DataDeletionIOS: FC = () => {
             </p>
             <ul className="list-disc list-inside space-y-2">
               <li>Delete your account from Binder and all your devices.</li>
-              <li>Erase your message history.</li>
+              <li>Remove your access to your message history. Messages you already sent into a shared conversation, like a group chat, may remain visible to the other participants after your account is deleted — similar to how account deletion works on other chat apps.</li>
               <li>Delete you from all of your Binder groups.</li>
               <li>Remove you as a group admin or follower, but not delete any updates you made or group interactions like reactions or poll votes.</li>
               <li>If you're a group admin, updates you've shared in group aren't deleted.</li>
