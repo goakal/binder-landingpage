@@ -4,13 +4,13 @@ import { usePageMeta } from "@/hooks/use-page-meta";
 export default function PrivacyPolicy() {
   usePageMeta(
     "Privacy Policy — Binder",
-    "How Binder collects, uses, shares, and protects your information across chat, groups, notes, and AI agent features."
+    "How Binder collects, uses, shares, and protects your information."
   );
 
   return (
     <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE AUGUST 31, 2026">
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App"), including chat, groups and communities, notes, mini-apps, and AI agent features.
+            Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App"), including messaging, groups and communities, and other features we offer from time to time.
           </p>
 
           <p className="text-base leading-7 text-slate-600 mb-6">
@@ -21,28 +21,28 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Account & Profile Information</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            When you sign up, Binder asks for a name, username, and either an email address or phone number, which we verify with a one-time code sent by SMS, WhatsApp, or email — Binder doesn't use passwords. You can also add a profile photo, a short bio, and an avatar color or emoji, and we record your device's timezone so scheduled messages and reminders fire at the right local time. If you choose to link your Binder account with a companion Akal account, some account and profile information may be shared between the two.
+            When you sign up, Binder asks for a name, username, and either an email address or phone number, which we verify with a one-time code — Binder doesn't use passwords. You can also add a profile photo and other optional profile details, and we may collect basic device information, such as your timezone, to support features that depend on it. If you choose to link your Binder account with another account you hold with us, some account and profile information may be shared between them.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Content You Share</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            We store the content you create and send in the App: group and direct messages, mentions and reactions, photos, videos, voice messages and documents, notes, mini-app and card data, polls and votes, and task boards. If you use an AI agent inside Binder, the messages you exchange with it are also stored and processed in order to generate its responses (see Third-Party Services below).
+            We store the content you create and share in the App — such as messages and other materials you send or post, including text, photos, videos, audio, and documents. This can include content shared through features that use automation or AI to help you communicate.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Groups, Communities & Friends</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            Binder stores the groups, communities, and spaces you create or join, your role in them (such as admin or member), and any join requests. You add friends by searching for their username or sharing an invite link — Binder does not access, upload, or store your device's contact list.
+            Binder stores the groups and communities you create or join and your role in them. You add friends by searching for their username or sharing an invite link — Binder does not access, upload, or store your device's contact list.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Device Permissions</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            Binder requests the following device permissions. Each is optional and only asked for when you use the related feature:
+            Binder may request the following device permissions. Each is optional and only asked for when you use a feature that needs it:
           </p>
           <ul className="list-disc pl-6 mb-4">
-            <li className="text-base leading-7 text-slate-600">Camera and Photo Library — to take or attach photos and videos, set a profile photo, and save images from chats to your device.</li>
-            <li className="text-base leading-7 text-slate-600">Microphone — to record and send voice messages.</li>
-            <li className="text-base leading-7 text-slate-600">Notifications — to alert you about new messages and activity.</li>
-            <li className="text-base leading-7 text-slate-600">Location — only if you actively choose to share your location in a chat or space; Binder does not track your location in the background.</li>
+            <li className="text-base leading-7 text-slate-600">Camera and Photo Library — to let you add photos or videos within the App.</li>
+            <li className="text-base leading-7 text-slate-600">Microphone — to support audio-based features.</li>
+            <li className="text-base leading-7 text-slate-600">Notifications — to alert you about relevant activity.</li>
+            <li className="text-base leading-7 text-slate-600">Location — only if you actively choose to share it within a conversation; Binder does not track your location in the background.</li>
           </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
             You can review or turn off any of these permissions at any time in your device settings.
@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Usage & Device Data</h3>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We automatically collect some technical information when you use Binder, such as device type and operating system, app version, IP address, and crash or performance logs, along with information about how you interact with the App.
+            We automatically collect some technical information when you use Binder, such as device and app information, IP address, and diagnostic logs, along with information about how you interact with the App.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">How We Use Your Information</h2>
@@ -58,9 +58,9 @@ export default function PrivacyPolicy() {
             We use your information to:
           </p>
           <ul className="list-disc pl-6 mb-6">
-            <li className="text-base leading-7 text-slate-600">Provide, operate, and maintain Binder's chat, groups, notes, and other features.</li>
-            <li className="text-base leading-7 text-slate-600">Deliver push notifications and process invite links you send or receive.</li>
-            <li className="text-base leading-7 text-slate-600">Generate responses when you use an AI agent within a conversation.</li>
+            <li className="text-base leading-7 text-slate-600">Provide, operate, and maintain the App's features.</li>
+            <li className="text-base leading-7 text-slate-600">Support communication features, including invite links and notifications.</li>
+            <li className="text-base leading-7 text-slate-600">Support features that use automation or AI, where you choose to use them.</li>
             <li className="text-base leading-7 text-slate-600">Personalize and improve your experience and understand how the App is used.</li>
             <li className="text-base leading-7 text-slate-600">Communicate with you, including customer support, app updates, and, where permitted, product announcements.</li>
             <li className="text-base leading-7 text-slate-600">Maintain the security of the App, detect abuse or fraud, and enforce our Terms and Conditions.</li>
@@ -71,7 +71,7 @@ export default function PrivacyPolicy() {
             We do not sell your personal information. We may share it:
           </p>
           <ul className="list-disc pl-6 mb-6">
-            <li className="text-base leading-7 text-slate-600">With the third-party service providers described below, which help us operate features like hosting, realtime messaging, push notifications, analytics, and invite links.</li>
+            <li className="text-base leading-7 text-slate-600">With service providers that help us operate the App (see Third-Party Services below).</li>
             <li className="text-base leading-7 text-slate-600">With other users, to the extent you share it with them — for example, messages you send in a group are visible to that group's members, and profile details like your name, username, and photo are visible to people you interact with.</li>
             <li className="text-base leading-7 text-slate-600">To comply with a legal obligation, or respond to a valid legal request such as a court order or government investigation.</li>
             <li className="text-base leading-7 text-slate-600">To protect the rights, property, or safety of Binder, our users, or the public.</li>
@@ -81,19 +81,10 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Service Providers We Use</h3>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            Binder relies on a small number of service providers to operate the App:
-          </p>
-          <ul className="list-disc pl-6 mb-4">
-            <li className="text-base leading-7 text-slate-600">Supabase — hosts our backend and delivers messages in realtime.</li>
-            <li className="text-base leading-7 text-slate-600">Firebase Cloud Messaging (Google) — delivers push notifications to your device using a device push token.</li>
-            <li className="text-base leading-7 text-slate-600">PostHog — provides product analytics so we can understand how the App is used and improve it.</li>
-            <li className="text-base leading-7 text-slate-600">Branch — powers invite and share links, such as an invite to join a group.</li>
-          </ul>
-          <p className="text-base leading-7 text-slate-600 mb-4">
-            Each provider only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
+            We work with third-party service providers who help us with things like hosting and infrastructure, communications and notifications, analytics, and invite or referral links. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
           </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            <strong>AI agent features:</strong> if you create, register, or interact with an AI agent inside Binder, the content of that conversation may be processed by automated systems — which may include third-party AI providers — in order to generate the agent's responses.
+            Some features in the App may use automation or AI, which can include third-party AI providers, to help generate content or responses. If you use those features, related content may be processed accordingly.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
@@ -110,7 +101,7 @@ export default function PrivacyPolicy() {
           <p className="text-base leading-7 text-slate-600 mb-6">
             We retain your personal data for as long as your account is active, and afterwards for as long as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements. If you request deletion of your account (see Your Rights below, or{" "}
             <a href="https://heybinder.com/data-deletion" className="text-slate-600 hover:text-slate-900 transition-colors">heybinder.com/data-deletion</a>
-            ), we permanently delete your personal data within 90 days. Content you shared with others — such as messages other people received, or updates you posted as a group admin — may remain visible to them afterwards, consistent with our Data Deletion page. We may keep anonymized or aggregated data for longer for statistical purposes.
+            ), we permanently delete your personal data within 90 days. Content you shared with others may remain visible to them afterwards, consistent with our Data Deletion page. We may keep anonymized or aggregated data for longer for statistical purposes.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Your Rights</h2>
@@ -121,7 +112,7 @@ export default function PrivacyPolicy() {
             <li className="text-base leading-7 text-slate-600">Access and update your personal information — most profile fields can be edited directly in the App.</li>
             <li className="text-base leading-7 text-slate-600">Request deletion of your account and personal data.</li>
             <li className="text-base leading-7 text-slate-600">Withdraw your consent for processing your data where we rely on consent.</li>
-            <li className="text-base leading-7 text-slate-600">Control app permissions — camera, microphone, photo library, notifications, and location — at any time in your device settings.</li>
+            <li className="text-base leading-7 text-slate-600">Control app permissions at any time in your device settings.</li>
           </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
             Please contact us at goku@goakal.com to exercise your rights.
@@ -134,7 +125,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">International Data Transfers</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Binder and the service providers listed above may store and process information in countries other than your own, including Indonesia and the United States. By using the App, you understand that your information may be transferred to, and processed in, a country with different data protection laws than your own.
+            Binder and the service providers we work with may store and process information in countries other than your own. By using the App, you understand that your information may be transferred to, and processed in, a country with different data protection laws than your own.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Changes to this Privacy Policy</h2>
