@@ -69,7 +69,7 @@ const DataDeletionIOS: FC = () => {
             <p>
               If you have any questions about this process, please contact us at{" "}
               <a
-                href="mailto:privacy@binder.com"
+                href="mailto:goku@goakal.com"
                 className="text-blue-600 hover:underline"
               >
                 goku@goakal.com
