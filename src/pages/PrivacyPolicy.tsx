@@ -94,7 +94,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Security</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We use industry-standard measures, such as encrypted network connections, to protect information in transit. That said, no method of transmission or storage is 100% secure, so we can't guarantee absolute security, and we encourage you to use caution when sharing sensitive information.
+            We use industry-standard measures to protect your information, including encryption in transit (between the App and our servers) and at rest (while stored on our servers). That said, no method of transmission or storage is 100% secure, so we can't guarantee absolute security, and we encourage you to use caution when sharing sensitive information.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
