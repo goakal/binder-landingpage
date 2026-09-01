@@ -62,12 +62,12 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We may disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation.
+            We will only disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation.
           </p>
 
-          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Security</h2>
+          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Chat Security and Encryption</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We implement robust security measures to protect your information. However, no security system is completely foolproof, so please exercise caution when sharing sensitive information.
+            We implement robust security measures, including encryption, to protect your information.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
