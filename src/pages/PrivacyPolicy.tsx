@@ -66,15 +66,18 @@ export default function PrivacyPolicy() {
             <li className="text-base leading-7 text-slate-600">Maintain the security of the App, detect abuse or fraud, and enforce our Terms and Conditions.</li>
           </ul>
 
+          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Chat Security and Encryption</h2>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We implement robust security measures to protect your information.
+          </p>
+
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Sharing Your Information</h2>
           <p className="text-base leading-7 text-slate-600 mb-4">
             We do not sell your personal information. We may share it:
           </p>
           <ul className="list-disc pl-6 mb-6">
-            <li className="text-base leading-7 text-slate-600">With service providers that help us operate the App (see Third-Party Services below).</li>
-            <li className="text-base leading-7 text-slate-600">With other users, to the extent you share it with them. For example, messages you send in a group are visible to that group's members, and profile details like your name, username, and photo are visible to people you interact with.</li>
-            <li className="text-base leading-7 text-slate-600">To comply with a legal obligation, or respond to a valid legal request such as a court order or government investigation.</li>
-            <li className="text-base leading-7 text-slate-600">To protect the rights, property, or safety of Binder, our users, or the public.</li>
+            <li className="text-base leading-7 text-slate-600">With third-party service providers that help us operate the app (hosting, analytics, customer support).</li>
+            <li className="text-base leading-7 text-slate-600">To comply with legal obligations or respond to lawful requests.</li>
           </ul>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Third-Party Services</h2>
@@ -89,12 +92,7 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We may disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation.
-          </p>
-
-          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Security</h2>
-          <p className="text-base leading-7 text-slate-600 mb-6">
-            We use industry-standard measures to protect your information. Chat messages are encrypted both in transit and at rest. That said, no method of transmission or storage is 100% secure, so we can't guarantee absolute security, and we encourage you to use caution when sharing sensitive information.
+            We will only disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation, or to protect the rights, property, or safety of Binder, our users, or the public.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
