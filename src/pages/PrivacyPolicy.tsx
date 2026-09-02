@@ -40,6 +40,11 @@ export default function PrivacyPolicy() {
             <li className="text-base leading-7 text-slate-600">Ensure security, detect fraud, and enforce our terms of service.</li>
           </ul>
 
+          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Chat Security and Encryption</h2>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We implement robust security measures to protect your information.
+          </p>
+
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Sharing Your Information</h2>
           <p className="text-base leading-7 text-slate-600 mb-4">
             We may share your information:
@@ -47,7 +52,6 @@ export default function PrivacyPolicy() {
           <ul className="list-disc pl-6 mb-6">
             <li className="text-base leading-7 text-slate-600">With third-party service providers that help us operate the app (hosting, analytics, customer support).</li>
             <li className="text-base leading-7 text-slate-600">To comply with legal obligations or respond to lawful requests.</li>
-            <li className="text-base leading-7 text-slate-600">To protect the rights, property, or safety of Binder, our users, or the public.</li>
           </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
             We do not sell your personal information.
@@ -62,12 +66,7 @@ export default function PrivacyPolicy() {
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            We may disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation.
-          </p>
-
-          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Security</h2>
-          <p className="text-base leading-7 text-slate-600 mb-6">
-            We implement robust security measures to protect your information. However, no security system is completely foolproof, so please exercise caution when sharing sensitive information.
+            We will only disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation, or to protect the rights, property, or safety of Binder, our users, or the public.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
