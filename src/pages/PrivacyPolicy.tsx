@@ -42,7 +42,7 @@ export default function PrivacyPolicy() {
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Chat Security and Encryption</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            All chats sent through Binder are encrypted in transit and at rest. We implement robust security measures, including access controls and regular security reviews, to protect your information from unauthorized access.
+            All chats and content sent through Binder are encrypted in transit and at rest. We implement robust security measures, including access controls and regular security reviews, to protect your information from unauthorized access.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Sharing Your Information</h2>
