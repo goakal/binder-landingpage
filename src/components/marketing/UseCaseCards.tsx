@@ -5,7 +5,7 @@ import { useCasesCopy, type UseCaseCard } from '@/i18n/use-cases.copy';
 import { SectionHeading } from './SectionHeading';
 
 /**
- * Cards keep their own accent so four identical panels don't read as wallpaper.
+ * Cards keep their own accent so five identical panels don't read as wallpaper.
  * Cast because React's CSSProperties still doesn't admit custom properties.
  */
 const CARD_ACCENTS = [
@@ -13,10 +13,11 @@ const CARD_ACCENTS = [
   { '--uc-accent': '#B4762A', '--uc-tint': '#FBF1E2', '--uc-line': '#EBDCC2' },
   { '--uc-accent': '#2F8C74', '--uc-tint': '#E9F6F1', '--uc-line': '#CCE7DE' },
   { '--uc-accent': '#4A6FB5', '--uc-tint': '#EDF2FB', '--uc-line': '#D2DEF1' },
+  { '--uc-accent': '#C2566A', '--uc-tint': '#FBEDF0', '--uc-line': '#EFD0D7' },
 ] as unknown as CSSProperties[];
 
 /**
- * The four small use-case cards.
+ * The small use-case cards, one per use-case page.
  *
  * `glass` is the translucent set that sits inside a hero photograph on the home
  * page; `light` is the tinted set the use-case pages show above their closing
@@ -50,7 +51,7 @@ export const UseCaseCards = ({
 };
 
 /**
- * The band every use-case page shows above its closing CTA: the other three
+ * The band every use-case page shows above its closing CTA: the other
  * pages, so a reader who landed on the wrong one has somewhere to go that isn't
  * the back button.
  */

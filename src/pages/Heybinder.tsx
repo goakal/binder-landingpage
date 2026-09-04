@@ -16,7 +16,7 @@ import heroCabinNight from '@/assets/heybinder-hero-cabin.jpg';
 
 /**
  * The home page is a hub, not a pitch: one hero that positions Binder and hands
- * the visitor straight to the use-case page written for them — the four cards
+ * the visitor straight to the use-case page written for them — the cards
  * live inside the hero rather than in a section below it, so the handoff
  * happens above the fold. The only thing the home page sells on its own is the
  * agent invite, because that reader arrives knowing what they want.

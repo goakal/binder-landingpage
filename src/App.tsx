@@ -23,6 +23,7 @@ const ForAiEngineers = lazy(() => import("./pages/ForAiEngineers"));
 const ForEducation = lazy(() => import("./pages/ForEducation"));
 const ForCommunities = lazy(() => import("./pages/ForCommunities"));
 const ForWork = lazy(() => import("./pages/ForWork"));
+const ForFamilies = lazy(() => import("./pages/ForFamilies"));
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="/for-education" element={<ForEducation />} />
               <Route path="/for-communities" element={<ForCommunities />} />
               <Route path="/for-work" element={<ForWork />} />
+              <Route path="/for-families" element={<ForFamilies />} />
 
               {/* Folded into /for-communities. Keep indefinitely — this URL has been shared. */}
               <Route path="/whatsapp-alternative" element={<Navigate to="/for-communities" replace />} />

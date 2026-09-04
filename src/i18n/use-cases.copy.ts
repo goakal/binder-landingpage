@@ -1,13 +1,13 @@
 import type { Copy } from '@/i18n';
 
 /**
- * The four use-case cards, shared by every page that renders them: the home
+ * The use-case cards, shared by every page that renders them: the home
  * hero, and the "more use cases" band each use-case page shows above its
  * closing CTA. One dictionary, because five pages showing five slightly
- * different descriptions of the same four pages would be a bug, not variety.
+ * different descriptions of the same pages would be a bug, not variety.
  *
  * `line` is that page's own hero headline, kept in sync by hand rather than
- * imported — importing the four page copy dictionaries here would pull their
+ * imported — importing the page copy dictionaries here would pull their
  * whole hero/section trees into every bundle that renders these cards,
  * including the home page, which otherwise doesn't need any of that code.
  */
@@ -51,6 +51,12 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         label: 'For work',
         line: 'Chat, project boards, and files in one place. Free.',
       },
+      {
+        to: '/for-families',
+        icon: '🏡',
+        label: 'For families',
+        line: 'One place for the whole family. Not four group chats.',
+      },
     ],
     other: {
       eyebrow: 'MORE USE CASES',
@@ -84,6 +90,12 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         icon: '💼',
         label: 'Buat kerja',
         line: 'Chat, papan proyek, dan file di satu tempat. Gratis.',
+      },
+      {
+        to: '/for-families',
+        icon: '🏡',
+        label: 'Buat keluarga',
+        line: 'Satu tempat buat seluruh keluarga. Bukan empat grup chat.',
       },
     ],
     other: {
