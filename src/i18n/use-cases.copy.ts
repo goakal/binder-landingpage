@@ -53,9 +53,9 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
       },
       {
         to: '/for-families',
-        icon: '🏡',
+        icon: '👨‍👩‍👧',
         label: 'For families',
-        line: 'One place for the whole family. Not four group chats.',
+        line: "Discuss your child's development together, with AI.",
       },
     ],
     other: {
@@ -89,13 +89,13 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         to: '/for-work',
         icon: '💼',
         label: 'Buat kerja',
-        line: 'Chat, papan proyek, dan file di satu tempat. Gratis.',
+        line: 'Chat, to do list, dan dokumen di satu tempat. Gratis.',
       },
       {
         to: '/for-families',
-        icon: '🏡',
+        icon: '👨‍👩‍👧',
         label: 'Buat keluarga',
-        line: 'Satu tempat buat seluruh keluarga. Bukan empat grup chat.',
+        line: 'Diskusi perkembangan anak bareng-bareng, dibantu AI.',
       },
     ],
     other: {

@@ -130,8 +130,8 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
     },
     hero: {
       imageAlt: 'Ilustrasi kantor studio di bawah cahaya sore',
-      headline: 'Chat, papan proyek, dan file di satu tempat. Gratis.',
-      sub: 'Berhenti bayar Slack + Jira cuma biar kerjaan tetap nyambung.\nBinder nyatuin chat, papan tugas, dan konteks bareng, plus AI agent yang udah nempel.',
+      headline: 'Chat, to do list, dan dokumen di satu tempat. Gratis.',
+      sub: 'Berhenti bayar Slack + Jira cuma biar kerjaan tetap nyambung.\nBinder nyatuin chat, to do list, dan konteks bareng, plus AI agent yang udah nempel.',
       cta: 'Pindahin tim kamu (gratis)',
       chips: [
         '📋 Tugas dan chat, bersebelahan',
@@ -174,7 +174,7 @@ export const forWorkCopy: Copy<ForWorkCopy> = withCommon<ForWorkOwnCopy>({
     agents: {
       eyebrow: 'AI DI RUANGAN YANG SAMA',
       heading: 'Undang AI agent kayak anggota tim',
-      body: 'Agent kamu masuk ke grup dan kerja di tempat kerjaannya dibahas. Dia baca **thread**, spek, dan **Library** bareng, jadi nggak ada yang perlu nempel konteks ke tab lain terus nempel jawabannya balik.\n\nBawa lebih dari satu, dan biarin mereka kerja bareng di chat yang sama — nyusun draf, saling ngecek, ngambil item dari papan tugas — sementara satu tim baca balasan yang sama.',
+      body: 'Agent kamu masuk ke grup dan kerja di tempat kerjaannya dibahas. Dia baca **thread**, spek, dan **Library** bareng, jadi nggak ada yang perlu nempel konteks ke tab lain terus nempel jawabannya balik.\n\nBawa lebih dari satu, dan biarin mereka kerja bareng di chat yang sama — nyusun draf, saling ngecek, ngambil item dari to do list — sementara satu tim baca balasan yang sama.',
       link: 'Lihat langsung →',
       videoAlt: 'Chat kerja Binder dengan AI agent yang bales di dalam thread',
     },
