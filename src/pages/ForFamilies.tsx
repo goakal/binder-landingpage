@@ -13,13 +13,16 @@ import { forFamiliesCopy } from './ForFamilies.copy';
 import './Heybinder.css';
 import heroFamilies from '@/assets/heybinder-hero-cabin-illustrated.jpg';
 import libraryDemo from '@/assets/heybinder-library-demo.webm';
+import boardWebm from '@/assets/demo-work-board.webm';
+import boardMp4 from '@/assets/demo-work-board.mp4';
+import boardPoster from '@/assets/demo-work-board-poster.jpg';
 import mobileDemoWebm from '@/assets/heybinder-mobile-demo.webm';
 import mobileDemoMp4 from '@/assets/heybinder-mobile-demo.mp4';
 
 /**
  * The reader is the parent who runs the household group. The comparison table
- * leads because their pain is "where did that document go", and the Library
- * row answers it before they have scrolled past the fold.
+ * leads because their pain is "who was supposed to remember this", and the
+ * board and Library rows answer it before they have scrolled far.
  *
  * The hero reuses the home page's daytime cabin until a family-specific
  * illustration exists; the bright sky needs a heavy scrim for white type.
@@ -49,8 +52,19 @@ const ForFamiliesPage = () => {
       <ComparisonTable copy={c.compare} rivalIcon="💬" background="alt" />
 
       <FeatureRow
-        id="library"
+        id="plan"
         mediaSide="right"
+        media={<PhoneDemo webm={boardWebm} mp4={boardMp4} poster={boardPoster} alt={c.plan.videoAlt} />}
+        eyebrow={c.plan.eyebrow}
+        heading={c.plan.heading}
+        body={c.plan.body}
+        link={{ label: c.plan.link, href: '#get' }}
+      />
+
+      <FeatureRow
+        id="library"
+        background="alt"
+        mediaSide="left"
         media={<PhoneDemo webm={libraryDemo} alt={c.library.videoAlt} />}
         eyebrow={c.library.eyebrow}
         heading={c.library.heading}
@@ -58,8 +72,7 @@ const ForFamiliesPage = () => {
       />
 
       <FeatureRow
-        background="alt"
-        mediaSide="left"
+        mediaSide="right"
         media={<PhoneDemo webm={mobileDemoWebm} mp4={mobileDemoMp4} alt={c.chat.videoAlt} />}
         eyebrow={c.chat.eyebrow}
         heading={c.chat.heading}

@@ -23,6 +23,7 @@ type ForFamiliesOwnCopy = {
     chips: string[];
   };
   compare: ComparisonCopy;
+  plan: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   library: { eyebrow: string; heading: string; body: string; videoAlt: string };
   chat: { eyebrow: string; heading: string; body: string; link: string; videoAlt: string };
   helper: { eyebrow: string; heading: string; sub: string; points: { title: string; body: string }[] };
@@ -37,18 +38,18 @@ export type ForFamiliesCopy = ForFamiliesOwnCopy & CommonCopy;
 export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnCopy>({
   en: {
     meta: {
-      title: 'Binder for families — one place for the people you love',
+      title: 'Binder for families — the group that plans it and remembers it',
       description:
-        'A private family group where the school calendar, the medical records, and the holiday plans stay findable, and nobody has to ask "can you send that again?". Free for families of any size.',
+        'A private family group with a board for the school run and the appointments, and a Library for the notes, documents, and photos. Nothing gets forgotten, and nobody has to ask "can you send that again?". Free for families of any size.',
     },
     hero: {
       imageAlt: 'Illustrated cabin in a green valley under a bright sky',
-      headline: 'One place for the whole family. Not four group chats.',
-      sub: 'Keep parents, kids, and grandparents in a single private space.\nSchedules, documents, and photos live where the conversation is, and they never scroll away.',
+      headline: 'The family group that runs the week, and forgets nothing.',
+      sub: 'Plan the school run and the appointments on a shared board. Keep the notes, documents, and photos in a Library that does not scroll away.\nOne private space for parents, kids, and grandparents.',
       cta: 'Set up your family (free)',
       chips: [
-        '👨‍👩‍👧‍👦 Everyone in one group, from kids to grandparents',
-        '📁 Documents and schedules that stay findable',
+        '🗓️ A family board, with a date and an owner on every task',
+        '📝 Notes, folders, and to-dos that stay findable',
         '🔒 Private by default, no phone numbers shared',
       ],
     },
@@ -66,6 +67,12 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
             'The school calendar, the insurance card, and the holiday booking all **sink into the same scroll** under stickers and voice notes.',
           binder:
             'Every family group gets its own **Library**: notes, files, folders, and to-dos, kept apart from the chatter and still there next year.',
+        },
+        {
+          rival:
+            '"What time is the pickup tomorrow?" is **answered twenty messages later**, with no date and nobody responsible. Somebody forgets.',
+          binder:
+            'The plan becomes a **card on the family board**, with a date, a priority, and the person who owns it. Everyone reads the same one.',
         },
         {
           rival:
@@ -100,10 +107,17 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
       ],
       cta: 'Try Binder now',
     },
+    plan: {
+      eyebrow: 'FAMILY BOARD',
+      heading: 'The school run stops living in one person\'s head',
+      body: 'Open a **board** for the family in about a minute: write your own columns — *This week*, *Waiting*, *Done* — then add the school run, the dentist, the passport renewal, the car service.\n\nEvery card carries a **date, a priority, and the person who owns it**, and it sits one tab away from the thread it came out of. Nobody has to remember on everybody else\'s behalf.',
+      link: 'Start a family board (free) →',
+      videoAlt: 'Creating a board in Binder, then adding a task with a date and an owner',
+    },
     library: {
       eyebrow: 'FAMILY LIBRARY',
-      heading: 'The important papers stop living in the chat',
-      body: 'Every family group gets **Notes**, **Folders**, and **To-dos** of its own. Put the school calendar, the medical records, and the recipes there once, and they stay there — searchable, organised, and no longer buried under this morning\'s stickers.',
+      heading: 'Write it down once, find it a year later',
+      body: 'Every family group gets **Notes**, **Folders**, and **To-dos** of its own. Write the packing list, the recipe, and the wifi password as notes. Drop the school calendar, the insurance card, and the medical records into folders.\n\nThey stay where you put them — searchable next month, and still there next year, instead of buried under this morning\'s stickers.',
       videoAlt: 'A Binder family group with Library tabs holding documents and notes',
     },
     chat: {
@@ -143,7 +157,7 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
         },
         {
           title: 'Move the important things in',
-          body: 'Put the school calendar, the insurance documents, and the shared to-do list in the Library. They stop disappearing.',
+          body: 'Put the school calendar, the insurance documents, and the recipes in the Library. Then open a board for the week, so every pickup and appointment gets a date and an owner.',
         },
         {
           title: 'Add an AI helper',
@@ -163,18 +177,18 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
 
   id: {
     meta: {
-      title: 'Binder buat keluarga — satu tempat buat orang-orang tersayang',
+      title: 'Binder buat keluarga — satu grup yang rapi dan nggak lupa',
       description:
-        'Grup keluarga privat yang nyimpen jadwal sekolah, dokumen kesehatan, dan rencana liburan biar gampang dicari, dan nggak ada lagi yang nanya "kirim ulang dong?". Gratis buat keluarga sebesar apa pun.',
+        'Grup keluarga privat dengan papan tugas buat antar-jemput dan jadwal dokter, plus Library buat catatan, dokumen, dan foto. Nggak ada yang kelewat, dan nggak ada lagi yang nanya "kirim ulang dong?". Gratis buat keluarga sebesar apa pun.',
     },
     hero: {
       imageAlt: 'Ilustrasi rumah kecil di lembah hijau di bawah langit cerah',
-      headline: 'Satu tempat buat seluruh keluarga. Bukan empat grup chat.',
-      sub: 'Kumpulin orang tua, anak, dan kakek-nenek di satu ruang privat.\nJadwal, dokumen, dan foto tinggal di tempat obrolannya, dan nggak pernah tenggelam.',
+      headline: 'Grup keluarga yang produktif dan nggak pernah lupa.',
+      sub: 'Atur antar-jemput dan jadwal dokter di papan tugas bareng. Simpan catatan, dokumen, dan foto di Library yang nggak ikut tenggelam.\nSatu ruang privat buat orang tua, anak, dan kakek-nenek.',
       cta: 'Siapin grup keluarga (gratis)',
       chips: [
-        '👨‍👩‍👧‍👦 Semua di satu grup, dari anak sampai kakek-nenek',
-        '📁 Dokumen dan jadwal yang gampang dicari',
+        '🗓️ Papan tugas keluarga: tiap tugas ada tanggal dan yang megang',
+        '📝 Catatan, folder, dan to-do yang gampang dicari',
         '🔒 Privat dari awal, nomor HP nggak kesebar',
       ],
     },
@@ -192,6 +206,12 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
             'Kalender sekolah, kartu asuransi, dan booking liburan **tenggelam di scroll yang sama** di bawah stiker dan voice note.',
           binder:
             'Tiap grup keluarga punya **Library** sendiri: catatan, file, folder, dan to-do, terpisah dari obrolan dan masih ada tahun depan.',
+        },
+        {
+          rival:
+            '"Besok jemputnya jam berapa?" **kejawab 20 pesan kemudian**, tanpa tanggal dan tanpa penanggung jawab. Ujung-ujungnya ada yang lupa.',
+          binder:
+            'Rencananya jadi **kartu di papan tugas keluarga**: ada tanggal, prioritas, dan siapa yang megang. Semua orang baca yang sama.',
         },
         {
           rival:
@@ -226,10 +246,17 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
       ],
       cta: 'Coba Binder sekarang',
     },
+    plan: {
+      eyebrow: 'PAPAN TUGAS KELUARGA',
+      heading: 'Antar-jemput berhenti cuma diinget satu orang',
+      body: 'Bikin **papan tugas** buat keluarga dalam semenit: bikin kolomnya sendiri — *Minggu ini*, *Nunggu*, *Beres* — terus masukin antar-jemput sekolah, kontrol ke dokter gigi, perpanjang paspor, sampai servis mobil.\n\nTiap kartu punya **tanggal, prioritas, dan siapa yang megang**, dan letaknya cuma satu tab dari thread asalnya. Nggak ada lagi satu orang yang harus inget buat semua orang.',
+      link: 'Bikin papan keluarga (gratis) →',
+      videoAlt: 'Bikin papan tugas di Binder, terus nambahin tugas lengkap sama tanggal dan penanggung jawabnya',
+    },
     library: {
       eyebrow: 'LIBRARY KELUARGA',
-      heading: 'Dokumen penting berhenti tinggal di kolom chat',
-      body: 'Tiap grup keluarga punya **Catatan**, **Folder**, dan **To-do** sendiri. Taruh kalender sekolah, catatan medis, dan resep di situ sekali, dan dia tetap di sana — bisa dicari, rapi, dan nggak ketimbun stiker tadi pagi.',
+      heading: 'Sekali dicatat, tahun depan masih ketemu',
+      body: 'Tiap grup keluarga punya **Catatan**, **Folder**, dan **To-do** sendiri. Tulis daftar bawaan mudik, resep, dan password wifi jadi catatan. Taruh kalender sekolah, kartu asuransi, dan catatan medis di folder.\n\nSemuanya tetap di tempatnya — gampang dicari bulan depan, dan masih ada tahun depan, bukan ketimbun stiker tadi pagi.',
       videoAlt: 'Grup keluarga Binder dengan tab Library berisi dokumen dan catatan',
     },
     chat: {
@@ -269,7 +296,7 @@ export const forFamiliesCopy: Copy<ForFamiliesCopy> = withCommon<ForFamiliesOwnC
         },
         {
           title: 'Pindahin yang penting-penting',
-          body: 'Taruh kalender sekolah, dokumen asuransi, dan to-do bersama di Library. Nggak ilang-ilang lagi.',
+          body: 'Taruh kalender sekolah, dokumen asuransi, dan resep di Library. Terus bikin papan tugas buat minggu ini, biar tiap jemputan dan jadwal dokter punya tanggal dan penanggung jawabnya.',
         },
         {
           title: 'Tambahin AI helper',

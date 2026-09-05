@@ -55,7 +55,7 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         to: '/for-families',
         icon: '🏡',
         label: 'For families',
-        line: 'One place for the whole family. Not four group chats.',
+        line: 'One family group that runs the week and forgets nothing.',
       },
     ],
     other: {
@@ -95,7 +95,7 @@ export const useCasesCopy: Copy<UseCasesCopy> = {
         to: '/for-families',
         icon: '🏡',
         label: 'Buat keluarga',
-        line: 'Satu tempat buat seluruh keluarga. Bukan empat grup chat.',
+        line: 'Grup keluarga yang produktif dan nggak pernah lupa.',
       },
     ],
     other: {
