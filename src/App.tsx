@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LanguageProvider } from "@/i18n";
 import ScrollToTop from "@/components/ScrollToTop";
+import Analytics from "@/components/Analytics";
 import Heybinder from "./pages/Heybinder";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -35,6 +36,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>
           <ScrollToTop />
+          <Analytics />
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<Heybinder />} />
