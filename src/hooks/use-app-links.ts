@@ -23,8 +23,9 @@ export const useAppLinks = () => {
   const { pathname } = useLocation();
   const useCase = resolveUseCase(pathname);
 
-  // Rebuilt per page rather than per render: the stored attribution only
-  // changes on a navigation, which is exactly when `pathname` changes.
+  // Safe to memoize: the attribution is captured once per page load, in
+  // `main.tsx` before React renders, so by the time any CTA is built it is
+  // already there and it does not change again until the next full load.
   const webUrl = useMemo(
     () => withAttribution(WEB_APP_URL, loadAttribution(), useCase),
     [useCase],

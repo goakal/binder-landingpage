@@ -31,7 +31,10 @@ const { nextAttribution, encodeAttribution, decodeAttribution, withAttribution }
   'src/lib/analytics/attribution.ts',
   'attribution.mjs',
 );
-const { resolveUseCase } = await load('src/lib/analytics/use-case.ts', 'use-case.mjs');
+const { resolveUseCase, routePathFrom } = await load(
+  'src/lib/analytics/use-case.ts',
+  'use-case.mjs',
+);
 
 let failures = 0;
 const eq = (name, got, want) => {
@@ -47,6 +50,20 @@ eq('home', resolveUseCase('/'), 'home');
 eq('use-case page', resolveUseCase('/for-work'), 'work');
 eq('trailing slash is the same page', resolveUseCase('/for-families/'), 'families');
 eq('anything else is "other"', resolveUseCase('/story'), 'other');
+
+console.log('\nstripping the vite base path');
+// main.tsx reads window.location directly, before <BrowserRouter> strips the
+// basename, so a GitHub Pages build would otherwise resolve every page as
+// "other" and lose the whole comparison.
+eq('netlify root build', routePathFrom('/for-work', '/'), '/for-work');
+eq('github pages build', routePathFrom('/binder-landingpage/for-work', '/binder-landingpage/'), '/for-work');
+eq('github pages home', routePathFrom('/binder-landingpage/', '/binder-landingpage/'), '/');
+eq('a path outside the base is left alone', routePathFrom('/for-work', '/other/'), '/for-work');
+eq(
+  'and it resolves to the same id either way',
+  routePathFrom('/binder-landingpage/for-families', '/binder-landingpage/'),
+  '/for-families',
+);
 
 console.log('\ncapturing a touch');
 const adClick = nextAttribution({
