@@ -47,6 +47,9 @@ project, after the first numbers are in.
 Point all Meta ad traffic at the web app. Keep the store buttons for organic visitors,
 but make the web app the primary CTA for a visitor who arrives from an ad.
 
+Confirmed: a person can complete OTP registration on `web.heybinder.com`. Phase 1 is
+therefore a complete funnel, not a partial one.
+
 Result: one complete, comparable funnel, in first-party data **and** in Meta Ads Manager.
 
 ### Phase 2 — mobile install funnel (second project)
@@ -144,11 +147,22 @@ Backend  (binderr_be)
 
 `fbc` is built from `fbclid` in the format `fb.1.<unix_ms>.<fbclid>`.
 
-**Why the URL and not a shared cookie:** the `_fbp` cookie is shared across
-`heybinder.com` subdomains only if the landing page really runs on `heybinder.com`.
-The repository can build for **both** Netlify (`heybinder.com`) and GitHub Pages
-(`goakal.github.io/binder-landingpage/`) — see `vite.config.ts`. A URL parameter works in
-both cases. Treat the cookie as a bonus, not as the mechanism.
+**Why the URL is still the mechanism.** Production runs the landing page on
+`heybinder.com` and the web app on `web.heybinder.com`. Both share one registrable
+domain, so the pixel's `_fbp` and `_fbc` cookies **are** readable on both hosts. That
+helps, but it does not replace the URL: no Meta cookie carries the `use_case` id or the
+UTM tags, and the `use_case` id is the whole comparison. The URL carries everything in
+one place, and it also keeps a GitHub Pages preview build
+(`goakal.github.io/binder-landingpage/`, still configured in `vite.config.ts`) working.
+
+**One simplification to confirm before Phase 2.** `dio_platform_web.dart:20` already
+sets `withCredentials = true`, so the browser attaches cookies to every API call from the
+web app. **If the production API host is also a `heybinder.com` subdomain**, the browser
+sends `_fbp` and `_fbc` to the backend by itself. The backend then reads them from the
+request cookies, and the client never has to forward them — only `use_case` and the UTM
+tags stay in the payload. Check the real `BASE_URL` in the production env file
+(`env/production.json.example` still holds a placeholder). If the API sits on another
+registrable domain, keep forwarding `fbp`/`fbc` in the payload as drawn above.
 
 **Do not put a Meta Pixel inside the Flutter app.** The Conversions API with the
 forwarded `fbp`/`fbc` gives the same match quality, and it keeps a tracker out of the
@@ -162,7 +176,7 @@ product for users who are already registered.
 |---|---|
 | `src/lib/analytics/use-case.ts` | new — pure: route path → `use_case` id |
 | `src/lib/analytics/attribution.ts` | new — pure: parse the URL, build and read the attribution object, encode it for a link |
-| `src/lib/analytics/pixel.ts` | new — thin `fbq` wrapper; loads the pixel script on demand, no-ops when the pixel id is empty |
+| `src/lib/analytics/pixel.ts` | new — thin `fbq` wrapper; no-ops when the pixel id is empty. No consent gate is needed (see section 10), so the loader stays a plain script tag |
 | `src/hooks/use-page-tracking.ts` | new — fires `PageView` + `ViewContent` on each route change |
 | `src/components/marketing/links.ts` | add `appUrl(destination)` — returns the exit URL with the attribution parameter and the UTM tags appended |
 | `src/components/marketing/CtaSection.tsx` | use `appUrl('web')`; fire `Lead` on click |
@@ -219,10 +233,18 @@ only. This is acceptable.
 
 ## 10. Privacy
 
+**No consent banner.** This is decided for the current target market, so the pixel loads
+on page load and `pixel.ts` needs no consent gate. Two conditions apply:
+
+* Revisit this if the ads ever target the EU or the UK. There, a banner with prior
+  consent is required, and the pixel must not load before the visitor agrees. The
+  `pixel.ts` seam keeps that a one-file change.
+* A banner is not needed, but a notice still is.
+
+The remaining obligations:
+
 * Update `/privacy` on the landing page: name Meta as a processor, name the pixel and the
   cookies, and explain the purpose.
-* Add a consent notice on the landing page and load the pixel only after consent. The
-  `pixel.ts` module loads the script on demand for this reason.
 * Never send a raw email or phone number to Meta. Hash with SHA-256, lower case and
   trimmed first.
 * `/data-deletion` must also delete the `UserAcquisition` row.
@@ -257,17 +279,17 @@ Use Meta for the buying decision, and use the table for the truth.
 | 0 | Meta setup, domain verification, naming | 0.5 day |
 | 1 | Landing page pixel and attribution | 2–3 days |
 | 2 | Backend table + Conversions API, web app capture | 2–3 days |
-| 3 | Consent notice and privacy text | 1 day |
+| 3 | Privacy policy text (no consent banner) | 0.5 day |
 | 4 | Mobile install attribution (second project) | 3–5 days |
 
-## 13. Decisions needed before the work starts
+## 13. Decisions — all answered
 
-1. ~~Where do the ads point?~~ **Answered: both, web funnel first.** Phase 1 ships
-   first and carries the use-case comparison. Phase 2 (mobile installs) follows as a
-   separate project.
-2. **Which domain serves the landing page in production** — `heybinder.com` (Netlify) or
-   `goakal.github.io` (GitHub Pages)? Both build paths exist in `vite.config.ts`.
-3. **Can a person complete registration fully on `web.heybinder.com`?** If the web app
-   cannot finish OTP sign-in, Phase 1 does not work and the mobile phase becomes first.
-4. **Consent model** — is a consent banner required for the target market, or is a
-   privacy notice enough?
+1. **Where do the ads point?** Both, web funnel first. Phase 1 ships first and carries
+   the use-case comparison. Phase 2 (mobile installs) follows as a separate project.
+2. **Which domain serves production?** `heybinder.com` for the landing page,
+   `web.heybinder.com` for the app. One registrable domain — see section 7.
+3. **Can a person register fully on the web app?** Yes. Phase 1 is a complete funnel.
+4. **Consent model?** No banner. A privacy notice only — see section 10.
+
+The work is unblocked. One item is left to check, and it does not block the start:
+the production API host, per section 7.
