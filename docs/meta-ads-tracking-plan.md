@@ -36,7 +36,11 @@ app**. The store click is the last thing the pixel sees.
 This is why the plan has two phases. Phase 1 measures the full funnel on the web.
 Phase 2 adds the mobile install funnel, which costs much more work.
 
-## 4. Recommended approach
+## 4. Approach
+
+**Decided: build both funnels, the web funnel first.** The web funnel answers the
+use-case comparison in about one week. Mobile install attribution follows as a second
+project, after the first numbers are in.
 
 ### Phase 1 — web funnel, end to end (do this first)
 
@@ -45,7 +49,7 @@ but make the web app the primary CTA for a visitor who arrives from an ad.
 
 Result: one complete, comparable funnel, in first-party data **and** in Meta Ads Manager.
 
-### Phase 2 — mobile install funnel (later, optional)
+### Phase 2 — mobile install funnel (second project)
 
 Two options, in order of cost:
 
@@ -56,7 +60,12 @@ Two options, in order of cost:
   Meta app registration, an ATT prompt on iOS, and native configuration in
   `binder-flutter`. Highest cost, best Meta optimisation.
 
-Do not start Phase 2 before Phase 1 gives numbers.
+Do not start Phase 2 before Phase 1 gives numbers. The use-case comparison does not
+need Phase 2 — it needs one funnel that is measured the same way for all five pages.
+Phase 2 adds reach, not comparability.
+
+The two phases share the same `use_case` id, the same campaign names and the same
+`UserAcquisition` table, so the Phase 1 work is not thrown away.
 
 ## 5. The use-case dimension
 
@@ -249,12 +258,13 @@ Use Meta for the buying decision, and use the table for the truth.
 | 1 | Landing page pixel and attribution | 2–3 days |
 | 2 | Backend table + Conversions API, web app capture | 2–3 days |
 | 3 | Consent notice and privacy text | 1 day |
-| 4 | Mobile install attribution (optional) | 3–5 days |
+| 4 | Mobile install attribution (second project) | 3–5 days |
 
 ## 13. Decisions needed before the work starts
 
-1. **Where do the ads point?** Web app first (this plan), or app installs (adds Phase 4
-   as mandatory)?
+1. ~~Where do the ads point?~~ **Answered: both, web funnel first.** Phase 1 ships
+   first and carries the use-case comparison. Phase 2 (mobile installs) follows as a
+   separate project.
 2. **Which domain serves the landing page in production** — `heybinder.com` (Netlify) or
    `goakal.github.io` (GitHub Pages)? Both build paths exist in `vite.config.ts`.
 3. **Can a person complete registration fully on `web.heybinder.com`?** If the web app
