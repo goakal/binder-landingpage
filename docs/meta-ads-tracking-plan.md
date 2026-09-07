@@ -166,14 +166,11 @@ UTM tags, and the `use_case` id is the whole comparison. The URL carries everyth
 one place, and it also keeps a GitHub Pages preview build
 (`goakal.github.io/binder-landingpage/`, still configured in `vite.config.ts`) working.
 
-**One simplification to confirm before Phase 2.** `dio_platform_web.dart:20` already
-sets `withCredentials = true`, so the browser attaches cookies to every API call from the
-web app. **If the production API host is also a `heybinder.com` subdomain**, the browser
-sends `_fbp` and `_fbc` to the backend by itself. The backend then reads them from the
-request cookies, and the client never has to forward them — only `use_case` and the UTM
-tags stay in the payload. Check the real `BASE_URL` in the production env file
-(`env/production.json.example` still holds a placeholder). If the API sits on another
-registrable domain, keep forwarding `fbp`/`fbc` in the payload as drawn above.
+**Confirmed and taken.** The production API is `api.heybinder.com`, a `heybinder.com`
+subdomain, and `dio_platform_web.dart:20` already sets `withCredentials = true`. So the
+browser sends `_fbp` and `_fbc` to the backend by itself, and the route reads them from
+`req.cookies` rather than the body. The client carries neither, and cannot be trusted
+with them anyway.
 
 **Do not put a Meta Pixel inside the Flutter app.** The Conversions API with the
 forwarded `fbp`/`fbc` gives the same match quality, and it keeps a tracker out of the
@@ -205,39 +202,53 @@ links. No marketing page links to them, so a visitor cannot browse into one, and
 points at one. They still fire `PageView` as `other`. Wire them if they ever become ad
 targets.
 
-### `binder-flutter` (web build)
+### `binder-flutter` (web build) — **built, Phase 2**
 
 | File | Change |
 |---|---|
-| `lib/core/analytics/acquisition.dart` | new — pure: parse `hb_a`, hold the value, expose it as a map. No Flutter import |
-| `lib/main.dart` | read `DeeplinkService.initialWebUri` into the store (the capture already exists at line 74) |
-| `lib/features/auth/auth_repository.dart` | add `postAcquisition(Map)` |
-| `lib/features/auth/auth_controller.dart` | after a sign-in with `isNewUser == true`, call it once, best effort |
-| `test/` | a unit test for the parser |
+| `lib/core/analytics/acquisition.dart` | new — pure token extraction plus a SharedPreferences store. **Never parses the token** |
+| `lib/main.dart` | capture from `DeeplinkService.initialWebUri`, in the window the invite code already depends on |
+| `lib/features/auth/auth_repository.dart` | `postAcquisition(String)` |
+| `lib/features/auth/acquisition_reporter.dart` | new — when a token is spent: kept through a network failure, dropped once the server answers |
+| `lib/features/auth/auth_controller.dart` | reports from `onSignedIn`, unawaited |
+| `test/acquisition_test.dart` | 8 unit tests for the parser |
 
-This follows `CLAUDE.md`: the parse is a pure function, the network call is in the
-repository, and the controller only wires them.
+The app carries the token opaquely. That keeps the payload shape to one reader
+(`binderr_be`), so a new field never needs a matching change in Dart.
 
-### `binderr_be`
+`onSignedIn` rather than the OTP screen: every path ends there, so SSO and the OAuth
+callback are covered too, and `isNewUser` never has to be plumbed through the flow. The
+server already ignores the call for an account that is not newly created.
+
+### `binderr_be` — **built, Phase 2**
 
 | File | Change |
 |---|---|
-| `prisma/migrations/…` | new `UserAcquisition` table: `userId` (unique), `useCase`, `fbp`, `fbc`, `utmSource`, `utmMedium`, `utmCampaign`, `utmContent`, `landingUrl`, `referrer`, `firstSeenAt`, `createdAt` |
-| `src/app/api/v3/account/acquisition/route.ts` | new — `createAuthenticatedEndpoint`, POST only. Writes the row **only** when the account has no row yet and was created in the last 30 minutes |
-| `src/validators/v3/acquisition.ts` | new — Yup schema |
-| `src/repositories/acquisition.repository.ts` | new — the data access |
-| `src/services/meta/conversions.ts` | new — the Conversions API client: SHA-256 hashing, `event_id`, retry-free, logs through `logger` |
-| the acquisition route | fires `CompleteRegistration` through `waitUntil` (per `CLAUDE.md`) |
-| `src/lib/auth.ts` after-hook | optional: fire `InitiateCheckout` at OTP send |
-| env | `META_PIXEL_ID`, `META_CAPI_ACCESS_TOKEN`, `META_CAPI_TEST_EVENT_CODE` |
+| `prisma/migrations/20260907120000_add_user_acquisition/` | new `user_acquisitions` table. `user_id` is the primary key, so one row per user is a constraint, not a check. Cascades with the account |
+| `src/lib/acquisition/payload.ts` | new — decodes the `hb_a` token. The only reader of its shape |
+| `src/services/meta/conversions.ts` | new — the Conversions API client: SHA-256 hashing, deterministic `event_id`, logs through `logger`, never throws |
+| `src/use-cases/acquisition/record-acquisition.usecase.ts` | new — writes the row, builds the `CompleteRegistration` event |
+| `src/app/api/v3/account/acquisition/route.ts` | new — POST, authenticated. Fires the event through `waitUntil` |
+| `src/validators/v3/acquisition.ts` | new — Yup schema, one bounded string |
+| `src/utils/request-ip.ts` | `extractIpFromRequest` moved out of the agent-registration module now that two callers need it |
+| env | `META_PIXEL_ID`, `META_CAPI_ACCESS_TOKEN`, `META_CAPI_TEST_EVENT_CODE`, `META_GRAPH_API_VERSION` |
 
-**Why a separate endpoint and not the Better Auth hook:** the hook has no access to the
-landing page data. A dedicated endpoint keeps Better Auth untouched, and the client
-already knows `isNewUser` from the sign-in response.
+**No repository.** The write is a single insert on one model, and `CLAUDE.md` is explicit
+that a 1:1 prisma pass-through earns nothing. `account/timezone` is the same call made the
+same way.
 
-**Spoofing:** the payload comes from the client, so it can be false. The limits above
-(one row per user, account younger than 30 minutes) keep the damage to marketing data
-only. This is acceptable.
+**Why a separate endpoint and not the Better Auth hook:** the hook runs inside
+authentication and has no access to what the landing page put in the URL. Making it care
+would put marketing data on the critical path of every login.
+
+**Spoofing:** the payload comes from the client, so it can be false. Two limits bound it —
+one row per user by primary key, and ignored once the account is older than 30 minutes, so
+an old account cannot be back-dated into a campaign. Past those the worst case is a wrong
+row in a marketing table.
+
+**`rawEmail`, not `email`.** `modifyUserEmail` strips the dots from a Gmail address before
+storing it, and Meta matches on the address the person actually typed. Hashing the
+normalised one would have quietly missed every Gmail user.
 
 ## 9. Meta setup checklist (no code)
 
@@ -295,9 +306,9 @@ Use Meta for the buying decision, and use the table for the truth.
 | Phase | Work | Estimate |
 |---|---|---|
 | 0 | Meta setup, domain verification, naming | 0.5 day |
-| 1 | Landing page pixel and attribution | 2–3 days |
-| 2 | Backend table + Conversions API, web app capture | 2–3 days |
-| 3 | Privacy policy text (no consent banner) | 0.5 day |
+| 1 | Landing page pixel and attribution | 2–3 days ✅ built |
+| 2 | Backend table + Conversions API, web app capture | 2–3 days ✅ built |
+| 3 | Privacy policy text (no consent banner) | 0.5 day ✅ built |
 | 4 | Mobile install attribution (second project) | 3–5 days |
 
 ## 13. Decisions — all answered
@@ -309,5 +320,10 @@ Use Meta for the buying decision, and use the table for the truth.
 3. **Can a person register fully on the web app?** Yes. Phase 1 is a complete funnel.
 4. **Consent model?** No banner. A privacy notice only — see section 10.
 
-The work is unblocked. One item is left to check, and it does not block the start:
-the production API host, per section 7.
+5. **Production API host?** `api.heybinder.com` — a `heybinder.com` subdomain, so the
+   backend reads `_fbp`/`_fbc` from the request cookies (section 7).
+
+Phases 1–3 are built. What is left is operational, not code: create the dataset, generate
+the Conversions API token, verify the domain, set the event priorities, and set
+`VITE_META_PIXEL_ID` / `META_PIXEL_ID` / `META_CAPI_ACCESS_TOKEN` (section 9). Everything
+stays inert until those are set.
