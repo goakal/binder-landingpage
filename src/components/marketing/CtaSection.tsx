@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { CommonCopy } from '@/i18n/common.copy';
-import { WEB_APP_URL } from './links';
+import { useAppLinks } from '@/hooks/use-app-links';
 import { AppleIcon, AndroidIcon, GlobeIcon } from './PlatformIcons';
 import { DownloadModal } from './DownloadModal';
 import { SiteFooter } from './SiteFooter';
@@ -29,6 +29,7 @@ export const CtaSection = ({
   modal: CommonCopy['modal'];
 }) => {
   const [downloadOpen, setDownloadOpen] = useState(false);
+  const { webUrl, trackExit } = useAppLinks();
 
   return (
     <div id="get" style={{ margin: '0 auto', padding: '100px 24px 120px', textAlign: 'center', background: `url(${ctaSky}) center / cover no-repeat`, width: '100%', paddingBottom: 0, paddingRight: 0, paddingLeft: 0 }}>
@@ -38,7 +39,7 @@ export const CtaSection = ({
       </h2>
       <p className="hb-rv" style={{ fontSize: 17, lineHeight: 1.6, color: '#FFFFFF', margin: '0 0 44px' }}>{copy.sub}</p>
       <div className="hb-rv" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, flexWrap: 'wrap', padding: '0 16px' }}>
-        <a href={WEB_APP_URL} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
+        <a href={webUrl} onClick={() => trackExit('web')} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
           <GlobeIcon />
           {buttons.web}
         </a>

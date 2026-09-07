@@ -125,12 +125,13 @@ This is the part that makes the funnel one funnel and not two.
 Meta ad click
    │  URL carries ?fbclid=…&utm_*=…
    ▼
-Landing page  (binder-landingpage)
-   │  1. Pixel fires. It writes the _fbp cookie.
-   │  2. An attribution object is built once and stored in localStorage:
-   │     { use_case, fbp, fbc, utm_source, utm_medium, utm_campaign,
-   │       utm_content, referrer, landing_url, first_seen_at }
-   │  3. Every CTA link gets ?hb_a=<base64url(attribution)> appended.
+Landing page  (binder-landingpage)   ← Phase 1, built
+   │  1. Pixel fires. Meta writes _fbp and _fbc on .heybinder.com.
+   │  2. An attribution object is built and stored in localStorage:
+   │     { v, uc, t, fbc, s, m, c, ct, tm, r }  — last paid touch wins
+   │  3. The web-app CTA gets ?hb_a=<base64url(payload)> appended,
+   │     where payload = attribution + uce (the page clicked from).
+   │     Store links are left alone — a browser cannot follow an install.
    ▼
 Web app  (binder-flutter, web build)
    │  4. main.dart already captures Uri.base before the router rewrites it.
@@ -142,10 +143,20 @@ Sign-in  (POST /api/v3/auth/sign-in/{phone,email}-otp → { isNewUser })
 Backend  (binderr_be)
    6. Store it in a new UserAcquisition row.
    7. Send CompleteRegistration to the Meta Conversions API with
-      fbp, fbc, hashed email/phone, client IP, client user agent.
+      fbc (from the payload), _fbp (from the request cookie),
+      hashed email/phone, client IP, client user agent.
 ```
 
 `fbc` is built from `fbclid` in the format `fb.1.<unix_ms>.<fbclid>`.
+
+**`_fbp` is not in the payload.** Meta writes that cookie on the registrable
+domain, so `web.heybinder.com` and any API on a `heybinder.com` subdomain read it
+from the request. Putting it in the URL would instead race the pixel's own
+script load, and produce a link built before the cookie exists. `fbc` travels in
+the payload because it comes from the ad URL and is present on the first frame.
+The one cost: Safari caps a script-written cookie at 7 days, so `_fbp` can expire
+before a slow converter returns — `fbc` and the UTM tags do not, and they are
+what the campaign report joins on.
 
 **Why the URL is still the mechanism.** Production runs the landing page on
 `heybinder.com` and the web app on `web.heybinder.com`. Both share one registrable
@@ -170,22 +181,29 @@ product for users who are already registered.
 
 ## 8. Changes per repository
 
-### `binder-landingpage`
+### `binder-landingpage` — **built, Phase 1**
 
 | File | Change |
 |---|---|
-| `src/lib/analytics/use-case.ts` | new — pure: route path → `use_case` id |
-| `src/lib/analytics/attribution.ts` | new — pure: parse the URL, build and read the attribution object, encode it for a link |
-| `src/lib/analytics/pixel.ts` | new — thin `fbq` wrapper; no-ops when the pixel id is empty. No consent gate is needed (see section 10), so the loader stays a plain script tag |
-| `src/hooks/use-page-tracking.ts` | new — fires `PageView` + `ViewContent` on each route change |
-| `src/components/marketing/links.ts` | add `appUrl(destination)` — returns the exit URL with the attribution parameter and the UTM tags appended |
-| `src/components/marketing/CtaSection.tsx` | use `appUrl('web')`; fire `Lead` on click |
-| `src/components/marketing/DownloadModal.tsx` | use `appUrl('ios' \| 'android')`; fire `Lead` on click |
-| `src/App.tsx` | mount the page-tracking hook once |
-| `.env` / build vars | `VITE_META_PIXEL_ID` |
+| `src/lib/analytics/use-case.ts` | new — pure: route path → `use_case` id. Named `resolveUseCase`, because `useX` reads as a React hook to the lint rule |
+| `src/lib/analytics/attribution.ts` | new — pure: capture a touch, encode and decode the URL payload. Owns the cross-repo contract |
+| `src/lib/analytics/pixel.ts` | new — the only place `fbq` is named. No-ops when the pixel id is empty. No consent gate (section 10) |
+| `src/components/Analytics.tsx` | new — fires `PageView` + `ViewContent` per route, beside `<ScrollToTop>` inside the router |
+| `src/hooks/use-app-links.ts` | new — the three product links plus `trackExit`; rewrites the web URL only |
+| `src/components/marketing/CtaSection.tsx` | web button uses `webUrl`, fires `Lead` |
+| `src/components/marketing/DownloadModal.tsx` | store buttons fire `Lead`; their URLs are unchanged |
+| `src/App.tsx` | mount `<Analytics />` |
+| `src/pages/PrivacyPolicy.tsx` | new "Cookies and Advertising on Our Website" section |
+| `scripts/check-analytics.mjs` | new — `npm run check:analytics`. No new dependency |
+| `.env.example` | `VITE_META_PIXEL_ID` |
 
-The attribution and use-case modules stay pure — no React, no `fbq` — so they are unit
-testable.
+`links.ts` was deliberately left as a list of constants: those URLs also answer "where
+does the product live", which has nothing to do with tracking.
+
+**Not wired:** `/short`, `/story`, `/clean` and `/old` hold their own hardcoded product
+links. No marketing page links to them, so a visitor cannot browse into one, and no ad
+points at one. They still fire `PageView` as `other`. Wire them if they ever become ad
+targets.
 
 ### `binder-flutter` (web build)
 

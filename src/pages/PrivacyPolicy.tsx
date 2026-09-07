@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
   );
 
   return (
-    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE AUGUST 31, 2026">
+    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE SEPTEMBER 7, 2026">
           <p className="text-base leading-7 text-slate-600 mb-6">
             Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App").
           </p>
@@ -77,6 +77,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul className="list-disc pl-6 mb-6">
             <li className="text-base leading-7 text-slate-600">With third-party service providers that help us operate the app (hosting, analytics, customer support).</li>
+            <li className="text-base leading-7 text-slate-600">With advertising platforms, to measure how our ads perform. See <strong>Cookies and Advertising on Our Website</strong> below for exactly what this covers and what it does not.</li>
             <li className="text-base leading-7 text-slate-600">To comply with legal obligations or respond to lawful requests.</li>
           </ul>
 
@@ -93,6 +94,36 @@ export default function PrivacyPolicy() {
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
           <p className="text-base leading-7 text-slate-600 mb-6">
             We will only disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation, or to protect the rights, property, or safety of Binder, our users, or the public.
+          </p>
+
+          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Cookies and Advertising on Our Website</h2>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            This section is about our marketing website at heybinder.com only. It does not describe the Binder app itself, and nothing here gives anyone access to your messages, notes, or any other content you create in Binder.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">The Meta Pixel</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Our website uses the Meta Pixel, a measurement tool provided by Meta Platforms (Facebook, Instagram). It records which of our pages you view, and when you click a button that opens the Binder web app or one of the app stores. To do that it stores cookies in your browser, named <code>_fbp</code> and <code>_fbc</code>. If you arrived from one of our ads, the link you clicked also carries campaign identifiers, which we keep in your browser's local storage so we can tell which ad brought you here.
+          </p>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            We use this for one purpose: to measure whether our advertising works, and to see which of our pages lead people to create an account. We do not use it to build a profile of you, and we do not sell this information.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Registration Events</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            If you create a Binder account after arriving from one of our ads, our servers send Meta a "registration" event together with those campaign identifiers, so the ad can be credited. Where that event includes your email address or phone number, it is irreversibly hashed with SHA-256 before it leaves our systems. Meta never receives it in readable form, and we never send your name, your profile, or anything you have written in Binder.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Meta's Own Use, and Your Choices</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Meta also processes this data for its own purposes, as an independent controller. What it does with it is governed by its own policy, which you can read at{" "}
+            <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">facebook.com/privacy/policy</a>
+            . You can review and limit how Meta uses data for advertising in your Meta ad settings at{" "}
+            <a href="https://accountscenter.facebook.com/ads" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">accountscenter.facebook.com/ads</a>.
+          </p>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            You can block or delete these cookies at any time in your browser settings, or use your browser's tracking protection. The website and the Binder app both work normally without them. The campaign information we store alongside your account is deleted when your account is deleted — see{" "}
+            <a href="https://heybinder.com/data-deletion" className="text-slate-600 hover:text-slate-900 transition-colors">heybinder.com/data-deletion</a>.
           </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Data Retention</h2>
