@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
   );
 
   return (
-    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE SEPTEMBER 7, 2026">
+    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE SEPTEMBER 18, 2026">
           <p className="text-base leading-7 text-slate-600 mb-6">
             Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App").
           </p>
@@ -65,6 +65,9 @@ export default function PrivacyPolicy() {
             <li className="text-base leading-7 text-slate-600">Communicate with you, including customer support, app updates, and, where permitted, product announcements.</li>
             <li className="text-base leading-7 text-slate-600">Maintain the security of the App, detect abuse or fraud, and enforce our Terms and Conditions.</li>
           </ul>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            Google user data is an exception to this list. We use it only to provide the feature you asked for. See <strong>Google User Data</strong> below, which has precedence for that data.
+          </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Chat Security and Encryption</h2>
           <p className="text-base leading-7 text-slate-600 mb-6">
@@ -80,6 +83,9 @@ export default function PrivacyPolicy() {
             <li className="text-base leading-7 text-slate-600">With advertising platforms, to measure how our ads perform. See <strong>Cookies and Advertising on Our Website</strong> below for exactly what this covers and what it does not.</li>
             <li className="text-base leading-7 text-slate-600">To comply with legal obligations or respond to lawful requests.</li>
           </ul>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We never share data from your Google Account with an advertising platform, and we never sell it. See <strong>Google User Data</strong> below.
+          </p>
 
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Third-Party Services</h2>
 
@@ -88,7 +94,7 @@ export default function PrivacyPolicy() {
             We work with third-party service providers who help us with things like hosting and infrastructure, communications, analytics, and other operational needs. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
           </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Some features in the App may use automation or AI, which can include third-party AI providers, to help generate content or responses. If you use those features, related content may be processed accordingly.
+            Some features use automation or AI, which can include third-party AI providers, to generate content or responses. The content a feature needs is sent to the provider to produce your result. We never use your content to train our own models.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
@@ -96,9 +102,65 @@ export default function PrivacyPolicy() {
             We will only disclose your personal information if required to do so by law or in response to a valid legal request, such as a court order or government investigation, or to protect the rights, property, or safety of Binder, our users, or the public.
           </p>
 
+          <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Google User Data</h2>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            Binder can connect to your Google Account if you choose to. This section covers data received from Google APIs ("Google user data") and has precedence over the rest of this policy for that data.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">What We Access</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            With your consent, and only for the services you connect:
+          </p>
+          <ul className="list-disc pl-6 mb-4">
+            <li className="text-base leading-7 text-slate-600"><strong>Gmail:</strong> to read, search, draft, and send your mail in Binder.</li>
+            <li className="text-base leading-7 text-slate-600"><strong>Google Calendar:</strong> to see, create, and change your events in Binder.</li>
+            <li className="text-base leading-7 text-slate-600"><strong>Google Drive, Docs, and Sheets:</strong> to find, open, and attach your files in Binder.</li>
+          </ul>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We request the smallest set of permissions each feature needs. Google's consent screen shows them before you agree.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">How We Use It</h3>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            Only to provide the features above. We do not use Google user data for advertising, profiling, general analytics or market research, personalization outside the feature, or marketing messages, and we do not use it to train, fine-tune, or improve any AI or machine-learning model. We do not sell it or transfer it to data brokers.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">AI Features</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Where a feature uses AI on Google user data, the content it needs is sent to an AI provider only to produce your result. No generalized AI or machine-learning model is developed or improved with it.
+          </p>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            Binder lets you choose an AI provider for some features. Google user data is an exception: only approved providers receive it. A provider is approved only if it is contractually prohibited from training on the content and from retaining it after it returns the result. If you choose an unapproved provider, Binder withholds access to your Google Account and the Google features stay unavailable. The App enforces this and it cannot be turned off.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Human Access</h3>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            No one at Binder reads your Google user data, except with your explicit consent, for security purposes, to comply with applicable law, or where the data is aggregated and anonymized for internal operations.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Transfers</h3>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We transfer Google user data only to you in the App; to the service providers that host and operate these features, as necessary to provide them and for no other purpose; at your explicit direction; to comply with applicable law; or in a merger or sale of assets, after notice and your explicit consent. We never transfer it to an advertising platform. The Meta Pixel described below is on our marketing website only and never receives it.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Retention and Deletion</h3>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            We store your Google tokens encrypted and keep only the content a feature needs. You can disconnect in Binder settings or at{" "}
+            <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">myaccount.google.com/permissions</a>
+            . On disconnect we delete the tokens immediately and any cached Google content within 30 days. Deleting your Binder account deletes all of it — see{" "}
+            <a href="https://heybinder.com/data-deletion" className="text-slate-600 hover:text-slate-900 transition-colors">heybinder.com/data-deletion</a>.
+          </p>
+
+          <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Limited Use</h3>
+          <p className="text-base leading-7 text-slate-600 mb-6">
+            Binder's use and transfer of information received from Google APIs to any other app adheres to the{" "}
+            <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-900 transition-colors">Google API Services User Data Policy</a>
+            , including the Limited Use requirements.
+          </p>
+
           <h2 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-slate-900">Cookies and Advertising on Our Website</h2>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            This section is about our marketing website at heybinder.com only. It does not describe the Binder app itself, and nothing here gives anyone access to your messages, notes, or any other content you create in Binder.
+            This section is about our marketing website at heybinder.com only. It does not describe the Binder app itself, and nothing here gives anyone access to your messages, notes, any other content you create in Binder, or any data from your Google Account.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">The Meta Pixel</h3>
