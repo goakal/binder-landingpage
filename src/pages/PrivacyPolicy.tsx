@@ -93,8 +93,14 @@ export default function PrivacyPolicy() {
           <p className="text-base leading-7 text-slate-600 mb-4">
             We work with third-party service providers who help us with things like hosting and infrastructure, communications, analytics, and other operational needs. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
           </p>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Some features in the App use automation or AI, which can include third-party AI providers, to help generate content or responses. If you use one of those features, the content that the feature needs is sent to the AI provider so that it can produce your result. We never use your content to train or improve our own models.
+          </p>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            For some features you can select which AI provider to use. Providers have different terms. Some keep the content that you send and use it to train or improve their own models, and some do not. Before you select a provider, the App shows you which category it belongs to and links to its policy. If you do not select one, Binder uses a default provider that does not train on your content.
+          </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Some features in the App use automation or AI, which can include third-party AI providers, to help generate content or responses. If you use one of those features, the content that the feature needs is sent to the AI provider only to produce your result at that moment. We do not use it, and we do not permit the provider to use it, to train or improve any AI or machine-learning model.
+            This choice does not apply to data from your Google Account. Google data goes only to providers that are contractually prohibited from training on it. See <strong>Google User Data</strong> below.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
@@ -140,8 +146,14 @@ export default function PrivacyPolicy() {
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">AI Features and Google User Data</h3>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            If you use a Binder feature that uses AI on your Google data, for example a summary of a mail thread or a draft reply, the content that the request needs is sent to an AI provider so that it can produce your result. The provider processes that content only to return that result to you. Neither we nor the provider retain it to train, fine-tune, or improve any model. No generalized AI or machine-learning model is developed or improved with your Google user data.
+          </p>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Binder lets you select an AI provider for some features. Google user data is an exception. Only approved providers can receive it. To be approved, a provider must contractually agree that it will not use the content to train or improve any model, and that it will not retain the content after it returns the result.
+          </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            If you use a Binder feature that uses AI on your Google data, for example a summary of a mail thread or a draft reply, the content that the request needs is sent to our AI provider so that it can produce your result. The provider processes that content only to return the result to you at that moment. Neither we nor the provider retain it to train, fine-tune, or improve any model, and no generalized AI or machine-learning model is developed with it.
+            If you select a provider that is not approved, Binder does not give that provider access to your Google Account. The Google features stay unavailable until you select an approved provider. Binder enforces this in the App; it is not a setting that you can turn off.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Human Access</h3>
