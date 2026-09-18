@@ -93,11 +93,8 @@ export default function PrivacyPolicy() {
           <p className="text-base leading-7 text-slate-600 mb-4">
             We work with third-party service providers who help us with things like hosting and infrastructure, communications, analytics, and other operational needs. These providers can change over time as we improve the App. Each one only receives the information needed to perform its function and isn't permitted to use it for its own purposes.
           </p>
-          <p className="text-base leading-7 text-slate-600 mb-4">
-            Some features use automation or AI, which can include third-party AI providers, to generate content or responses. The content a feature needs is sent to the provider to produce your result. We never use your content to train our own models.
-          </p>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            For some features you can choose the AI provider. Their terms differ: some use what you send to train their models, some do not. The App shows a provider's category before you choose it, and the default provider does not train on your content. This choice does not apply to Google user data — see <strong>Google User Data</strong> below.
+            Some features use automation or AI, which can include third-party AI providers, to generate content or responses. The content a feature needs is sent to the provider to produce your result. We never use your content to train our own models.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Legal Requirements</h3>
