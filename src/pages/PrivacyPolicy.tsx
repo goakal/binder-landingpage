@@ -130,12 +130,11 @@ export default function PrivacyPolicy() {
             Where a feature uses AI on Google user data, the content it needs is sent to an AI provider only to produce your result. No generalized AI or machine-learning model is developed or improved with it.
           </p>
           <p className="text-base leading-7 text-slate-600 mb-4">
-            Binder lets you choose an AI provider for some features. Google user data is an exception: only the approved providers below receive it, and only at that provider's own API endpoint. A provider is approved only if its API terms, on the plan Binder uses, forbid training on the content it receives.
+            Binder lets you choose an AI provider for some features. Google user data is an exception: only the approved providers below receive it, and only at that provider's own API endpoint. A provider is approved only if its API terms, on the plan and the account settings Binder uses, forbid training on the content it receives.
           </p>
           <ul className="list-disc pl-6 mb-4">
-            <li className="text-base leading-7 text-slate-600"><strong>OpenAI</strong> (paid OpenAI Platform API, <code>api.openai.com</code>).</li>
-            <li className="text-base leading-7 text-slate-600"><strong>Google Gemini</strong> (paid Gemini API, <code>generativelanguage.googleapis.com</code>).</li>
-            <li className="text-base leading-7 text-slate-600"><strong>DeepSeek</strong> (paid DeepSeek Open Platform API, <code>api.deepseek.com</code>).</li>
+            <li className="text-base leading-7 text-slate-600"><strong>OpenAI</strong> (OpenAI Platform API, <code>api.openai.com</code>). OpenAI does not use API inputs or outputs to train its models.</li>
+            <li className="text-base leading-7 text-slate-600"><strong>DeepSeek</strong> (DeepSeek Open Platform API, <code>api.deepseek.com</code>). Model improvement is switched off on the account Binder uses, so DeepSeek does not train on the content.</li>
           </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
             Each request goes to that provider directly. We do not send Google user data through an aggregator, a gateway, a model hub, or a proxy, because the model behind such a service and its data retention are not known to us. If you set your agent to a different provider or a different endpoint, Binder does not give it the Google tools and the Google features stay unavailable. The App enforces this and it cannot be turned off.

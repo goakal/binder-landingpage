@@ -2,40 +2,28 @@
 
 Draft reply to the Third-Party Data Safety Team. Fill every `[BRACKET]` before
 you send it: those are facts only the account holder can confirm (plan tier,
-Zero Data Retention status, contract terms). Send it as a direct reply to the
-verification email, so it stays on the same thread.
+the name of the DeepSeek dashboard setting, the model IDs, the CASA lab). Send
+it as a direct reply to the verification email, so it stays on the same thread.
 
 Related changes:
 
-- Privacy policy (`src/pages/PrivacyPolicy.tsx`) — names the approved providers,
-  their endpoints, and the no-aggregator rule.
+- Privacy policy (`src/pages/PrivacyPolicy.tsx`) — names the approved
+  providers, their endpoints, and the no-aggregator rule.
 - Backend (`goakal/binderr_be`,
   `src/modules/agent-mcp/lib/google-data-policy.ts`) — the allowlist the app
   enforces, with the two gates that apply it.
 
----
+## Before you send
 
-## Before you send: DeepSeek
-
-DeepSeek is the weak point of this reply. Its published policy says that inputs
-to its first-party API can be used to train and improve its models, and it
-publishes no Zero Data Retention tier. Under Google's Limited Use terms, that
-makes DeepSeek unacceptable for Google user data unless you hold a separate
-written agreement with DeepSeek that forbids training on the content and
-forbids retention after the response.
-
-Three options:
-
-1. You hold such an agreement. State it in the table, and keep a copy: Google
-   can ask for it.
-2. You do not hold one. Remove DeepSeek from the table, and remove `DEEPSEEK`
-   from `APPROVED_GOOGLE_DATA_PROVIDERS` in the backend before you reply. The
-   provider stays available for features that do not touch Google user data.
-3. You want to keep it and ask Google. Say in the reply that DeepSeek is
-   included, and give the terms you rely on. Expect a follow-up question.
-
-Do not send the reply with an unsupported claim in it. The list you give Google
-is the list Google audits.
+1. Confirm that model improvement stays switched OFF on the DeepSeek platform
+   account whose key the deployment uses. That setting is the whole basis of
+   the DeepSeek entry. Take a screenshot with the date: Google can ask for
+   evidence.
+2. Confirm the OpenAI account tier, and whether Zero Data Retention is active
+   on it.
+3. List the model IDs that the Google features can use.
+4. Keep this page, the privacy policy and the backend allowlist identical. The
+   list you give Google is the list Google audits.
 
 ---
 
@@ -46,8 +34,8 @@ Subject: Re: OAuth verification — AI/ML disclosure for Binder
 Hello,
 
 Thank you for the review. Below is the complete list of the AI providers that
-can receive Google user data in Binder, the plans we use, and the controls that
-keep Google user data away from every other model.
+can receive Google user data in Binder, the plans and settings we use, and the
+controls that keep Google user data away from every other model.
 
 **1. How Google user data reaches a model**
 
@@ -69,26 +57,34 @@ model, so no Google user data can reach it. The user cannot turn this off.
 
 These are the only providers that can receive Google user data:
 
-| Provider | Service and endpoint | Plan / tier | Training and retention |
+| Provider | Service and endpoint | Plan / tier | Training and retention control |
 | --- | --- | --- | --- |
-| OpenAI | OpenAI Platform API, `api.openai.com` | [PLAN, e.g. Paid usage tier N / Enterprise] | API inputs and outputs are not used to train OpenAI models. Zero Data Retention: [ENABLED on this account / NOT ENABLED] |
-| Google | Gemini API, `generativelanguage.googleapis.com` | [Paid tier — confirm billing is enabled] | Paid Gemini API content is not used to improve Google products |
-| DeepSeek | DeepSeek Open Platform API, `api.deepseek.com` | [PLAN] | [STATE THE COMMITMENT YOU HOLD — see the note below] |
+| OpenAI | OpenAI Platform API, `api.openai.com` | [PLAN, e.g. Paid usage tier N / Enterprise] | OpenAI does not use API inputs or outputs to train its models. Zero Data Retention: [ACTIVE on this account / NOT ACTIVE] |
+| DeepSeek | DeepSeek Open Platform API, `api.deepseek.com` | [PLAN] | Model improvement is switched off on our platform account ("[SETTING NAME AS IT APPEARS IN THE DASHBOARD]", disabled on [DATE]), so DeepSeek does not train on the content we send |
 
-Models: [LIST THE MODEL IDS IN USE, for example `gpt-...`, `gemini-...`,
-`deepseek-...`]. Each model runs at the provider named above and nowhere else.
+Models: [LIST THE MODEL IDS IN USE, for example `gpt-...` and `deepseek-...`].
+Each model runs at the provider named above and nowhere else.
 
 **3. Multi-model services and upstream models**
 
 Binder does not send Google user data to an aggregator, a gateway, a model hub,
 or a proxy, and it does not use a multi-model routing service for this data.
-Every call that carries Google user data goes directly to one of the three
+Every call that carries Google user data goes directly to one of the two
 endpoints in the table above.
 
-This is a technical restriction, not only a policy. The allowlist holds the
-provider AND the permitted host, so an endpoint that merely speaks the same API
-protocol, for example a router or a self-run proxy, is refused. Two gates apply
-it:
+The configurations that restrict training are:
+
+- **Account settings.** On DeepSeek, model improvement is switched off on the
+  account whose API key the application uses. On OpenAI, API content is outside
+  model training by default[, and Zero Data Retention is active on our
+  account].
+- **Endpoint routing rule.** The application holds an allowlist of the provider
+  AND the permitted API host. A request that carries Google user data can only
+  go to `api.openai.com` or `api.deepseek.com`. An endpoint that merely speaks
+  the same API protocol, for example a router or a self-run proxy, is refused,
+  so no call can be routed to an unknown downstream model.
+
+Two gates apply the allowlist:
 
 - the application refuses to attach a Google connection to an agent that runs
   on a provider or an endpoint that is not on the allowlist;
