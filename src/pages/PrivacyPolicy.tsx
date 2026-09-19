@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
   );
 
   return (
-    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE SEPTEMBER 18, 2026">
+    <LegalPage title="Privacy Policy" effectiveDate="EFFECTIVE SEPTEMBER 19, 2026">
           <p className="text-base leading-7 text-slate-600 mb-6">
             Welcome to Binder. We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, share, and safeguard your information when you use Binder's mobile and web application (the "App").
           </p>
@@ -129,8 +129,16 @@ export default function PrivacyPolicy() {
           <p className="text-base leading-7 text-slate-600 mb-4">
             Where a feature uses AI on Google user data, the content it needs is sent to an AI provider only to produce your result. No generalized AI or machine-learning model is developed or improved with it.
           </p>
+          <p className="text-base leading-7 text-slate-600 mb-4">
+            Binder lets you choose an AI provider for some features. Google user data is an exception: only the approved providers below receive it, and only at that provider's own API endpoint. A provider is approved only if its API terms, on the plan Binder uses, forbid training on the content it receives.
+          </p>
+          <ul className="list-disc pl-6 mb-4">
+            <li className="text-base leading-7 text-slate-600"><strong>OpenAI</strong> (paid OpenAI Platform API, <code>api.openai.com</code>).</li>
+            <li className="text-base leading-7 text-slate-600"><strong>Google Gemini</strong> (paid Gemini API, <code>generativelanguage.googleapis.com</code>).</li>
+            <li className="text-base leading-7 text-slate-600"><strong>DeepSeek</strong> (paid DeepSeek Open Platform API, <code>api.deepseek.com</code>).</li>
+          </ul>
           <p className="text-base leading-7 text-slate-600 mb-6">
-            Binder lets you choose an AI provider for some features. Google user data is an exception: only approved providers receive it. A provider is approved only if it is contractually prohibited from training on the content and from retaining it after it returns the result. If you choose an unapproved provider, Binder withholds access to your Google Account and the Google features stay unavailable. The App enforces this and it cannot be turned off.
+            Each request goes to that provider directly. We do not send Google user data through an aggregator, a gateway, a model hub, or a proxy, because the model behind such a service and its data retention are not known to us. If you set your agent to a different provider or a different endpoint, Binder does not give it the Google tools and the Google features stay unavailable. The App enforces this and it cannot be turned off.
           </p>
 
           <h3 className="mt-6 mb-3 text-xl font-semibold text-slate-900">Human Access</h3>
