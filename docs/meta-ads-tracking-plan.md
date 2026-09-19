@@ -231,6 +231,7 @@ server already ignores the call for an account that is not newly created.
 | `src/app/api/v3/account/acquisition/route.ts` | new — POST, authenticated. Fires the event through `waitUntil` |
 | `src/validators/v3/acquisition.ts` | new — Yup schema, one bounded string |
 | `src/utils/request-ip.ts` | `extractIpFromRequest` moved out of the agent-registration module now that two callers need it |
+| `src/utils/request-geo.ts` | new — city / region / postal / country from the Vercel edge headers, for the Meta match only. Never stored |
 | env | `META_PIXEL_ID`, `META_CAPI_ACCESS_TOKEN`, `META_CAPI_TEST_EVENT_CODE`, `META_GRAPH_API_VERSION` |
 
 **No repository.** The write is a single insert on one model, and `CLAUDE.md` is explicit
@@ -275,7 +276,10 @@ The remaining obligations:
 * Update `/privacy` on the landing page: name Meta as a processor, name the pixel and the
   cookies, and explain the purpose.
 * Never send a raw email or phone number to Meta. Hash with SHA-256, lower case and
-  trimmed first.
+  trimmed first. The same rule covers the IP-derived city, region, postal code and
+  country: they are hashed in `conversions.ts` and are never written to
+  `user_acquisitions`, because an edge guess is not reliable enough to report on and
+  the table does not need it to answer "which campaign".
 * `/data-deletion` must also delete the `UserAcquisition` row.
 
 ## 11. How to compare the use cases
