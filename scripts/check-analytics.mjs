@@ -27,7 +27,13 @@ async function load(entry, name) {
   return import(pathToFileURL(outfile).href);
 }
 
-const { nextAttribution, encodeAttribution, decodeAttribution, withAttribution } = await load(
+const {
+  nextAttribution,
+  encodeAttribution,
+  decodeAttribution,
+  withAttribution,
+  withStoreAttribution,
+} = await load(
   'src/lib/analytics/attribution.ts',
   'attribution.mjs',
 );
@@ -50,6 +56,45 @@ eq('home', resolveUseCase('/'), 'home');
 eq('use-case page', resolveUseCase('/for-work'), 'work');
 eq('trailing slash is the same page', resolveUseCase('/for-families/'), 'families');
 eq('anything else is "other"', resolveUseCase('/story'), 'other');
+
+console.log('\nstore links (phase 2)');
+const APP_STORE = 'https://apps.apple.com/id/app/binder-chat/id6749217579';
+const BRANCH = 'https://invite.heybinder.com/get';
+const attr = { v: 1, uc: 'work', t: 1 };
+
+// The default. Somebody who never sets the env var must get the site they had.
+eq(
+  'no branch link configured leaves the store url alone',
+  withStoreAttribution('', APP_STORE, attr, 'work'),
+  APP_STORE,
+);
+eq(
+  'no branch link, no attribution either',
+  withStoreAttribution('', APP_STORE, null, 'work'),
+  APP_STORE,
+);
+
+// Configured: the token rides the Branch link, which is the only way it can
+// survive a store install.
+eq(
+  'a branch link carries the token',
+  withStoreAttribution(BRANCH, APP_STORE, attr, 'families'),
+  `${BRANCH}?hb_a=${encodeAttribution({ ...attr, uce: 'families' })}`,
+);
+// An organic visitor still routes through Branch — the link reports the install
+// to Meta whether or not there is a campaign to attribute it to.
+eq(
+  'a branch link with no attribution is still the branch link',
+  withStoreAttribution(BRANCH, APP_STORE, null, 'work'),
+  BRANCH,
+);
+eq(
+  'the token a store link carries round-trips',
+  decodeAttribution(
+    new URL(withStoreAttribution(BRANCH, APP_STORE, attr, 'education')).searchParams.get('hb_a'),
+  ),
+  { ...attr, uce: 'education' },
+);
 
 console.log('\nstripping the vite base path');
 // main.tsx reads window.location directly, before <BrowserRouter> strips the
