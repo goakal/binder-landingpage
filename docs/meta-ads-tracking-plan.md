@@ -485,6 +485,7 @@ Design the comparison so it does not depend on iOS precision. Compare use cases
 | `lib/core/analytics/acquisition.dart` | `captureToken` (platform-independent) beside the web-only `captureFrom`; pure `acquisitionTokenFromBranchParams`; the new-registration flag |
 | `lib/core/deeplink/deeplink_service.dart` | `onAcquisitionToken` callback, fired from `_handleBranchParams`. The service still knows nothing about the acquisition feature |
 | `lib/main.dart` | wires that callback to the store |
+| `lib/features/auth/auth_repository.dart` | `postAcquisition` sends `source` — `web` or `app`, from `kIsWeb` |
 | `lib/features/auth/registration_events.dart` | new — the only place Branch's event API is named |
 | `lib/features/auth/auth_controller.dart` | `onSignedIn` fires the event when the flag is set |
 | `lib/features/auth/otp_verification_screen.dart` | records `is_new_user` at the one moment the server states it |
