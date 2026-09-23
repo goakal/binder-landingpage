@@ -1,7 +1,18 @@
 import { useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { APP_STORE_URL, PLAY_STORE_URL, WEB_APP_URL } from '@/components/marketing/links';
-import { loadAttribution, track, resolveUseCase, withAttribution } from '@/lib/analytics';
+import {
+  APP_STORE_URL,
+  BRANCH_DOWNLOAD_URL,
+  PLAY_STORE_URL,
+  WEB_APP_URL,
+} from '@/components/marketing/links';
+import {
+  loadAttribution,
+  track,
+  resolveUseCase,
+  withAttribution,
+  withStoreAttribution,
+} from '@/lib/analytics';
 
 /** Which exit a visitor took out of the landing page. */
 export type AppDestination = 'web' | 'ios' | 'android';
@@ -14,10 +25,14 @@ export type AppDestination = 'web' | 'ios' | 'android';
  * a list of constants — because these URLs are also the answer to "where does
  * the product live", which has nothing to do with tracking.
  *
- * **Only the web URL is rewritten.** Apple drops unknown query parameters, and
- * Google Play needs its own `pcampaignid` left alone; more to the point, a
- * browser cannot follow anyone into a native app, so a parameter there would buy
- * nothing. Install attribution is Phase 2 — see `docs/meta-ads-tracking-plan.md`.
+ * **The web URL is always rewritten. The store URLs are rewritten only when a
+ * Branch link is configured.** Apple drops unknown query parameters and Google
+ * Play needs its own `pcampaignid` left alone, so a token on a bare store URL
+ * would be thrown away. A Branch link in front of the store is what carries it
+ * through the install instead — Phase 2, `docs/meta-ads-tracking-plan.md` §14.
+ *
+ * With `VITE_BRANCH_DOWNLOAD_URL` empty — the default — both store buttons keep
+ * pointing straight at the stores, exactly as they did in Phase 1.
  */
 export const useAppLinks = () => {
   const { pathname } = useLocation();
@@ -26,10 +41,23 @@ export const useAppLinks = () => {
   // Safe to memoize: the attribution is captured once per page load, in
   // `main.tsx` before React renders, so by the time any CTA is built it is
   // already there and it does not change again until the next full load.
-  const webUrl = useMemo(
-    () => withAttribution(WEB_APP_URL, loadAttribution(), useCase),
-    [useCase],
-  );
+  //
+  // One `loadAttribution()` for all three, rather than one per link: it reads
+  // localStorage, and the three URLs must in any case describe the same visit.
+  const { webUrl, appStoreUrl, playStoreUrl } = useMemo(() => {
+    const attribution = loadAttribution();
+    return {
+      webUrl: withAttribution(WEB_APP_URL, attribution, useCase),
+      // Both resolve to the SAME Branch link when one is configured. Branch
+      // routes by user agent, so the two buttons stay honest without two links.
+      appStoreUrl: withStoreAttribution(
+        BRANCH_DOWNLOAD_URL, APP_STORE_URL, attribution, useCase,
+      ),
+      playStoreUrl: withStoreAttribution(
+        BRANCH_DOWNLOAD_URL, PLAY_STORE_URL, attribution, useCase,
+      ),
+    };
+  }, [useCase]);
 
   const trackExit = useCallback(
     (destination: AppDestination) => {
@@ -42,5 +70,5 @@ export const useAppLinks = () => {
     [useCase],
   );
 
-  return { webUrl, appStoreUrl: APP_STORE_URL, playStoreUrl: PLAY_STORE_URL, trackExit };
+  return { webUrl, appStoreUrl, playStoreUrl, trackExit };
 };

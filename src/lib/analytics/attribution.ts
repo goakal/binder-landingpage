@@ -190,6 +190,34 @@ export function withAttribution(
   }
 }
 
+/**
+ * Where a store button should point.
+ *
+ * **With no Branch link configured this is the bare store URL.** Apple drops
+ * unknown query parameters, Google Play needs its own `pcampaignid` left alone,
+ * and a browser cannot follow anyone into an install — so tagging a store URL
+ * directly buys nothing. That is the Phase 1 behaviour and it stays the default,
+ * which is what keeps this change inert until somebody sets the env var.
+ *
+ * **With one configured the button goes to Branch instead**, carrying the same
+ * `hb_a` token the web CTA carries. Branch holds it against the device and
+ * replays it on the first launch after the install. That deferred deep link is
+ * the only thing that makes the mobile funnel measurable — see
+ * `docs/meta-ads-tracking-plan.md` §14.3.
+ *
+ * An organic visitor with no attribution still goes through Branch. The link is
+ * a router as well as a carrier, and it is what reports the install to Meta.
+ */
+export function withStoreAttribution(
+  branchUrl: string,
+  storeUrl: string,
+  attribution: Attribution | null,
+  exitUseCase: UseCaseId,
+): string {
+  if (!branchUrl) return storeUrl;
+  return withAttribution(branchUrl, attribution, exitUseCase);
+}
+
 // --- browser edges -----------------------------------------------------------
 
 export function loadAttribution(): Attribution | null {

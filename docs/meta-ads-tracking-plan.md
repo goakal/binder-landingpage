@@ -52,20 +52,17 @@ therefore a complete funnel, not a partial one.
 
 Result: one complete, comparable funnel, in first-party data **and** in Meta Ads Manager.
 
-### Phase 2 — mobile install funnel (second project)
+### Phase 2 — mobile install funnel — **built, see section 14**
 
-Two options, in order of cost:
+Branch, not the Meta SDK. The SDK, the native configuration and the deferred
+deep-link plumbing are already in `binder-flutter`, and Branch is an approved Meta
+Mobile Measurement Partner, so it covers both halves with no new tracker in the
+product. Section 14 is the whole design.
 
-* **Branch** — the SDK is already in the app. Branch has a Meta Ads integration and
-  deferred deep links. It can carry the use case through an install and report the
-  install back to Meta. Lowest new code.
-* **Meta SDK + SKAdNetwork** — the standard path for App Install campaigns. It needs a
-  Meta app registration, an ATT prompt on iOS, and native configuration in
-  `binder-flutter`. Highest cost, best Meta optimisation.
-
-Do not start Phase 2 before Phase 1 gives numbers. The use-case comparison does not
-need Phase 2 — it needs one funnel that is measured the same way for all five pages.
-Phase 2 adds reach, not comparability.
+The alternative, a Meta SDK with SKAdNetwork, is not built. It gives Meta a stronger
+optimisation signal and costs an ATT prompt, App Store privacy disclosures and native
+configuration on both platforms. Revisit it only if the Branch signal proves too thin
+to optimise on.
 
 The two phases share the same `use_case` id, the same campaign names and the same
 `UserAcquisition` table, so the Phase 1 work is not thrown away.
@@ -331,3 +328,181 @@ Phases 1–3 are built. What is left is operational, not code: create the datase
 the Conversions API token, verify the domain, set the event priorities, and set
 `VITE_META_PIXEL_ID` / `META_PIXEL_ID` / `META_CAPI_ACCESS_TOKEN` (section 9). Everything
 stays inert until those are set.
+
+---
+
+## 14. Phase 2 — the mobile install funnel
+
+Phase 1 measures a visitor who registers **in a browser**. A visitor who installs the
+app is invisible to it: the store click is the last thing a browser pixel sees, and an
+App Store install carries no URL.
+
+This section closes that. It is built, and it is inert until the console setup in
+§14.6 is done.
+
+### 14.1 The one hard fact
+
+Meta accepts app attribution from exactly two sources: **its own SDK**, or an
+**approved Mobile Measurement Partner**. Branch is an approved MMP.
+
+Nothing else works. In particular, sending `CompleteRegistration` from `binderr_be`
+with `action_source: 'app'` does *not* work: a browser conversion is tied to an ad by
+`fbc` and `fbp`, an app has neither, and an event carrying only a hashed email reaches
+Meta but cannot be attributed to a campaign. Campaign attribution is the whole
+comparison, so an unattributed event is worth nothing here.
+
+**The event was never the hard part. The attribution link is.**
+
+### 14.2 Two problems, solved separately
+
+Branch answers two different questions, and they need different setup. Build both;
+know which is which.
+
+| | Answers | Needs Meta setup | Works when |
+|---|---|---|---|
+| **Deferred deep link** | "which landing page produced this account", in *our* database | No | The visitor came through `heybinder.com` |
+| **Branch as Meta MMP** | the same, in Ads Manager, and lets Meta **optimise** | Yes | Any install, including a direct App Install campaign |
+
+The first is what answers the original question. The second is what lets Meta bid on
+it.
+
+### 14.3 The chain
+
+```
+Meta ad  ──►  heybinder.com  ──►  Branch link  ──►  App Store / Play Store
+                   │                   │
+                   │  hb_a token       │  Branch holds the token against the device
+                   ▼                   ▼
+            (Phase 1 pixel)      install, first launch
+                                       │
+                                       │  listSession() replays the link data,
+                                       │  hb_a included — this is the deferred
+                                       │  deep link, and it is Branch's core job
+                                       ▼
+                                 AcquisitionStore (native)
+                                       │
+                                       │  spent at the next sign-in, exactly as
+                                       │  on web — same reporter, same endpoint
+                                       ▼
+                                 POST /api/v3/account/acquisition
+                                       │  { payload, source: 'app' }
+                                       ▼
+                                 user_acquisitions row
+```
+
+The store links are no longer bare store URLs when `VITE_BRANCH_DOWNLOAD_URL` is set.
+They point at one Branch link that carries `hb_a`, and Branch routes by user agent.
+
+**Set `$desktop_url` on that Branch link to the web app.** A desktop visitor who
+clicks "Download" reaches Branch, not the App Store, and the web app is the right
+answer for them. Leaving it unset sends them to a Branch error page.
+
+### 14.4 Who reports to Meta, and who must not
+
+A registration that came through the app is reported to Meta **by Branch**, as the
+MMP. `binderr_be` must not also send it through the Conversions API — Meta would
+count the same registration twice, because the two events carry different
+`event_id`s and different `action_source`s and cannot be deduplicated.
+
+So the endpoint takes a `source`:
+
+| `source` | Row written | Conversions API event | Reported to Meta by |
+|---|---|---|---|
+| `web` (default) | yes | **yes** | `binderr_be` |
+| `app` | yes | **no** | Branch |
+
+The first-party table is written either way, so the SQL in §11 answers for both
+platforms without knowing which is which.
+
+### 14.5 Which registrations fire the Branch event
+
+`COMPLETE_REGISTRATION` is Branch's standard event, and the MMP integration forwards
+it to Meta. It must fire **once per new account** — firing on every sign-in would
+report a registration every time somebody logs in.
+
+The signal is the server's own `is_new_user`, recorded at OTP verification and read
+back at `onSignedIn`. It is not `isSignup`: that flag says which button the person
+tapped, and an existing user who taps "Sign up" is still not a registration.
+
+**Known gap: SSO and the OAuth callback.** Those paths do not return `is_new_user`,
+so a registration through them writes its `user_acquisitions` row but fires no Branch
+event. In the last 30 days social sign-in was 64 requests against 1,690 for email
+OTP, so this is small — but it is a real undercount, and it is the first thing to fix
+if the Ads Manager number reads low against the table.
+
+### 14.6 Console setup (no code)
+
+Everything above is inert until these are done.
+
+1. **Branch → a download link.** Create one Quick Link for the landing page CTA. Set
+   its iOS and Android destinations, and set `$desktop_url` to `https://web.heybinder.com/`.
+   Put the link in `VITE_BRANCH_DOWNLOAD_URL` in the Netlify build environment.
+   Vite inlines it at build time, so a **rebuild** is needed, not a redeploy.
+2. **Confirm Branch forwards custom link parameters.** The design assumes `?hb_a=…`
+   on a Branch link comes back in `listSession()`. Verify it on a real device before
+   trusting the numbers — a deferred deep link cannot be tested in a simulator.
+3. **Meta → register the app.** Create the app in Meta's developer portal and note
+   the Facebook App ID. Add it to the Branch dashboard.
+4. **Meta → link Branch as the MMP** for that app, in Business Manager.
+5. **Branch → enable the Meta Ads integration** and map `COMPLETE_REGISTRATION` to
+   Meta's `CompleteRegistration`.
+6. **iOS → configure SKAdNetwork** in Branch, and decide about ATT (§14.7).
+7. **Campaigns.** The same rule as §5: one campaign per use case. On mobile the
+   `use_case` id cannot travel as a parameter through a store install for a direct
+   App Install campaign, so the campaign name *is* the dimension.
+
+Meta's MMP terms and the iOS measurement rules move often. Confirm each step against
+Meta's own documentation rather than this list.
+
+### 14.7 iOS and Android are not comparable
+
+**Android is deterministic.** The Play Install Referrer carries the referrer through
+the install. Branch reads it. The numbers are trustworthy.
+
+**iOS is not.** Without ATT consent there is no IDFA, so attribution falls back to
+SKAdNetwork: aggregated, delayed by a day or more, and coarse. An ATT prompt raises
+the match rate and costs an app update, App Store privacy disclosures, and most
+people decline it anyway.
+
+Design the comparison so it does not depend on iOS precision. Compare use cases
+**within** a platform, never across one.
+
+### 14.8 Changes per repository
+
+#### `binder-landingpage`
+
+| File | Change |
+|---|---|
+| `src/components/marketing/links.ts` | `BRANCH_DOWNLOAD_URL` from `VITE_BRANCH_DOWNLOAD_URL`. Empty keeps the bare store URLs, so the site behaves exactly as before until it is set |
+| `src/hooks/use-app-links.ts` | store URLs carry `hb_a` through the Branch link when one is configured |
+| `scripts/check-analytics.mjs` | round-trip cases for the store links, both configured and not |
+| `.env.example` | `VITE_BRANCH_DOWNLOAD_URL` |
+
+#### `binder-flutter`
+
+| File | Change |
+|---|---|
+| `lib/core/analytics/acquisition.dart` | `captureToken` (platform-independent) beside the web-only `captureFrom`; pure `acquisitionTokenFromBranchParams`; the new-registration flag |
+| `lib/core/deeplink/deeplink_service.dart` | `onAcquisitionToken` callback, fired from `_handleBranchParams`. The service still knows nothing about the acquisition feature |
+| `lib/main.dart` | wires that callback to the store |
+| `lib/features/auth/auth_repository.dart` | `postAcquisition` sends `source` — `web` or `app`, from `kIsWeb` |
+| `lib/features/auth/registration_events.dart` | new — the only place Branch's event API is named |
+| `lib/features/auth/auth_controller.dart` | `onSignedIn` fires the event when the flag is set |
+| `lib/features/auth/otp_verification_screen.dart` | records `is_new_user` at the one moment the server states it |
+
+#### `binderr_be`
+
+| File | Change |
+|---|---|
+| `src/validators/v3/acquisition.ts` | optional `source`, `web` by default |
+| `src/use-cases/acquisition/record-acquisition.usecase.ts` | writes the row for both; suppresses the Conversions API event for `app` |
+| `src/app/api/v3/account/acquisition/route.ts` | passes `source` through |
+
+**No migration.** `user_acquisitions` does not record the platform. The log line does,
+which is enough to start. Add a column only once there is a question the logs cannot
+answer — it costs a migration that has to be applied by hand before merge.
+
+### 14.9 Do not start this before Phase 1 reports
+
+Phase 1 has not yet produced one attributed registration. Until the `reason` logging
+says why, a second funnel on top of it makes both harder to debug.
