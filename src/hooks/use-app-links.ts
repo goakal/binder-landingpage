@@ -3,8 +3,10 @@ import { useLocation } from 'react-router-dom';
 import {
   APP_STORE_URL,
   BRANCH_DOWNLOAD_URL,
+  MAC_DOWNLOAD_URL,
   PLAY_STORE_URL,
   WEB_APP_URL,
+  WINDOWS_DOWNLOAD_URL,
 } from '@/components/marketing/links';
 import {
   loadAttribution,
@@ -15,7 +17,7 @@ import {
 } from '@/lib/analytics';
 
 /** Which exit a visitor took out of the landing page. */
-export type AppDestination = 'web' | 'ios' | 'android';
+export type AppDestination = 'web' | 'ios' | 'android' | 'mac' | 'windows';
 
 /**
  * The three product links, plus the one call that records leaving for them.
@@ -70,5 +72,12 @@ export const useAppLinks = () => {
     [useCase],
   );
 
-  return { webUrl, appStoreUrl, playStoreUrl, trackExit };
+  return {
+    webUrl,
+    appStoreUrl,
+    playStoreUrl,
+    macUrl: MAC_DOWNLOAD_URL,
+    windowsUrl: WINDOWS_DOWNLOAD_URL,
+    trackExit,
+  };
 };

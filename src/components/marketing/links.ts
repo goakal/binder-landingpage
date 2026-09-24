@@ -3,6 +3,8 @@
 export const APP_STORE_URL = 'https://apps.apple.com/id/app/binder-chat/id6749217579';
 export const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share';
 export const WEB_APP_URL = 'https://web.heybinder.com/';
+export const MAC_DOWNLOAD_URL = 'https://github.com/goakal/binder-landingpage/releases/download/downloads-v1/Binder.dmg';
+export const WINDOWS_DOWNLOAD_URL = 'https://github.com/goakal/binder-landingpage/releases/download/downloads-v1/Binder.Windows.Setup.v0.0.31.exe';
 
 /**
  * One Branch link standing in front of both stores, when it is configured.
