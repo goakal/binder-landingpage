@@ -32,6 +32,10 @@ Treat me as non-technical. Show me the plan as a short checklist, keep it update
 const APP_STORE_URL = "https://apps.apple.com/id/app/binder-chat/id6749217579";
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.akal.binder&pcampaignid=web_share";
+const MAC_DOWNLOAD_URL =
+  "https://github.com/goakal/binder-landingpage/releases/download/downloads-v1/Binder.dmg";
+const WINDOWS_DOWNLOAD_URL =
+  "https://github.com/goakal/binder-landingpage/releases/download/downloads-v1/Binder.Windows.Setup.v0.0.31.exe";
 
 const AppleIcon = ({ size = 15 }: { size?: number }) => (
   <svg
@@ -56,6 +60,19 @@ const AndroidIcon = ({ size = 17 }: { size?: number }) => (
     aria-hidden="true"
   >
     <path d="M420.55 301.93a24 24 0 1 1 24-24 24 24 0 0 1-24 24m-265.1 0a24 24 0 1 1 24-24 24 24 0 0 1-24 24m273.7-144.48 47.94-83a10 10 0 1 0-17.27-10l-48.54 84.07a301.25 301.25 0 0 0-246.56 0l-48.54-84.07a10 10 0 1 0-17.27 10l47.94 83C64.53 202.22 8.24 285.55 0 384h576c-8.24-98.45-64.54-181.78-146.85-226.55" />
+  </svg>
+);
+
+const WindowsIcon = ({ size = 15 }: { size?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 448 512"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z" />
   </svg>
 );
 
@@ -134,6 +151,28 @@ const DownloadModal = ({
         >
           <AndroidIcon size={18} />
           Google Play
+        </a>
+        <a
+          href={MAC_DOWNLOAD_URL}
+          download
+          className="hb-pill-btn"
+          style={{
+            background: "linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)",
+          }}
+        >
+          <AppleIcon size={17} />
+          Download for Mac
+        </a>
+        <a
+          href={WINDOWS_DOWNLOAD_URL}
+          download
+          className="hb-pill-btn"
+          style={{
+            background: "linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)",
+          }}
+        >
+          <WindowsIcon size={15} />
+          Download for Windows
         </a>
       </div>
     </DialogContent>
