@@ -1,7 +1,7 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import type { CommonCopy } from '@/i18n/common.copy';
 import { useAppLinks } from '@/hooks/use-app-links';
-import { AppleIcon, AndroidIcon } from './PlatformIcons';
+import { AppleIcon, AndroidIcon, WindowsIcon } from './PlatformIcons';
 
 export const DownloadModal = ({
   open,
@@ -12,7 +12,7 @@ export const DownloadModal = ({
   onOpenChange: (open: boolean) => void;
   copy: CommonCopy['modal'];
 }) => {
-  const { appStoreUrl, playStoreUrl, trackExit } = useAppLinks();
+  const { appStoreUrl, playStoreUrl, macUrl, windowsUrl, trackExit } = useAppLinks();
 
   return (
   <Dialog open={open} onOpenChange={onOpenChange}>
@@ -33,6 +33,14 @@ export const DownloadModal = ({
         <a href={playStoreUrl} onClick={() => trackExit('android')} className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }} target="_blank" rel="noopener noreferrer">
           <AndroidIcon size={18} />
           Google Play
+        </a>
+        <a href={macUrl} onClick={() => trackExit('mac')} download className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #E9E7E2 100%)' }}>
+          <AppleIcon size={17} />
+          Download for Mac
+        </a>
+        <a href={windowsUrl} onClick={() => trackExit('windows')} download className="hb-pill-btn" style={{ background: 'linear-gradient(180deg, #EFEDFF 0%, #B7ABFF 100%)' }}>
+          <WindowsIcon size={15} />
+          Download for Windows
         </a>
       </div>
     </DialogContent>
